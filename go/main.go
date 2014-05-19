@@ -1,8 +1,8 @@
 package main
 
 import (
-  "log"
-  "github.com/veandco/go-sdl2/sdl"
+	"github.com/veandco/go-sdl2/sdl"
+	"log"
 )
 
 // This file is more similar to the C and C++ examples than strictly needed
@@ -14,7 +14,7 @@ func main() {
 
 	// Prepare the window and load the image
 	win := sdl.CreateWindow("Hello World!", 100, 100, 640, 480, sdl.WINDOW_SHOWN)
-	ren := sdl.CreateRenderer(win, -1, sdl.RENDERER_ACCELERATED | sdl.RENDERER_PRESENTVSYNC);
+	ren := sdl.CreateRenderer(win, -1, sdl.RENDERER_ACCELERATED|sdl.RENDERER_PRESENTVSYNC)
 	bmp := sdl.LoadBMP("test.bmp")
 	tex := ren.CreateTextureFromSurface(bmp)
 
