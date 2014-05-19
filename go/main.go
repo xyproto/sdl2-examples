@@ -1,58 +1,36 @@
 package main
 
-// #include <SDL2/SDL.h>
-
 import (
-	"fmt"
+  "log"
+  "github.com/veandco/go-sdl2/sdl"
 )
 
-// extern SDL_Init
-func SDL_Init(flag int) int
-
-// extern SDL_GetError
-func SDL_GetError() string
+// This file is more similar to the C and C++ examples than strictly needed
 
 func main() {
-  if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-    fmt.Printf("SDL_Init Error: %s\n", SDL_GetError());
-    return 1;
-  }
+	if sdl.Init(sdl.INIT_EVERYTHING) != 0 {
+		log.Fatalf("SDL_Init Error: %s\n", sdl.GetError())
+	}
 
-  SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
-  if (win == nullptr) {
-    printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
-    return 1;
-  }
+	// Prepare the window and load the image
+	win := sdl.CreateWindow("Hello World!", 100, 100, 640, 480, sdl.WINDOW_SHOWN)
+	ren := sdl.CreateRenderer(win, -1, sdl.RENDERER_ACCELERATED | sdl.RENDERER_PRESENTVSYNC);
+	bmp := sdl.LoadBMP("test.bmp")
+	tex := ren.CreateTextureFromSurface(bmp)
 
-  SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-  if (ren == nullptr) {
-    printf("SDL_CreateRenderer Error: %s\n", SDL_GetError());
-    return 1;
-  }
+	// Show the image
+	ren.Clear()
+	ren.Copy(tex, nil, nil)
+	ren.Present()
 
-  SDL_Surface *bmp = SDL_LoadBMP("test.bmp");
-  if (bmp == nullptr) {
-    printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
-    return 1;
-  }
+	// Wait 2 seconds
+	sdl.Delay(2000)
 
-  SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, bmp);
-  SDL_FreeSurface(bmp);
-  if (tex == nullptr) {
-    printf("SDL_CreateTextureFromSurface Error: %s\n", SDL_GetError());
-    return 1;
-  }
+	// These three are not strictly needed
+	tex.Destroy()
+	ren.Destroy()
+	win.Destroy()
 
-  SDL_RenderClear(ren);
-  SDL_RenderCopy(ren, tex, NULL, NULL);
-  SDL_RenderPresent(ren);
-
-  SDL_Delay(2000);
-
-  SDL_DestroyTexture(tex);
-  SDL_DestroyRenderer(ren);
-  SDL_DestroyWindow(win);
-  SDL_Quit();
-
-  return 0;
+	// Neither is this one
+	sdl.Quit()
 }
