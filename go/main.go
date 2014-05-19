@@ -1,14 +1,20 @@
-// TODO: Convert from C to Go
+package main
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_pnglite.h>
-#include <stdio.h>
+// #include <SDL2/SDL.h>
+
+import (
+	"fmt"
+)
+
+// extern SDL_Init
+func SDL_Init(flag int) int
+
+// extern SDL_GetError
+func SDL_GetError() string
 
 func main() {
-  void* nullptr = NULL;
-
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-    printf("SDL_Init Error: %s\n", SDL_GetError());
+    fmt.Printf("SDL_Init Error: %s\n", SDL_GetError());
     return 1;
   }
 
