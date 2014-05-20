@@ -1,3 +1,0 @@
-sdl2 and this go package:
-
-go get github.com/veandco/go-sdl2/sdl
