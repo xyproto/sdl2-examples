@@ -21,7 +21,7 @@ int main() {
     return 1;
   }
 
-  SDL_Surface *bmp = SDL_LoadBMP("test.bmp");
+  SDL_Surface *bmp = SDL_LoadBMP("../data/test.bmp");
   if (bmp == nullptr) {
     printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
     return 1;

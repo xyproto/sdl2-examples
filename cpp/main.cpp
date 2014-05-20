@@ -21,7 +21,7 @@ int main() {
     return 1;
   }
 
-  SDL_Surface *bmp = SDL_LoadBMP("test.bmp");
+  SDL_Surface *bmp = SDL_LoadBMP("../data/test.bmp");
   if (bmp == nullptr) {
     std::cout << "SDL_LoadBMP Error: " << SDL_GetError() << std::endl;
     return 1;
