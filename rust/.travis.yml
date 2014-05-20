@@ -1,0 +1,15 @@
+before_install:
+  - wget -q http://static.rust-lang.org/dist/rust-nightly-x86_64-unknown-linux-gnu.tar.gz
+  - tar xf rust-nightly-x86_64-unknown-linux-gnu.tar.gz
+  - sudo ./rust-nightly-x86_64-unknown-linux-gnu/install.sh
+install:
+  - time wget -q http://www.libsdl.org/release/SDL2-2.0.3.tar.gz
+  - time tar zxf SDL2-2.0.0.tar.gz
+  - cd SDL2-2.0.0
+  - ./configure && make && sudo make install
+  - cd -
+  - git clone https://github.com/AngryLawyer/rust-sdl2.git
+  - (cd rust2-sdl && make)
+  - rustc rust-sdl2/src/sdl2/lib.rs
+script:
+  - rustc -L. sdl2test/rust/main.rs
