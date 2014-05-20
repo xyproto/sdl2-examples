@@ -9,7 +9,7 @@ int main() {
     return 1;
   }
 
-  SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+  SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 960, 540, SDL_WINDOW_SHOWN);
   if (win == nullptr) {
     printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
     return 1;
@@ -21,7 +21,7 @@ int main() {
     return 1;
   }
 
-  SDL_Surface *bmp = SDL_LoadBMP("../data/test.bmp");
+  SDL_Surface *bmp = SDL_LoadBMP("../img/boxes.bmp");
   if (bmp == nullptr) {
     printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
     return 1;

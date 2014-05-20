@@ -13,9 +13,9 @@ func main() {
 	}
 
 	// Prepare the window and load the image
-	win := sdl.CreateWindow("Hello World!", 100, 100, 640, 480, sdl.WINDOW_SHOWN)
+	win := sdl.CreateWindow("Hello World!", 100, 100, 960, 540, sdl.WINDOW_SHOWN)
 	ren := sdl.CreateRenderer(win, -1, sdl.RENDERER_ACCELERATED|sdl.RENDERER_PRESENTVSYNC)
-	bmp := sdl.LoadBMP("../data/test.bmp")
+	bmp := sdl.LoadBMP("../img/boxes.bmp")
 	tex := ren.CreateTextureFromSurface(bmp)
 
 	// Show the image
