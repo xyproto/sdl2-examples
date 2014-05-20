@@ -1,9 +1,7 @@
 sdl2test
 ========
 
-Small test of SDL2 in combination with various programming languages.
-
-Pull requests are welcome.
+"hello world" for SDL2 for various programming languages.
 
 Requirements
 ------------
@@ -17,5 +15,9 @@ Additional information
 
 * MIT licensed
 * Alexander Rødseth, 2014
+* Pull requests are welcome
+
+Test image
+----------
 
 ![Test image](https://raw.githubusercontent.com/xyproto/sdl2test/master/img/boxes.bmp "Test image")
