@@ -8,15 +8,20 @@ import (
 // This file is more similar to the C and C++ examples than strictly needed
 
 func main() {
+	// Initialize
 	if sdl.Init(sdl.INIT_EVERYTHING) != 0 {
 		log.Fatalf("SDL_Init Error: %s\n", sdl.GetError())
 	}
+	defer sdl.Quit()
 
 	// Prepare the window and load the image
 	win := sdl.CreateWindow("Hello World!", 100, 100, 960, 540, sdl.WINDOW_SHOWN)
+	defer win.Destroy()
 	ren := sdl.CreateRenderer(win, -1, sdl.RENDERER_ACCELERATED|sdl.RENDERER_PRESENTVSYNC)
+	defer ren.Destroy()
 	bmp := sdl.LoadBMP("../img/boxes.bmp")
 	tex := ren.CreateTextureFromSurface(bmp)
+	defer tex.Destroy()
 
 	// Show the image
 	ren.Clear()
@@ -25,12 +30,4 @@ func main() {
 
 	// Wait 2 seconds
 	sdl.Delay(2000)
-
-	// These three are not strictly needed
-	tex.Destroy()
-	ren.Destroy()
-	win.Destroy()
-
-	// Neither is this one
-	sdl.Quit()
 }
