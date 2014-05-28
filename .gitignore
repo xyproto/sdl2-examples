@@ -23,6 +23,7 @@ main
 
 # Pascal units
 *.ppu
+fpc/SDL2/
 
 # Nimrod cache
 nimcache
