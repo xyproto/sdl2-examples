@@ -6,6 +6,8 @@ W = 960
 H = 540
 FLAGS = SDL2::Video::Window::SDL_WINDOW_SHOWN
 
+# Note that error checking is built in for many of the functions below.
+
 begin
   begin
     win = SDL2::Video::Window.new "Hello World!", X, Y, W, H, FLAGS
