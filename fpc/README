@@ -1,0 +1,13 @@
+SDL2 files are from bitbucket.org/p_daniel/sdl-2-for-free-pascal-compiler.
+
+To checkout the files:
+
+git clone https://bitbucket.org/p_daniel/sdl-2-for-free-pascal-compiler.git temp
+mv temp/SDL2 .
+rm -r temp
+
+Requires fpc and sdl2 to be installed.
+
+Make should produce an executable named "main".
+
+Currently it crashes when presenting the renderer, unfortunately.

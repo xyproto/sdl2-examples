@@ -1,0 +1,12 @@
+* Install the SDL2 library and headers.
+
+* Install the latest version of Go.
+
+* Install the sdl2 package:
+  go get github.com/veandco/go-sdl2/sdl
+
+* Build:
+  go build -o main
+ 
+* Run:
+  ./main
