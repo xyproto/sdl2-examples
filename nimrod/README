@@ -1,0 +1,11 @@
+Install sdl2 and nimrod.
+
+Install babel (nimrod package manager).
+
+Update the list of available babel packages:
+babel update
+
+Install sdl2 support:
+babel install sdl2
+
+Now everything is ready to compile and run.
