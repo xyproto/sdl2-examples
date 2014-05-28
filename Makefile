@@ -6,6 +6,7 @@ all:
 	@-make -C go
 	#@-make -C mruby (interpreted)
 	@-make -C nimrod
+	#@-make -C python (interpreted)
 
 run:
 	@-make -C c run
@@ -25,3 +26,4 @@ clean:
 	@-make -C go clean
 	#@-make -C mruby clean (no cleaning needed)
 	@-make -C nimrod clean
+	#@-make -C python clean (no cleaning needed)
