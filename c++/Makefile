@@ -12,5 +12,9 @@ small:
 debug:
 	${CPP} -O0 -g ${CPPFLAGS} main.cpp -o main
 
+run:
+	@echo C++
+	./main
+
 clean:
 	rm -f main

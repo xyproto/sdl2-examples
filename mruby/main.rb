@@ -13,6 +13,7 @@ begin
     ren = SDL2::Video::Renderer.new(win)
     bmp = SDL2::Video::Surface::load_bmp("../img/boxes.bmp")
     tex = SDL2::Video::Texture.new(ren, bmp)
+    bmp.free
 
     # Show the image 
     ren.clear
