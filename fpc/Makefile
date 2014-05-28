@@ -1,6 +1,9 @@
 all: main.pas SDL2/SDL2.o
 	fpc -FuSDL2 main.pas
 
+SDL2/SDL2.pas:
+	./checkout.sh
+
 SDL2/SDL2.o: SDL2/SDL2.pas
 	fpc $<
 
