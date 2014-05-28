@@ -7,7 +7,6 @@ H = 540
 FLAGS = SDL2::Video::Window::SDL_WINDOW_SHOWN
 
 begin
-  #SDL2::Video::init
   begin
     win = SDL2::Video::Window.new "Hello World!", X, Y, W, H, FLAGS
     ren = SDL2::Video::Renderer.new(win)
