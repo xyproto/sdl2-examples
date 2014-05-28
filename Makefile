@@ -15,6 +15,7 @@ run:
 	@-make -C go run
 	@-make -C mruby run
 	@-make -C nimrod run
+	@-make -C python run
 
 clean:
 	@-make -C c clean
