@@ -16,5 +16,9 @@ SDL2/SDL2_net.o: SDL2/SDL2_net.pas
 SDL2/SDL2_ttf.o: SDL2/SDL2_ttf.pas
 	fpc $<
 
+run:
+	@echo Free Pascal Compiler
+	./main
+
 clean:
 	rm -f *.o main link.res SDL2/*.o SDL2/*.ppu

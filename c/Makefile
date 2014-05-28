@@ -12,5 +12,9 @@ small:
 debug:
 	${CC} -O0 -g ${CFLAGS} main.c -o main
 
+run:
+	@echo C
+	./main
+
 clean:
 	rm -f main

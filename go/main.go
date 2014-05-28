@@ -39,6 +39,7 @@ func main() {
 
 	// Use the image as a texture
 	tex := ren.CreateTextureFromSurface(bmp)
+	bmp.Free()
 	if tex == nil {
 		log.Fatalf("CreateTextureFromSurface Error: %s\n", sdl.GetError())
 	}
