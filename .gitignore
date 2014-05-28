@@ -20,3 +20,6 @@
 *.out
 *.app
 main
+
+# Pascal units
+*.ppu
