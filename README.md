@@ -21,4 +21,4 @@ Additional information
 Test image
 ----------
 
-![Test image](https://raw.githubusercontent.com/xyproto/sdl2test/master/img/boxes.bmp "Test image")
+![Test image](https://raw.githubusercontent.com/xyproto/sdl2test/master/img/boxes.png "Test image")
