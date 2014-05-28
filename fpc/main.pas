@@ -9,32 +9,32 @@ var
   tex : PSDL_Texture;
 begin
   if SDL_Init(SDL_INIT_EVERYTHING) <> 0 then begin
-    WriteLn('SDL_Init Error:', SDL_GetError());
-    halt(1);
+    WriteLn('SDL_Init Error: ', SDL_GetError());
+    Halt(1);
   end;
 
   win := SDL_CreateWindow('Hello World', 100, 100, 960, 540, SDL_WINDOW_SHOWN);
   if win = nil then begin
-    WriteLn('SDL_CreateWindow Error:', SDL_GetError());
+    WriteLn('SDL_CreateWindow Error: ', SDL_GetError());
     Halt(1);
   end;
 
   ren := SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED or SDL_RENDERER_PRESENTVSYNC);
   if ren = nil then begin
-    WriteLn('SDL_CreateRenderer Error:', SDL_GetError());
+    WriteLn('SDL_CreateRenderer Error: ', SDL_GetError());
     Halt(1);
   end;
 
   bmp := SDL_LoadBMP('../img/boxes.bmp');
   if bmp = nil then begin
-    WriteLn('SDL_LoadBMP Error:', SDL_GetError());
+    WriteLn('SDL_LoadBMP Error: ', SDL_GetError());
     Halt(1);
   end;
 
   tex := SDL_CreateTextureFromSurface(ren, bmp);
   SDL_FreeSurface(bmp);
   if tex = nil then begin
-    WriteLn('SDL_CreateTextureFromSurface Error:', SDL_GetError());
+    WriteLn('SDL_CreateTextureFromSurface Error: ', SDL_GetError());
     Halt(1);
   end;
 
