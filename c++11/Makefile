@@ -1,13 +1,16 @@
+CPP=g++
+CPPFLAGS=-std=c++11 `pkg-config sdl2 --libs --cflags`
+
 all:
-	g++ -O3 -std=c++11 `pkg-config sdl2 --libs --cflags` main.cpp -o main
+	${CPP} -O3 ${CPPFLAGS} main.cpp -o main
 
 small:
-	g++ -Os -std=c++11 `pkg-config sdl2 --libs --cflags` main.cpp -o main
+	${CPP} -Os ${CPPFLAGS} main.cpp -o main
 	strip main
 	sstrip main
 
 debug:
-	g++ -O0 -g -std=c++11 `pkg-config sdl2 --libs --cflags` main.cpp -o main
+	${CPP} -O0 -g ${CPPFLAGS} main.cpp -o main
 
 clean:
 	rm -f main
