@@ -1,13 +1,16 @@
+CC=gcc
+CFLAGS=-std=c99 `pkg-config sdl2 --libs --cflags`
+
 all:
-	gcc -O3 -std=c99 `pkg-config sdl2 --libs --cflags` main.c -o main
+	${CC} -O3 ${CFLAGS} main.c -o main
 
 small:
-	gcc -Os -std=c99 `pkg-config sdl2 --libs --cflags` main.c -o main
+	${CC} -Os ${CFLAGS} main.c -o main
 	strip main
 	sstrip main
 
 debug:
-	gcc -O0 -g -std=c99 `pkg-config sdl2 --libs --cflags` main.c -o main
+	${CC} -O0 -g ${CFLAGS} main.c -o main
 
 clean:
 	rm -f main
