@@ -6,4 +6,4 @@ run:
 	./main
 
 clean:
-	rm -r main nimcache
+	rm -rf main nimcache
