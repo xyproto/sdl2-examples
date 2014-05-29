@@ -1,12 +1,12 @@
-#language: go
-#go:
-#  - 1.2
-#install:
-#  - go get -v github.com/veandco/go-sdl2/sdl
-#script:
-#  - cd go
-#  - go build
-#  - go test
+language: go
+go:
+  - 1.1
+install:
+  - go get -v github.com/veandco/go-sdl2/sdl
+script:
+  - cd go
+  - go build
+  - go test
 
 language: cpp
 compiler:
@@ -19,7 +19,7 @@ before_install:
   # Update
   - sudo apt-get -qq update
 install:
-  - sudo apt-get -qq install pkg-config libsdl2-dev 
+  - sudo apt-get -qq install pkg-config libsdl2-dev libsdl2
   # build-essential gcc-4.9 g++-4.9 bison flex
   # cmake libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libpng-dev
 script:
