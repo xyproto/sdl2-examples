@@ -16,7 +16,7 @@ before_install:
   # No SDL2 in the repos yet
   - sudo add-apt-repository ppa:antumdeluge/sdl2 -y
   # No GCC 4.9 either
-  - sudo apt-add-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   # Update
   - sudo apt-get -qq update
 install:
