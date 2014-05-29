@@ -15,13 +15,13 @@ compiler:
 before_install:
   # No SDL2 in the repos yet
   - sudo add-apt-repository ppa:antumdeluge/sdl2 -y
-  # No GCC 4.8 (or 4.9) either
+  # No GCC 4.9 either
   - sudo apt-add-repository ppa:ubuntu-toolchain-r/test -y
   # Update
   - sudo apt-get -qq update
 install:
+  - sudo apt-get install pkg-config libsdl2-dev build-essential gcc-4.9 bison flex
   # cmake libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libpng-dev
-  - sudo apt-get install pkg-config libsdl2-dev build-essential g++4.8 bison flex
 script:
   - make -C c
   - make -C c++
