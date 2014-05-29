@@ -10,9 +10,14 @@ Requirements
 ------------
 
 * The SDL 2 library
-* GCC 4.9 or later, for compiling the C++11 sample
-* Go 1.2 or later and the sdl2 package, for compiling the Go sample (`go get github.com/veandco/go-sdl2/sdl`)
-* MRuby for running the MRuby sample
+
+Requirements for the various languages
+--------------------------------------
+* GCC 4.8 or later (preferably GCC 4.9), for compiling the C++11 sample
+* Go 1.1 or later (preferably Go 1.2) and the sdl2 go package (`go get github.com/veandco/go-sdl2/sdl`)
+* MRuby with SDL2 added to the configuration file
+* Nimrod 0.9.4 and sdl2 installed with babel
+* Python 2 or 3 and PySDL2
 
 Additional information
 ----------------------
