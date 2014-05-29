@@ -13,11 +13,29 @@ compiler:
   - gcc
   - clang
 before_install:
+  # No SDL in the repos yet
   - sudo add-apt-repository ppa:antumdeluge/sdl2 -y
-  - sudo apt-get update
+  # No GCC 4.9 either
+  - sudo apt-add-repository ppa:ubuntu-toolchain-r/test -y
+  # Update
+  - sudo apt-get -qq update
 install:
-  - sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+  # cmake libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libpng-dev
+  - sudo apt-get install libsdl2-dev build-essential g++4.9 bison flex
 script:
   - make -C c
   - make -C c++
   - make -C c++11
+#notifications:
+#  email: false
+#  irc:
+#    channels:
+#      - "irc.freenode.net#blabla"
+#    on_success: change
+#    on_failure: always
+#    template:
+#      - "%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
+#      - "Change view : %{compare_url}"
+#      - "Build details : %{build_url}"
+#    use_notice: true
+#    skip_join: true
