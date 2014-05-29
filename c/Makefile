@@ -1,6 +1,6 @@
 CC=gcc
 #CFLAGS=-std=c99 `pkg-config sdl2 --libs --cflags`
-CFLAGS=-std=c99 `sdl2-config sdl2 --libs --cflags`
+CFLAGS=-std=c99 `sdl2-config --cflags --libs`
 
 all:
 	${CC} -O3 ${CFLAGS} main.c -o main
