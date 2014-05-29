@@ -1,7 +1,13 @@
 language: go
 go:
   - 1.1
+before_install:
+  # No SDL2 in the repos yet
+  - sudo add-apt-repository -y ppa:antumdeluge/sdl2
+  # Update
+  - sudo apt-get -qq update
 install:
+  - sudo apt-get -qq install libsdl2-dev
   - go get -v github.com/veandco/go-sdl2/sdl
 script:
   - cd go
