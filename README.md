@@ -1,6 +1,9 @@
 sdl2test
 ========
 
+[![Build Status](https://travis-ci.org/xyproto/sdl2test.svg?branch=master)](https://travis-ci.org/xyproto/sdl2test)
+<!-- [![Build Status](https://drone.io/github.com/xyproto/browserspeak/status.png)](https://drone.io/github.com/xyproto/browserspeak/latest) -->
+
 "hello world" for SDL2 for various programming languages.
 
 Requirements
