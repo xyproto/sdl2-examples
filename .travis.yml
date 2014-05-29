@@ -1,0 +1,20 @@
+language: go
+go:
+  - 1.1
+install:
+  - go get -v github.com/veandco/go-sdl2/sdl
+script:
+  - cd go
+  - go build
+  - go test
+
+language: cpp
+compiler:
+  - gcc
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install libsdl2-dev
+script:
+  - make -C c
+  - make -C c++
+  - make -C c++11
