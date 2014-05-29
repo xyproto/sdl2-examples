@@ -19,12 +19,12 @@ before_install:
   # Update
   - sudo apt-get -qq update
 install:
-  - sudo apt-get -qq install pkg-config libsdl2-dev libsdl2
-  # build-essential gcc-4.9 g++-4.9 bison flex
+  - sudo apt-get -qq install libsdl2-dev
+    # build-essential gcc-4.9 g++-4.9 bison flex libsdl2 pkg-config
   # cmake libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libpng-dev
 script:
   - make -C c
-  - make -C c++
+  #- make -C c++
   #- make -C c++11
 
 #notifications:
