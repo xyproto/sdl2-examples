@@ -21,7 +21,7 @@ before_install:
   - sudo apt-get -qq update
 install:
   # cmake libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libpng-dev
-  - sudo apt-get install libsdl2-dev build-essential g++4.9 bison flex
+  - sudo apt-get install pkg-config libsdl2 libsdl2-dev build-essential g++4.9 bison flex
 script:
   - make -C c
   - make -C c++
