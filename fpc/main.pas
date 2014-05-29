@@ -1,6 +1,5 @@
 program sdltest;
 
-{$linklib SDL2}
 uses SDL2;
 var
   win : PSDL_Window;

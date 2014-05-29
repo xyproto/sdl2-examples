@@ -4,15 +4,13 @@ all:
 	@-make -C c++11
 	@-make -C fpc
 	@-make -C go
-	#@-make -C mruby (interpreted)
 	@-make -C nimrod
-	#@-make -C python (interpreted)
 
 run:
 	@-make -C c run
 	@-make -C c++ run
 	@-make -C c++11 run
-	#@-make -C fpc run (fails to run)
+	@-make -C fpc run
 	@-make -C go run
 	@-make -C mruby run
 	@-make -C nimrod run
@@ -24,6 +22,4 @@ clean:
 	@-make -C c++11 clean
 	@-make -C fpc clean
 	@-make -C go clean
-	#@-make -C mruby clean (no cleaning needed)
 	@-make -C nimrod clean
-	#@-make -C python clean (no cleaning needed)
