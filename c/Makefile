@@ -12,6 +12,9 @@ small:
 debug:
 	${CC} -O0 -g main.c ${CFLAGS} -o main
 
+asm:
+	${CC} -Os -S main.c ${CFLAGS} -o main.asm
+
 run:
 	@echo C
 	./main
