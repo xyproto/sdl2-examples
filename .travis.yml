@@ -1,12 +1,13 @@
 language: cpp
 compiler:
   - gcc
-  - clang
+#  - clang
 before_install:
   - sudo add-apt-repository -y ppa:zoogie/sdl2-snapshots
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
 install:
   - sudo apt-get install -qq libsdl2-dev libsdl2-image-dev gcc-4.8
+  - sudo ldconfig
 script:
-  - make -C c++
+  - make -C c++11
