@@ -1,15 +1,14 @@
 language: c
 compiler:
   - gcc
-before_install:
-  #  SDL2
-  - sudo add-apt-repository -y ppa:antumdeluge/sdl2
-  # No GCC 4.9 either
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  # Update
-  - sudo apt-get -qq update
 install:
-  - sudo apt-get -qq install libsdl2-dev libsdl2
+  - curl -O http://libsdl.org/release/SDL2-2.0.3.tar.gz
+  - tar zxv SDL2-2.0.3.tar.gz
+  - pushd SDL2-2.0.3
+  - ./configure
+  - make
+  - sudo make install
+  - popd
 script:
   - make -C c
 
