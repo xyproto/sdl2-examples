@@ -1,62 +1,8 @@
-language: c
-compiler:
-  - gcc
+before_install:
+  - sudo add-apt-repository -y ppa:zoogie/sdl2-snapshots
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
 install:
-  - curl -O http://libsdl.org/release/SDL2-2.0.3.tar.gz
-  - tar zxv SDL2-2.0.3.tar.gz
-  - pushd SDL2-2.0.3
-  - ./configure
-  - make
-  - sudo make install
-  - popd
+  - sudo apt-get install -qq libsdl2-dev libsdl2-image-dev gcc-4.8
 script:
-  - make -C c
-
-#language: go
-#go:
-#  - 1.1
-#before_install:
-#  # No SDL2 in the repos yet
-#  - sudo add-apt-repository -y ppa:antumdeluge/sdl2
-#  # Update
-#  - sudo apt-get -qq update
-#install:
-#  - sudo apt-get -qq install libsdl2-dev
-#  - go get -v github.com/veandco/go-sdl2/sdl
-#script:
-#  - cd go
-#  - go build
-#  - go test
-
-#language: cpp
-#compiler:
-#  - gcc
-#before_install:
-#  # No SDL2 in the repos yet
-#  - sudo add-apt-repository -y ppa:antumdeluge/sdl2
-#  # No GCC 4.9 either
-#  #- sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-#  # Update
-#  - sudo apt-get -qq update
-#install:
-#  - sudo apt-get -qq install libsdl2-dev
-#    # build-essential gcc-4.9 g++-4.9 bison flex libsdl2 pkg-config
-#  # cmake libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libpng-dev
-#script:
-#  - make -C c
-#  #- make -C c++
-#  #- make -C c++11
-
-#notifications:
-#  email: false
-#  irc:
-#    channels:
-#      - "irc.freenode.net#blabla"
-#    on_success: change
-#    on_failure: always
-#    template:
-#      - "%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
-#      - "Change view : %{compare_url}"
-#      - "Build details : %{build_url}"
-#    use_notice: true
-#    skip_join: true
+  - make -C c++
