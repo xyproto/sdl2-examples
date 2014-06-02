@@ -2,15 +2,15 @@ CC=gcc
 CFLAGS=$(shell pkg-config sdl2 --cflags --libs) -std=c99
 
 all:
-	${CC} -O3 ${CFLAGS} main.c -o main
+	${CC} -O3 main.c ${CFLAGS} -o main
 
 small:
-	${CC} -Os ${CFLAGS} main.c -o main
+	${CC} -Os main.c ${CFLAGS} -o main
 	strip main
 	sstrip main
 
 debug:
-	${CC} -O0 -g ${CFLAGS} main.c -o main
+	${CC} -O0 -g main.c ${CFLAGS} -o main
 
 run:
 	@echo C
