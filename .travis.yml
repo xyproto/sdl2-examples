@@ -1,18 +1,34 @@
-language: go
-go:
-  - 1.1
+language: c
+compiler:
+  - gcc
 before_install:
-  # No SDL2 in the repos yet
+  #  SDL2
   - sudo add-apt-repository -y ppa:antumdeluge/sdl2
+  # No GCC 4.9 either
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   # Update
   - sudo apt-get -qq update
 install:
   - sudo apt-get -qq install libsdl2-dev
-  - go get -v github.com/veandco/go-sdl2/sdl
 script:
-  - cd go
-  - go build
-  - go test
+  - make -C c
+
+
+#language: go
+#go:
+#  - 1.1
+#before_install:
+#  # No SDL2 in the repos yet
+#  - sudo add-apt-repository -y ppa:antumdeluge/sdl2
+#  # Update
+#  - sudo apt-get -qq update
+#install:
+#  - sudo apt-get -qq install libsdl2-dev
+#  - go get -v github.com/veandco/go-sdl2/sdl
+#script:
+#  - cd go
+#  - go build
+#  - go test
 
 #language: cpp
 #compiler:
