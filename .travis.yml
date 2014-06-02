@@ -9,7 +9,7 @@ before_install:
   # Update
   - sudo apt-get -qq update
 install:
-  - sudo apt-get -qq install libsdl2-dev
+  - sudo apt-get -qq install libsdl2-dev libsdl2
 script:
   - make -C c
 
