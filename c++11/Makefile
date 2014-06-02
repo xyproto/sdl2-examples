@@ -1,5 +1,5 @@
 CPP=g++
-CPPFLAGS=-std=c++11 `pkg-config sdl2 --libs --cflags`
+CPPFLAGS=$(shell pkg-config sdl2 --libs --cflags) -std=c++11
 
 all:
 	${CPP} -O3 ${CPPFLAGS} main.cpp -o main

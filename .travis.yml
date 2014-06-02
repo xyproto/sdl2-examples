@@ -13,7 +13,6 @@ install:
 script:
   - make -C c
 
-
 #language: go
 #go:
 #  - 1.1
