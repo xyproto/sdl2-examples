@@ -1,4 +1,4 @@
-language: c
+language: cpp
 compiler:
   - gcc
 install:
@@ -10,7 +10,7 @@ install:
   - sudo make install
   - popd
 script:
-  - make -C c
+  - make -C c++
 
 #language: go
 #go:
