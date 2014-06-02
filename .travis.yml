@@ -1,4 +1,8 @@
 language: cpp
+  #  - c
+  #  - cpp
+  #  - go
+  #  - python
 compiler:
   - gcc
   - clang
@@ -7,11 +11,30 @@ before_install:
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
 install:
-  - sudo apt-get install -qq libsdl2-dev libsdl2-image-dev gcc-4.8 g++-4.8
+  - sudo apt-get install -qq libsdl2-dev libsdl2-image-dev gcc-4.9 g++-4.9
+  #  - go get -v github.com/veandco/go-sdl2/sdl
 before_script:
-  - export CXX=g++-4.8
-  - export CC=gcc-4.8
+  - export CXX=g++-4.9
+  - export CC=gcc-4.9
 script:
   - make -C c++11
   - make -C c++
   - make -C c
+  #  - pushd go
+  #  - go build
+  #  - go test
+  #  - popd
+
+#notifications:
+#  email: false
+#  irc:
+#    channels:
+#      - "irc.freenode.net#blabla"
+#    on_success: change
+#    on_failure: always
+#    template:
+#      - "%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
+#      - "Change view : %{compare_url}"
+#      - "Build details : %{build_url}"
+#    use_notice: true
+#    skip_join: true
