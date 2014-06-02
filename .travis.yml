@@ -3,7 +3,7 @@ compiler:
   - gcc
 install:
   - curl -O http://libsdl.org/release/SDL2-2.0.3.tar.gz
-  - tar zxv SDL2-2.0.3.tar.gz
+  - tar zxf SDL2-2.0.3.tar.gz
   - pushd SDL2-2.0.3
   - ./configure
   - make
