@@ -1,5 +1,5 @@
-CC=gcc
-CFLAGS=$(shell pkg-config sdl2 --cflags --libs) -std=c99
+CC?=gcc
+CFLAGS?=$(shell pkg-config sdl2 --cflags --libs) -std=c99
 
 all:
 	${CC} -O3 main.c ${CFLAGS} -o main
