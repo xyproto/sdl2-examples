@@ -1,34 +1,34 @@
 #include <SDL2/SDL.h>
-#include <iostream>
+#include <stdio.h>
 
 int main() {
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-    std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
+    printf("SDL_Init Error: %s\n", SDL_GetError());
     return 1;
   }
 
   SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 960, 540, SDL_WINDOW_SHOWN);
   if (win == nullptr) {
-    std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+    printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
     return 1;
   }
 
   SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (ren == nullptr) {
-    std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+    printf("SDL_CreateRenderer Error: %s\n", SDL_GetError());
     return 1;
   }
 
   SDL_Surface *bmp = SDL_LoadBMP("../img/boxes.bmp");
   if (bmp == nullptr) {
-    std::cout << "SDL_LoadBMP Error: " << SDL_GetError() << std::endl;
+    printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
     return 1;
   }
 
   SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, bmp);
   SDL_FreeSurface(bmp);
   if (tex == nullptr) {
-    std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
+    printf("SDL_CreateTextureFromSurface Error: %s\n", SDL_GetError());
     return 1;
   }
 
