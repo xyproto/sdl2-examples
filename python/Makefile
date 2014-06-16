@@ -1,5 +1,6 @@
 all:
-	true
+	@# Nothing to do here
+	@-false
 
 run:
 	@echo Python
