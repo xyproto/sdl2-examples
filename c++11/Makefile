@@ -1,16 +1,16 @@
-CPP?=g++
-CPPFLAGS?=$(shell pkg-config sdl2 --libs --cflags) -std=c++11
+CXX?=g++
+CXXFLAGS?=$(shell pkg-config sdl2 --libs --cflags) -std=c++11
 
 all:
-	${CPP} -O3 main.cpp ${CPPFLAGS} -o main
+	${CXX} -O3 main.cpp ${CXXFLAGS} -o main
 
 small:
-	${CPP} -Os main.cpp ${CPPFLAGS} -o main
+	${CXX} -Os main.cpp ${CXXFLAGS} -o main
 	strip main
 	sstrip main
 
 debug:
-	${CPP} -O0 -g main.cpp ${CPPFLAGS} -o main
+	${CXX} -O0 -g main.cpp ${CXXFLAGS} -o main
 
 run:
 	@echo C++11
