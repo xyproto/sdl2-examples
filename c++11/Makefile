@@ -13,7 +13,7 @@ debug:
 	${CXX} -O0 -g main.cpp ${CXXFLAGS} -o main
 
 run:
-	@echo C++11
+	@echo --- C++11 ---
 	./main
 
 clean:

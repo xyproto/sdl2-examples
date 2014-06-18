@@ -1,7 +1,11 @@
 all:
-	@# Nothing to do here
+	@# Nothing to build
 	@-false
 
 run:
-	@echo Python
+	@echo --- Python ---
 	python main.py
+
+clean:
+	@# Nothing to clean
+	@-false

@@ -1,25 +1,10 @@
+SAMPLES = c c++ c++11 fpc go mruby nimrod python
+
 all:
-	@-make -C c
-	@-make -C c++
-	@-make -C c++11
-	@-make -C fpc
-	@-make -C go
-	@-make -C nimrod
+	@-$(foreach x,$(SAMPLES),make -C $(x);)
 
 run:
-	@-make -C c run
-	@-make -C c++ run
-	@-make -C c++11 run
-	@-make -C fpc run
-	@-make -C go run
-	@-make -C mruby run
-	@-make -C nimrod run
-	@-make -C python run
+	@-$(foreach x,$(SAMPLES),time make -C $(x) run;)
 
 clean:
-	@-make -C c clean
-	@-make -C c++ clean
-	@-make -C c++11 clean
-	@-make -C fpc clean
-	@-make -C go clean
-	@-make -C nimrod clean
+	@-$(foreach x,$(SAMPLES),make -C $(x) clean;)

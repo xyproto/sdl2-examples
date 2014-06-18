@@ -2,7 +2,7 @@ all:
 	nimrod c main.nim
 
 run:
-	@echo Nimrod
+	@echo --- Nimrod ---
 	./main
 
 clean:
