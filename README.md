@@ -6,6 +6,8 @@ sdl2test
 
 "hello world" for SDL2 for various programming languages.
 
+Each sample creates a window and displays a picture, then waits two seconds and quits.
+
 Requirements
 ------------
 
@@ -13,11 +15,14 @@ Requirements
 
 Requirements for the various languages
 --------------------------------------
-* GCC 4.8 or later (preferably GCC 4.9), for compiling the C++11 sample
-* Go 1.1 or later (preferably Go 1.2) and the sdl2 go package (`go get github.com/veandco/go-sdl2/sdl`)
+* C compiler that supports C99 for the C sample
+* A C++ compiler for the C++ sample
+* GCC 4.8 or later for the C++11 sample
+* Go 1.1 or later and the sdl2 go package (`go get github.com/veandco/go-sdl2/sdl`)
 * MRuby with SDL2 added to the configuration file
 * Nimrod 0.9.4 and sdl2 installed with babel
 * Python 2 or 3 and PySDL2
+* FPC 2.6.4 (or later than 2.4.0, must have Uint8, Uint16 and Uint32)
 
 Additional information
 ----------------------
@@ -25,8 +30,3 @@ Additional information
 * MIT licensed
 * Alexander Rødseth, 2014
 * Pull requests are welcome
-
-Test image
-----------
-
-![Test image](https://raw.githubusercontent.com/xyproto/sdl2test/master/img/boxes.png "Test image")
