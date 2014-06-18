@@ -16,7 +16,7 @@ asm:
 	${CC} -Os -S main.c ${CFLAGS} -o main.asm
 
 run:
-	@echo C
+	@echo --- C ---
 	./main
 
 clean:
