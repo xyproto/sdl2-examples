@@ -1,6 +1,6 @@
 all:
 	@# Nothing to build
-	@-false
+	@true
 
 run:
 	@echo --- MRuby ---
@@ -8,4 +8,4 @@ run:
 
 clean:
 	@# Nothing to clean
-	@-false
+	@true
