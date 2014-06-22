@@ -5,6 +5,8 @@
 * Install the sdl2 package:
   go get github.com/veandco/go-sdl2/sdl
 
+* For OS X, remember to install the Development Libraries (place the SDL2 framework in /Library/Frameworks)
+
 * Build:
   go build -o main
  
