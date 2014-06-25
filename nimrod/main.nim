@@ -6,12 +6,7 @@ var
   bmp: PSurface
   tex: PTexture
 
-# The Nimrod SDL2 states that it should also be possible to just discard
-# the return values from functions that return SdlSuccess or SdlError.
-
-if Init(INIT_EVERYTHING) != SdlSuccess:
-  echo("Init Error: ", GetError())
-  quit(1)
+discard Init(INIT_EVERYTHING)
 
 win = CreateWindow("Hello World!", 100, 100, 960, 540, SDL_WINDOW_SHOWN)
 if win == nil:
