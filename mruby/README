@@ -9,6 +9,7 @@ This sample uses MRuby.
 
 * Edit build_config.rb in the mruby checkout with the SDL2 configuration from here:
   https://github.com/crimsonwoods/mruby-sdl2
+  (It's the code under "How to build". It should be added in the right place in build_config.rb).
 
 * Make sure to paste the lines within the "MRuby::Build.new do |conf|".."end" block.
   Edit the lines so that they point to where the SDL2 includes and library files are.
