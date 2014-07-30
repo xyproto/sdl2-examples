@@ -1,15 +1,11 @@
-SDL2 files are from bitbucket.org/p_daniel/sdl-2-for-free-pascal-compiler.
+Requires fpc and the sdl2 library to be installed.
 
-To checkout the files:
+The SDL2 files needed for FPC are from bitbucket.org/p_daniel/sdl-2-for-free-pascal-compiler.
+
+To check out the needed files, either use checkout.sh or run the following commands:
 
 git clone https://bitbucket.org/p_daniel/sdl-2-for-free-pascal-compiler.git temp
 mv temp/SDL2 .
 rm -r temp
 
-Requires fpc and sdl2 to be installed.
-
-Make should produce an executable named "main".
-
-NOTE:
-This sample currently does not work, see the following url for more info:
-https://bitbucket.org/p_daniel/sdl-2-for-free-pascal-compiler/issue/3/runtime-error-207-at-b3d22754
+make should produce an executable named "main".
