@@ -2,6 +2,8 @@
 
 * Install the latest version of Go.
 
+* Install the latest version of GCC + gccgo.
+
 * Install the sdl2 package:
   go get github.com/veandco/go-sdl2/sdl
 
@@ -12,3 +14,5 @@
  
 * Run:
   ./main
+
+NOTE: This sample may not build, for some configurations.
