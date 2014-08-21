@@ -24,6 +24,7 @@ Requirements for the various languages
 * Python 2 or 3 and PySDL2
 * FPC 2.6.4 (or later than 2.4.0, must have Uint8, Uint16 and Uint32)
 * Rust 0.12.0 or later and rust-sdl2 (from github.com/AngryLawyer/rust-sdl2)
+* Rust and Cargo for the rust-cargo example
 
 Additional information
 ----------------------
