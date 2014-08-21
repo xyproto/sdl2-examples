@@ -2,36 +2,33 @@ extern crate sdl2;
 extern crate native;
 
 fn main() {
-    sdl2::init(sdl2::InitVideo);
+    sdl2::init(sdl2::InitEverything);
 
-    let window = match sdl2::video::Window::new("rust-sdl2 demo: Video", sdl2::video::PosCentered, sdl2::video::PosCentered, 800, 600, sdl2::video::OpenGL) {
+    let win = match sdl2::video::Window::new("Hello World!", sdl2::video::Positioned(100), sdl2::video::Positioned(100), 960, 540, sdl2::video::Shown) {
         Ok(window) => window,
-        Err(err) => fail!(format!("failed to create window: {}", err))
+        Err(err) => fail!(format!("SDL_CreateWindow Error: {}", err))
     };
 
-    let renderer = match sdl2::render::Renderer::from_window(window, sdl2::render::DriverAuto, sdl2::render::Accelerated) {
+    let ren = match sdl2::render::Renderer::from_window(win, sdl2::render::DriverAuto, sdl2::render::Accelerated) {
         Ok(renderer) => renderer,
-        Err(err) => fail!(format!("failed to create renderer: {}", err))
+        Err(err) => fail!(format!("SDL_CreateRenderer Error: {}", err))
     };
 
-    let _ = renderer.set_draw_color(sdl2::pixels::RGB(255, 0, 0));
-    let _ = renderer.clear();
-    renderer.present();
+    let bmp = match sdl2::surface::Surface::from_bmp(&Path::new("../img/boxes.bmp")) {
+    	Ok(bmp) => bmp,
+	Err(err) => fail!(format!("SDL_LoadBMP Error: {}", err))
+    };
 
-    'main : loop {
-        'event : loop {
-            match sdl2::event::poll_event() {
-                sdl2::event::QuitEvent(_) => break 'main,
-                sdl2::event::KeyDownEvent(_, _, key, _, _) => {
-                    if key == sdl2::keycode::EscapeKey {
-                        break 'main
-                    }
-                },
-                sdl2::event::NoEvent => break 'event,
-                _ => {}
-            }
-        }
-    }
+    let tex = match ren.create_texture_from_surface(&bmp) {
+    	Ok(tex) => tex,
+	Err(err) => fail!(format!("SDL_CreateTextureFromSurface Error: {}", err))
+    };
+
+    let _ = ren.clear();
+    let _ = ren.copy(&tex, None, None);
+    ren.present();
+
+    sdl2::timer::delay(2000);
 
     sdl2::quit();
 }
