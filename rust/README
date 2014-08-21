@@ -1,3 +1,4 @@
-Requires rust and git to be installed. Remember to set LD_LIBRARY_PATH as required by rust, if needed.
+Requires `rustc`, `cargo`, and `git` to be installed. Remember to set LD_LIBRARY_PATH
+as required by Rust, if needed.
 
-make should produce an executable named "main" and will check out rust-sdl2 with git if needed.
+Just type `cargo run` to build and run the example.
