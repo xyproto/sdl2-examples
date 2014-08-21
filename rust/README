@@ -1,0 +1,3 @@
+Requires rust and git to be installed. Remember to set LD_LIBRARY_PATH as required by rust, if needed.
+
+make should produce an executable named "main" and will check out rust-sdl2 with git if needed.
