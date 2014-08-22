@@ -6,7 +6,7 @@ Hello SDL2!
 
 "hello world" for SDL2 for various programming languages.
 
-Each sample creates a window and displays a picture, then waits two seconds and quits.
+Each sample creates a window, displays an image, then waits two seconds and quits.
 
 Requirements
 ------------
