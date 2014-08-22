@@ -1,6 +1,6 @@
 [package]
 
-name = "sdl2test"
+name = "hello_sdl2"
 version = "1.0.0"
 authors = ["Some One <somebody@example.com>"]
 
