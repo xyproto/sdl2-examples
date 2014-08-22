@@ -1,4 +1,4 @@
-SAMPLES = c c++ c++11 fpc go mruby nimrod python
+SAMPLES = c c++ c++11 fpc go mruby nimrod python rust
 
 all:
 	@-$(foreach x,$(SAMPLES),make -C $(x);)
