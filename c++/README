@@ -1,0 +1,6 @@
+Requires a C++ compiler and SDL2.
+
+For the Makefile to work, pkg-config and sdl2 must be installed.
+
+It is possible to install pkg-config on OS X as well, but if this is not desired, -LSDL2 in the Makefile might do the trick.
+
