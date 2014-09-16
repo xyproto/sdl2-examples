@@ -5,6 +5,7 @@ This sample uses MRuby.
 * Clone and build MRuby (requires bison, ruby and termcap):
 
   git clone https://github.com/mruby/mruby
+  cd mruby
   make
 
 * Edit build_config.rb in the mruby checkout with the SDL2 configuration from here:
@@ -12,11 +13,11 @@ This sample uses MRuby.
   (It's the code under "How to build". It should be added in the right place in build_config.rb).
 
 * Make sure to paste the lines within the "MRuby::Build.new do |conf|".."end" block.
-  Edit the lines so that they point to where the SDL2 includes and library files are.
-  (typically /usr/include and /usr/lib)
+  Edit the lines so that they point to the SDL2 includes and library files
+  (typically /usr/include and /usr/lib).
 
-* Optionally put the files in the mruby/bin directory in /usr/bin and
-  the files in the mruby/include directory in /usr/include.
+* Optionally copy the files in the mruby/bin directory to /usr/bin and
+  the files in the mruby/include directory to /usr/include.
 
 Run the SDL2 sample with "mruby main.rb".
 
