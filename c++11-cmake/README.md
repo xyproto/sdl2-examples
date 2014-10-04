@@ -10,8 +10,8 @@ One way of building with C++11, SDL2, CMake and make
 mkdir -p build
 cd build
 cmake ..
+make
 cd ..
-make -C build
 mv build/main .
 
 
