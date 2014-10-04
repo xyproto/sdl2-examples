@@ -10,7 +10,7 @@ Requirements
 
 An alternative way of fetching and updating the dependencies is: `go get -d -t -v -u`
 
-For OS X, remember to install the Development Libraries (place the SDL2 framework in /Library/Frameworks)
+For OS X, remember to install the Development Libraries (place the SDL2 framework in `/Library/Frameworks`)
 
 Building
 --------
