@@ -1,5 +1,5 @@
-Install sdl2, nimrod and babel (the nimrod package manager), then:
+Install sdl2, nimrod and nimble (the nimrod package manager), then:
 
-babel install sdl2
+nimble install sdl2
 
 Now everything is ready to compile and run.
