@@ -1,9 +1,9 @@
 all:
-	go build -o main
+	go build
 
 run:
 	@echo --- Go ---
-	./main
+	./go
 
 clean:
 	go clean

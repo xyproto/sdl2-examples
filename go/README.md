@@ -15,10 +15,10 @@ For OS X, remember to install the Development Libraries (place the SDL2 framewor
 Building
 --------
 
-    go build -o main
+    go build
  
 Running
 -------
 
-    ./main
+    ./go
 
