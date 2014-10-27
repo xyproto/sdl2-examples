@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/veandco/go-sdl2/sdl"
 	"log"
+
+	"github.com/veandco/go-sdl2/sdl"
 )
 
 // Note that the SDL2 package could have been more ideomatic by
@@ -26,7 +27,7 @@ func main() {
 
 	// Create a renderer
 	ren := sdl.CreateRenderer(win, -1, sdl.RENDERER_ACCELERATED|sdl.RENDERER_PRESENTVSYNC)
-	if win == nil {
+	if ren == nil {
 		log.Fatalf("CreateRenderer Error: %s\n", sdl.GetError())
 	}
 	defer ren.Destroy()
