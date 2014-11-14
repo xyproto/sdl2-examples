@@ -29,9 +29,9 @@ if tex == nil:
   quit(1)
 FreeSurface(bmp)
 
-ren.clear
+ren.Clear
 Copy(ren, tex, nil, nil)
-ren.present
+ren.Present
 
 Delay(2000)
 
