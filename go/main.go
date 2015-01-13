@@ -6,10 +6,6 @@ import (
 	"github.com/veandco/go-sdl2/sdl"
 )
 
-// Note that the SDL2 package could have been more ideomatic by
-// returning error values that could contain error messages instead
-// of having to use "if == nil", "sdl.GetError()" and the .Destroy() functions.
-
 func main() {
 	// Initialize
 	if sdl.Init(sdl.INIT_EVERYTHING) != 0 {
@@ -19,16 +15,16 @@ func main() {
 	defer sdl.Quit()
 
 	// Create the window
-	win := sdl.CreateWindow("Hello World!", 100, 100, 960, 540, sdl.WINDOW_SHOWN)
-	if win == nil {
-		log.Fatalf("CreateWindow Error: %s\n", sdl.GetError())
+	win, err := sdl.CreateWindow("Hello World!", 100, 100, 960, 540, sdl.WINDOW_SHOWN)
+	if err != nil {
+		log.Fatalf("CreateWindow Error: %s\n", err.Error())
 	}
 	defer win.Destroy()
 
 	// Create a renderer
-	ren := sdl.CreateRenderer(win, -1, sdl.RENDERER_ACCELERATED|sdl.RENDERER_PRESENTVSYNC)
-	if ren == nil {
-		log.Fatalf("CreateRenderer Error: %s\n", sdl.GetError())
+	ren, err := sdl.CreateRenderer(win, -1, sdl.RENDERER_ACCELERATED|sdl.RENDERER_PRESENTVSYNC)
+	if err != nil {
+		log.Fatalf("CreateRenderer Error: %s\n", err.Error())
 	}
 	defer ren.Destroy()
 
@@ -39,14 +35,16 @@ func main() {
 	}
 
 	// Use the image as a texture
-	tex := ren.CreateTextureFromSurface(bmp)
-	bmp.Free()
-	if tex == nil {
-		log.Fatalf("CreateTextureFromSurface Error: %s\n", sdl.GetError())
+	tex, err := ren.CreateTextureFromSurface(bmp)
+	if err != nil {
+		log.Fatalf("CreateTextureFromSurface Error: %s\n", err.Error())
 	}
 	defer tex.Destroy()
 
-	// Show the texture
+	// No need for the image data after the texture has been created
+	bmp.Free()
+
+	// Clear the renderer and display the image/texture
 	ren.Clear()
 	ren.Copy(tex, nil, nil)
 	ren.Present()
