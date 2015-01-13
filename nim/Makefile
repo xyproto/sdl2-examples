@@ -1,8 +1,8 @@
 all:
-	nimrod c main.nim
+	nim c main.nim
 
 run:
-	@echo --- Nimrod ---
+	@echo --- Nim ---
 	./main
 
 clean:
