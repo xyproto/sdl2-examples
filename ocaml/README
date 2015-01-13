@@ -1,0 +1,3 @@
+Build https://github.com/fccm/OCamlSDL2 and install it in /usr/lib/ocaml. Make sure the ocaml sdl2 library files in /usr/lib/ocaml are readable.
+
+Now everything is ready to build and run.
