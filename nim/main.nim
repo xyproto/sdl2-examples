@@ -1,42 +1,42 @@
 import sdl2
 
 var 
-  win: PWindow
-  ren: PRenderer
-  bmp: PSurface
-  tex: PTexture
+  win: WindowPtr
+  ren: RendererPtr
+  bmp: SurfacePtr
+  tex: TexturePtr
 
-discard Init(INIT_EVERYTHING)
+discard init(INIT_EVERYTHING)
 
-win = CreateWindow("Hello World!", 100, 100, 960, 540, SDL_WINDOW_SHOWN)
+win = createWindow("Hello World!", 100, 100, 960, 540, SDL_WINDOW_SHOWN)
 if win == nil:
-  echo("CreateWindow Error: ", GetError())
+  echo("createWindow Error: ", getError())
   quit(1)
 
-ren = CreateRenderer(win, -1, Renderer_Accelerated or Renderer_PresentVsync)
+ren = createRenderer(win, -1, Renderer_Accelerated or Renderer_PresentVsync)
 if ren == nil:
-  echo("CreateRenderer Error: ", GetError())
+  echo("createRenderer Error: ", getError())
   quit(1)
 
-bmp = LoadBMP("../img/boxes.bmp")
+bmp = loadBMP("../img/boxes.bmp")
 if bmp == nil:
-  echo("LoadBMP Error: ", GetError())
+  echo("loadBMP Error: ", getError())
   quit(1)
 
-tex = CreateTextureFromSurface(ren, bmp)
+tex = createTextureFromSurface(ren, bmp)
 if tex == nil:
-  echo("CreateTextureFromSurface Error: ", GetError())
+  echo("createTextureFromSurface Error: ", getError())
   quit(1)
-FreeSurface(bmp)
+freeSurface(bmp)
 
-ren.Clear
-Copy(ren, tex, nil, nil)
-ren.Present
+ren.clear
+copy(ren, tex, nil, nil)
+ren.present
 
-Delay(2000)
+delay(2000)
 
 destroy tex
 destroy ren
 destroy win
 
-sdl2.Quit()
+sdl2.quit()
