@@ -28,6 +28,8 @@ Requirements for the various languages
 * FPC 2.6.4 (or later than 2.4.0, must have Uint8, Uint16 and Uint32)
 * Rust 0.12.0 or later and rust-sdl2 (from github.com/AngryLawyer/rust-sdl2)
 * Rust and Cargo for the rust-cargo example
+* OCaml and OCamlSDL2
+* Lua (tested with Lua 5.2) and lua-sdl2
 
 
 Number of times the sample code itself has had to been updated to make it work again
@@ -42,6 +44,7 @@ This is usually caused by changes in external dependencies.
 * FPC: 1 (new host for the SDL2 git repository)
 * GCCGo: 1 (the sdl2 package changed)
 * Go: 1 (the sdl2 package changed)
+* Lua: 0
 * MRuby: 0
 * Nim: 1 (new function names)
 * OCaml: 0
