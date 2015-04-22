@@ -30,3 +30,6 @@ nimcache
 
 # Rust sdl2 package
 rust/sdl2/
+
+# Cmake
+c++11-cmake/build/
