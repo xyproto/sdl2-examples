@@ -3,7 +3,7 @@ all:
 	@true
 
 run:
-	@echo --- MRuby ---
+	@echo --- Ruby ---
 	mruby main.rb
 
 clean:
