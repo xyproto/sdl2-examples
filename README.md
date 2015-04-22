@@ -33,7 +33,7 @@ Requirements for the various languages
 Number of times the sample code itself has had to been updated to make it work again
 ------------------------------------------------------------------------------------
 
-Some times external dependencies, or the languages themselves, change.
+This is usually caused by changes in external dependencies.
 
 * C: 0
 * C++: 0
