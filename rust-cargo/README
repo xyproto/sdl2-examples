@@ -1,5 +1,0 @@
-Requires `rustc`, `cargo`, and `git` to be installed.
-
-Remember to set LD_LIBRARY_PATH as required by Rust, if needed.
-
-Just type `cargo run` to build and run the example.
