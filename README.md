@@ -11,7 +11,8 @@ Each sample creates a window, displays an image, then waits two seconds and quit
 Requirements
 ------------
 
-* The SDL 2 library
+* The SDL 2 library.
+* See the README or README.md file per sample for more information.
 
 Requirements for the various languages
 --------------------------------------
@@ -26,7 +27,31 @@ Requirements for the various languages
 * Rust 0.12.0 or later and rust-sdl2 (from github.com/AngryLawyer/rust-sdl2)
 * Rust and Cargo for the rust-cargo example
 
-Additional information
+Number of times the samples has had to been updated to make them work again
+---------------------------------------------------------------------------
+
+Some times external dependencies, or the languages themselves, change:
+
+* C: 0
+* C++: 0
+* C++11: 0
+* C++11 w/ CMake: 0
+* FPC: 1 (SDL2 repository changed location)
+* GCCGo: 1 (the sdl2 package made a few changes)
+* Go: 1 (the sdl2 package made a few changes)
+* MRuby: 0
+* Nim: 1 (new function names)
+* OCaml: 0
+* Python: 0
+* Rust: 0
+* Rust-Cargo: 0
+
+Samples that currently does not build, but did build before
+-----------------------------------------------------------
+
+* GCCGo, after the sdl2 package was changed
+
+General information
 ----------------------
 
 * MIT licensed
