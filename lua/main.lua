@@ -26,10 +26,10 @@ if not img then
 	error(err)
 end
 
-img = rdr:createTextureFromSurface(img)
+tex = rdr:createTextureFromSurface(img)
 
 rdr:clear()
-rdr:copy(img)
+rdr:copy(tex)
 rdr:present()
 
 SDL.delay(2000)
