@@ -15,6 +15,10 @@
 *.a
 *.lib
 
+# OCaml
+*.cmi
+*.cmx
+
 # Executables
 *.exe
 *.out
