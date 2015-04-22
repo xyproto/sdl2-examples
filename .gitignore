@@ -33,7 +33,7 @@ fpc/SDL2/
 # Nimrod cache
 nimcache
 
-# Rust sdl2 package
+# Rust
 rust/sdl2/
 
 # Cmake

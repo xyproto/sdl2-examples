@@ -30,8 +30,8 @@ Requirements for the various languages
 * Rust and Cargo for the rust-cargo example
 
 
-Number of times the samples has had to been updated to make them work again
----------------------------------------------------------------------------
+Number of times the sample code itself has had to been updated to make it work again
+------------------------------------------------------------------------------------
 
 Some times external dependencies, or the languages themselves, change.
 
@@ -54,6 +54,7 @@ Samples that currently does not build, but did build before
 -----------------------------------------------------------
 
 * GCCGo, after the sdl2 package was changed (possibly due to gccgo supporting an older version of the Go language than the Go compiler)
+* Rust and Rust-Cargo (several errors that are not related to sdl2 nor the sample code)
 
 
 General information
