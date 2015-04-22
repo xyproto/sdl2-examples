@@ -40,8 +40,8 @@ This is usually caused by changes in external dependencies.
 * C++11: 0
 * C++11 w/ CMake: 0
 * FPC: 1 (new host for the SDL2 git repository)
-* GCCGo: 1 (the sdl2 package made a few good changes)
-* Go: 1 (the sdl2 package made a few good changes)
+* GCCGo: 1 (the sdl2 package changed)
+* Go: 1 (the sdl2 package changed)
 * MRuby: 0
 * Nim: 1 (new function names)
 * OCaml: 0
