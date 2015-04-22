@@ -1,51 +1,50 @@
 package main
 
 import (
-	"github.com/veandco/go-sdl2/sdl"
 	"log"
-)
 
-// Note that the SDL2 package could have been more ideomatic by
-// returning error values that could contain error messages instead
-// of having to use "if == nil", "sdl.GetError()" and the .Destroy() functions.
+	"github.com/veandco/go-sdl2/sdl"
+)
 
 func main() {
 	// Initialize
-	if sdl.Init(sdl.INIT_EVERYTHING) != 0 {
-		log.Fatalf("Init Error: %s\n", sdl.GetError())
+	if err := sdl.Init(sdl.INIT_EVERYTHING); err != nil {
+		log.Fatalln("Init Error:", err)
 	}
 	// Make sure to quit when the function returns
 	defer sdl.Quit()
 
 	// Create the window
-	win := sdl.CreateWindow("Hello World!", 100, 100, 960, 540, sdl.WINDOW_SHOWN)
-	if win == nil {
-		log.Fatalf("CreateWindow Error: %s\n", sdl.GetError())
+	win, err := sdl.CreateWindow("Hello World!", 100, 100, 960, 540, sdl.WINDOW_SHOWN)
+	if err != nil {
+		log.Fatalln("CreateWindow Error:", err)
 	}
 	defer win.Destroy()
 
 	// Create a renderer
-	ren := sdl.CreateRenderer(win, -1, sdl.RENDERER_ACCELERATED|sdl.RENDERER_PRESENTVSYNC)
-	if win == nil {
-		log.Fatalf("CreateRenderer Error: %s\n", sdl.GetError())
+	ren, err := sdl.CreateRenderer(win, -1, sdl.RENDERER_ACCELERATED|sdl.RENDERER_PRESENTVSYNC)
+	if err != nil {
+		log.Fatalln("CreateRenderer Error:", err)
 	}
 	defer ren.Destroy()
 
 	// Load the image
-	bmp := sdl.LoadBMP("../img/boxes.bmp")
-	if bmp == nil {
-		log.Fatalf("LoadBMP Error: %s\n", sdl.GetError())
+	bmp, err := sdl.LoadBMP("../img/boxes.bmp")
+	if err != nil {
+		log.Fatalln("LoadBMP Error:", err)
 	}
 
 	// Use the image as a texture
-	tex := ren.CreateTextureFromSurface(bmp)
-	bmp.Free()
-	if tex == nil {
-		log.Fatalf("CreateTextureFromSurface Error: %s\n", sdl.GetError())
+	tex, err := ren.CreateTextureFromSurface(bmp)
+	if err != nil {
+		log.Fatalln("CreateTextureFromSurface Error:", err)
 	}
 	defer tex.Destroy()
 
-	// Show the texture
+	// No need for the image data after the texture has been created
+	bmp.Free()
+
+	// Clear the renderer and display the image/texture
 	ren.Clear()
 	ren.Copy(tex, nil, nil)
 	ren.Present()

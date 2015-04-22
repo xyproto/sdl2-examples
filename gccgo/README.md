@@ -1,3 +1,6 @@
+NOTE! This sample currently does not build.
+Probably because the go-sdl2 package uses the syntax for a later version of Go than gccgo supports.
+
 * Install the SDL2 library and headers.
 
 * Install the latest version of Go.
