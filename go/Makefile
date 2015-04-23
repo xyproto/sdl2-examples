@@ -12,7 +12,7 @@ deps:
 	go get -d
 
 run: msg go
-	./go
+	time ./go
 
 gorun: main.go
 	go run main.go

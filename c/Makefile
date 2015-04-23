@@ -25,7 +25,7 @@ main.asm: main.c
 	${CC} -Os -S main.c ${CFLAGS} -o main.asm
 
 run: msg main
-	./main
+	time ./main
 
 clean:
 	rm -f main

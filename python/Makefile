@@ -8,7 +8,7 @@ msg:
 	@echo --- Python ---
 
 run: msg main.py
-	python main.py
+	time python main.py
 
 clean:
 	@# Nothing to clean

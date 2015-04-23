@@ -17,13 +17,10 @@ let () =
   in
   let img = Surface.load_bmp "../img/boxes.bmp" in
   let tex = Texture.create_from_surface ren img in
+    Render.clear ren;
   let src_rect = Rect.make4 0 0 960 540 in
   let dst_rect = Rect.make4 0 0 960 540 in
-    Render.clear ren;
-    Render.copy ren
-      ~texture:tex
-      ~src_rect
-      ~dst_rect ();
+    Render.copy ren ~texture:tex ~src_rect ~dst_rect ();
     Render.render_present ren;
     Timer.delay 2000;
   Sdl.quit ()

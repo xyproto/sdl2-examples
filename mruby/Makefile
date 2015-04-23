@@ -8,7 +8,7 @@ msg:
 	@echo --- Ruby ---
 
 run: msg main.rb
-	mruby main.rb
+	time mruby main.rb
 
 clean:
 	@# Nothing to clean
