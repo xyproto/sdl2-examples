@@ -9,7 +9,7 @@ main: main.nim
 	nim c main.nim
 
 run: msg main
-	./main
+	time ./main
 
 clean:
 	rm -f main

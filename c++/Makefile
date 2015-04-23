@@ -20,7 +20,7 @@ debug: main.cpp
 	${CXX} -O0 -g main.cpp ${CXXFLAGS} -o main
 
 run: msg main
-	./main
+	time ./main
 
 clean:
 	rm -f main

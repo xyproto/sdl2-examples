@@ -8,7 +8,7 @@ msg:
 	@echo --- Lua ---
 
 run: msg main.lua
-	lua main.lua
+	time lua main.lua
 
 clean:
 	@# Nothing to clean

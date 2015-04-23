@@ -1,4 +1,4 @@
-.PHONY: all msg clean fullclean
+.PHONY: all msg run clean fullclean
 
 all: msg main
 
@@ -25,7 +25,7 @@ main: sdl2 main.ml
 	@echo 'ok'
 
 run: msg main
-	./main
+	time ./main
 
 clean:
 	rm -f main *.o *.cmx *.cmi
