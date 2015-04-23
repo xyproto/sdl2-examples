@@ -1,9 +1,12 @@
 CXX?=g++
 CXXFLAGS?=$(shell pkg-config sdl2 --libs --cflags) -std=c++11
 
-.PHONY: all clean fullclean
+.PHONY: all msg clean fullclean
 
-all: main
+all: msg main
+
+msg:
+	@echo --- C++11 ---
 
 main: main.cpp
 	${CXX} -O3 main.cpp ${CXXFLAGS} -o main
@@ -16,8 +19,7 @@ small: main.cpp
 debug: main.cpp
 	${CXX} -O0 -g main.cpp ${CXXFLAGS} -o main
 
-run: main
-	@echo --- C++11 ---
+run: msg main
 	./main
 
 clean:

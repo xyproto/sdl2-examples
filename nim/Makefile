@@ -1,12 +1,14 @@
-.PHONY: all clean fullclean
+.PHONY: all msg clean fullclean
 
-all: main
+all: msg main
+
+msg:
+	@echo --- Nim ---
 
 main: main.nim
 	nim c main.nim
 
-run: main
-	@echo --- Nim ---
+run: msg main
 	./main
 
 clean:

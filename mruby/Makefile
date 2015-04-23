@@ -1,11 +1,13 @@
-.PHONY: all clean fullclean
+.PHONY: all msg clean fullclean
 
-all:
+all: msg
 	@# Nothing to build
 	@true
 
-run: main.rb
+msg:
 	@echo --- Ruby ---
+
+run: msg main.rb
 	mruby main.rb
 
 clean:

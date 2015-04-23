@@ -1,6 +1,9 @@
-.PHONY: all clean fullclean
+.PHONY: all msg clean fullclean
 
-all: go
+all: msg go
+
+msg:
+	@echo --- Go ---
 
 go: deps main.go
 	go build
@@ -8,12 +11,10 @@ go: deps main.go
 deps:
 	go get -d
 
-run: go
-	@echo --- Go ---
+run: msg go
 	./go
 
 gorun: main.go
-	@echo --- Go run ---
 	go run main.go
 
 clean:
