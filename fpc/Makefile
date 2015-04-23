@@ -1,6 +1,9 @@
-.PHONY: sdl2 all run clean fullclean
+.PHONY: all msg sdl2 clean fullclean
 
-all: main
+all: msg main
+
+msg:
+	@echo --- FPC ---
 
 main: sdl2 SDL2/SDL2.o main.pas
 	@echo -n '[main] Compiling...'
@@ -27,8 +30,7 @@ SDL2/SDL2_net.o: SDL2/SDL2_net.pas
 SDL2/SDL2_ttf.o: SDL2/SDL2_ttf.pas
 	@fpc $<
 
-run:
-	@echo --- Free Pascal ---
+run: msg main
 	./main
 
 clean:

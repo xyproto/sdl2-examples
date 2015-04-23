@@ -1,17 +1,20 @@
-.PHONY: all sdl2 run clean fullclean
+.PHONY: all msg clean fullclean
 
-all: main
+all: msg main
 
-OCamlSDL2:
-	@echo -n '[OCamlSDL2] Checking out...'
-	@./checkout.sh > /dev/null
-	@echo 'ok'
+msg:
+	@echo --- OCaml ---
 
 sdl2: OCamlSDL2
 	@echo -n '[OCamlSDL2] Compiling...'
 	@make -s -C OCamlSDL2/src gen
 	@make -s -C OCamlSDL2/src dep
 	@make -s -C OCamlSDL2/src opt byte 2> /dev/null
+	@echo 'ok'
+
+OCamlSDL2:
+	@echo -n '[OCamlSDL2] Checking out...'
+	@./checkout.sh > /dev/null
 	@echo 'ok'
 
 main: sdl2 main.ml
@@ -21,8 +24,7 @@ main: sdl2 main.ml
 	@[ -e OCamlSDL2/src ] && ocamlopt -g -I OcamlSDL2/src sdl2.cmxa main.ml -o main || ocamlopt -g -I /usr/lib/ocaml sdl2.cmxa main.ml -o main
 	@echo 'ok'
 
-run:
-	@echo --- OCaml ---
+run: msg main
 	./main
 
 clean:

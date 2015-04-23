@@ -1,11 +1,13 @@
-.PHONY: all clean fullclean
+.PHONY: all msg clean fullclean
 
-all:
+all: msg
 	@# Nothing to build
 	@true
 
-run: main.py
+msg:
 	@echo --- Python ---
+
+run: msg main.py
 	python main.py
 
 clean:

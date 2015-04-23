@@ -1,11 +1,13 @@
-.PHONY: all clean fullclean
+.PHONY: all msg clean fullclean
 
-all:
+all: msg
 	@# Nothing to build
 	@true
 
-run: main.lua
+msg:
 	@echo --- Lua ---
+
+run: msg main.lua
 	lua main.lua
 
 clean:
