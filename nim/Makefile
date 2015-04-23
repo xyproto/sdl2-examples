@@ -1,9 +1,16 @@
-all:
+.PHONY: all clean fullclean
+
+all: main
+
+main: main.nim
 	nim c main.nim
 
-run:
+run: main
 	@echo --- Nim ---
 	./main
 
 clean:
-	rm -rf main nimcache
+	rm -f main
+
+fullclean: clean
+	rm -rf nimcache

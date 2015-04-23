@@ -1,23 +1,31 @@
-all: main.pas SDL2/SDL2.o
-	fpc -FuSDL2 main.pas
+.PHONY: sdl2 all run clean fullclean
 
-SDL2/SDL2.pas:
-	./checkout.sh
+all: main
+
+main: sdl2 SDL2/SDL2.o main.pas
+	@echo -n '[main] Compiling...'
+	@fpc -FuSDL2 main.pas
+	@echo 'ok'
+
+sdl2: checkout.sh
+	@echo -n '[SDL2 for FPC] Checking out...'
+	@./checkout.sh > /dev/null
+	@echo 'ok'
 
 SDL2/SDL2.o: SDL2/SDL2.pas
-	fpc $<
+	@fpc $<
 
 SDL2/SDL2_image.o: SDL2/SDL2_image.pas
-	fpc $<
+	@fpc $<
 
 SDL2/SDL2_mixer.o: SDL2/SDL2_mixer.pas
-	fpc $<
+	@fpc $<
 
 SDL2/SDL2_net.o: SDL2/SDL2_net.pas
-	fpc $<
+	@fpc $<
 
 SDL2/SDL2_ttf.o: SDL2/SDL2_ttf.pas
-	fpc $<
+	@fpc $<
 
 run:
 	@echo --- Free Pascal ---
@@ -25,3 +33,6 @@ run:
 
 clean:
 	rm -f *.o main link.res SDL2/*.o SDL2/*.ppu
+
+fullclean: clean
+	rm -rf SDL2
