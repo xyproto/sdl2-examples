@@ -18,4 +18,3 @@ Note
 ----
 
 * Make sure the ocaml sdl2 library files in /usr/lib/ocaml are readable (+r).
-* Making this sample similar to the other samples is a work in progress.
