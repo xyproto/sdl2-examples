@@ -20,11 +20,11 @@ def main():
     tex = SDL_CreateTextureFromSurface(ren, bmp)
     SDL_FreeSurface(bmp)
 
-    SDL_RenderClear(ren)
-    SDL_RenderCopy(ren, tex, None, None)
-    SDL_RenderPresent(ren)
-
-    SDL_Delay(2000)
+    for i in range(20):
+        SDL_RenderClear(ren)
+        SDL_RenderCopy(ren, tex, None, None)
+        SDL_RenderPresent(ren)
+        SDL_Delay(100)
 
     SDL_DestroyTexture(tex)
     SDL_DestroyRenderer(ren)
