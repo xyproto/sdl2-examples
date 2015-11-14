@@ -21,7 +21,7 @@ main: sdl2 main.ml
 	@# Use OCamlSDL2/src or /usr/lib/ocaml as the extra include directory
 	@# depending on if the former directory exists or not. Avoids a warning.
 	@echo -n '[main] Compiling...'
-	@[ -e OCamlSDL2/src ] && ocamlopt -g -I OcamlSDL2/src sdl2.cmxa main.ml -o main || ocamlopt -g -I /usr/lib/ocaml sdl2.cmxa main.ml -o main
+	@[ -e OCamlSDL2/src ] && ocamlopt -g -I OCamlSDL2/src sdl2.cmxa main.ml -o main || ocamlopt -g -I /usr/lib/ocaml sdl2.cmxa main.ml -o main
 	@echo 'ok'
 
 run: msg main
