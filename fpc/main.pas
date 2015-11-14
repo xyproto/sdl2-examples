@@ -6,6 +6,7 @@ var
   ren : PSDL_Renderer;
   bmp : PSDL_Surface;
   tex : PSDL_Texture;
+  i : Integer;
 begin
   if SDL_Init(SDL_INIT_EVERYTHING) <> 0 then begin
     WriteLn('SDL_Init Error: ', SDL_GetError());
@@ -37,11 +38,12 @@ begin
     Halt(1);
   end;
 
-  SDL_RenderClear(ren);
-  SDL_RenderCopy(ren, tex, nil, nil);
-  SDL_RenderPresent(ren);
-
-  SDL_Delay(2000);
+  for i := 0 to 20 do begin
+    SDL_RenderClear(ren);
+    SDL_RenderCopy(ren, tex, nil, nil);
+    SDL_RenderPresent(ren);
+    SDL_Delay(100);
+  end;
 
   SDL_DestroyTexture(tex);
   SDL_DestroyRenderer(ren);
