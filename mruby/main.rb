@@ -16,13 +16,15 @@ begin
     tex = SDL2::Video::Texture.new(ren, bmp)
     bmp.free
 
-    # Show the image 
-    ren.clear
-    ren.copy(tex)
-    ren.present
+    for i in 0..20
+      # Show the image 
+      ren.clear
+      ren.copy(tex)
+      ren.present
 
-    # Wait 2 seconds
-    SDL2::delay(2000)
+      # Wait 100 ms
+      SDL2::delay(100)
+    end
 
     # Clean up
     tex.destroy
