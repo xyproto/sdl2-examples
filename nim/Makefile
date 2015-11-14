@@ -12,7 +12,6 @@ run: msg main
 	time ./main
 
 clean:
-	rm -f main
+	rm -rf main nimcache
 
 fullclean: clean
-	rm -rf nimcache

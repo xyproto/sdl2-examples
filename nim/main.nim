@@ -29,11 +29,11 @@ if tex == nil:
   quit(1)
 freeSurface(bmp)
 
-ren.clear
-copy(ren, tex, nil, nil)
-ren.present
-
-delay(2000)
+for i in countup(1, 20):
+  ren.clear
+  copy(ren, tex, nil, nil)
+  ren.present
+  delay(100)
 
 destroy tex
 destroy ren
