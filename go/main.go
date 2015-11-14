@@ -44,11 +44,13 @@ func main() {
 	// No need for the image data after the texture has been created
 	bmp.Free()
 
-	// Clear the renderer and display the image/texture
-	ren.Clear()
-	ren.Copy(tex, nil, nil)
-	ren.Present()
+	for i := 0; i < 20; i++ {
+		// Clear the renderer and display the image/texture
+		ren.Clear()
+		ren.Copy(tex, nil, nil)
+		ren.Present()
 
-	// Wait 2 seconds
-	sdl.Delay(2000)
+		// Wait 100 ms
+		sdl.Delay(100)
+	}
 }
