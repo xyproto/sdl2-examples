@@ -28,8 +28,10 @@ end
 
 tex = rdr:createTextureFromSurface(img)
 
-rdr:clear()
-rdr:copy(tex)
-rdr:present()
+for i = 1, 20 do
+    rdr:clear()
+    rdr:copy(tex)
+    rdr:present()
 
-SDL.delay(2000)
+    SDL.delay(100)
+end
