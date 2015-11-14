@@ -2,22 +2,12 @@ This sample uses MRuby.
 
 * Install the SDL2 libraries and include files.
 
-* Clone and build MRuby (requires bison, ruby and termcap):
+* Install MRuby (https://github.com/mruby/mruby) and mruby-sdl2 (https://github.com/crimsonwoods/mruby-sdl2).
 
-  git clone https://github.com/mruby/mruby
-  cd mruby
-  make
+The installation of mruby-sdl2 may be tricky, and may involve recompiling mruby while adding this line to build_config.rb:
 
-* Edit build_config.rb in the mruby checkout with the SDL2 configuration from here:
-  https://github.com/crimsonwoods/mruby-sdl2
-  (It's the code under "How to build". It should be added in the right place in build_config.rb).
+  conf.gem :github => 'crimsonwoods/mruby-sdl2', :branch => 'master'
 
-* Make sure to paste the lines within the "MRuby::Build.new do |conf|".."end" block.
-  Edit the lines so that they point to the SDL2 includes and library files
-  (typically /usr/include and /usr/lib).
+Consult the mruby-sdl2 project for more information.
 
-* Optionally copy the files in the mruby/bin directory to /usr/bin and
-  the files in the mruby/include directory to /usr/include.
-
-Run the SDL2 sample with "mruby main.rb".
-
+* Run the SDL2 sample with "mruby main.rb".
