@@ -34,11 +34,12 @@ int main() {
     return 1;
   }
 
-  SDL_RenderClear(ren);
-  SDL_RenderCopy(ren, tex, NULL, NULL);
-  SDL_RenderPresent(ren);
-
-  SDL_Delay(2000);
+  for (int i=0; i < 20; i++) {
+      SDL_RenderClear(ren);
+      SDL_RenderCopy(ren, tex, NULL, NULL);
+      SDL_RenderPresent(ren);
+      SDL_Delay(100);
+  }
 
   SDL_DestroyTexture(tex);
   SDL_DestroyRenderer(ren);
