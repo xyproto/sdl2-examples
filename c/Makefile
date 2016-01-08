@@ -1,5 +1,5 @@
 CC?=gcc
-CFLAGS?=$(shell pkg-config sdl2 --cflags --libs) -std=c99
+CFLAGS?=$(shell pkg-config sdl2 --cflags --libs) -std=c11 -O2 -Wall -pedantic -Werror -Wshadow -Wstrict-aliasing -Wstrict-overflow
 
 .PHONY: all msg clean fullclean
 
@@ -9,20 +9,20 @@ msg:
 	@echo --- C ---
 
 main: main.c
-	${CC} -O3 main.c ${CFLAGS} -o main
+	${CC} main.c ${CFLAGS} -O3 -o main
 
 small: main.c
-	${CC} -Os main.c ${CFLAGS} -o main
+	${CC} main.c ${CFLAGS} -Os -o main
 	strip main
 	sstrip main
 
 debug: main.c
-	${CC} -O0 -g main.c ${CFLAGS} -o main
+	${CC} main.c ${CFLAGS} -O1 -g -o main
 
 asm: main.asm
 
 main.asm: main.c
-	${CC} -Os -S main.c ${CFLAGS} -o main.asm
+	${CC} main.c ${CFLAGS} -S -o main.asm
 
 run: msg main
 	time ./main
