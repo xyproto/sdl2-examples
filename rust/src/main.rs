@@ -33,9 +33,8 @@ fn main() {
         for _ in 0..20 {
 
             // Update the window to display the changed surface
-            match window.update_surface() {
-                Ok(_) => {},
-                Err(err) => panic!("failed to update window surface: {}", err)
+            if let Err(err) = window.update_surface() {
+                panic!("failed to update window surface: {}", err);
             }
 
             // Wait 100ms
