@@ -27,9 +27,7 @@ fn main() {
             let screen = window.surface_mut(&events).unwrap();
 
             // Blit the image to the window
-            unsafe {
-                let _ = surface.blit(None, screen, None);
-            }
+            surface.blit(None, screen, None).unwrap();
         }
 
         for _ in 0..20 {
