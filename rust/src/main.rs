@@ -9,7 +9,7 @@ fn main() {
     let mut timer = ctx.timer().unwrap();
 
     // Create a new OpenGL window
-    let window  = match video_ctx.window("Hello World!", 960, 540).position_centered().opengl().build() {
+    let mut window  = match video_ctx.window("Hello World!", 960, 540).position_centered().opengl().build() {
         Ok(window) => window,
         Err(err)   => panic!("failed to create window: {}", err)
     };
@@ -24,11 +24,11 @@ fn main() {
         {
             // Get the window surface
             let events = ctx.event_pump().unwrap();
-            let screen = window.surface(&events).unwrap();
+            let screen = window.surface_mut(&events).unwrap();
 
             // Blit the image to the window
             unsafe {
-                let _ = surface.blit(None, Surface::from_ll(screen.raw()), None);
+                let _ = surface.blit(None, screen, None);
             }
         }
 
