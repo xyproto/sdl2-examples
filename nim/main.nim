@@ -1,6 +1,6 @@
 import sdl2
 
-var 
+var
   win: WindowPtr
   ren: RendererPtr
   bmp: SurfacePtr
