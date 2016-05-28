@@ -10,7 +10,6 @@ template<typename Creator, typename Destructor, typename... Arguments>
 auto make_resource(Creator c, Destructor d, Arguments&&... args)
 {
   auto r = c(std::forward<Arguments>(args)...);
-  if (!r) { throw std::system_error(errno, std::generic_category()); }
   return std::unique_ptr<std::decay_t<decltype(*r)>, decltype(d)>(r, d);
 }
 
@@ -45,6 +44,11 @@ namespace sdl2
 
   class SDL2System {
 
+    private:
+
+      bool _initialized = false;
+      const char* _error = nullptr;
+
     public:
 
       SDL2System() {
@@ -69,10 +73,6 @@ namespace sdl2
       const char* Error() {
         return _error;
       }
-
-    private:
-      bool _initialized = false;
-      const char* _error = nullptr;
 
   };
 
