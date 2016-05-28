@@ -43,15 +43,48 @@ namespace sdl2
     return make_resource(SDL_CreateTextureFromSurface, SDL_DestroyTexture, ren, surf);
   }
 
+  class SDL2System {
+
+    public:
+
+      SDL2System() {
+        if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+          _error = SDL_GetError();
+          _initialized = false;
+          return;
+        }
+        _initialized = true;
+      }
+
+      ~SDL2System() {
+        SDL_Quit();
+        _initialized = false;
+        _error = nullptr;
+      }
+
+      bool isInitialized() {
+        return _initialized;
+      }
+
+      const char* Error() {
+        return _error;
+      }
+
+    private:
+      bool _initialized = false;
+      const char* _error = nullptr;
+
+  };
+
 }
 
 int main() {
-  if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-    cout << "Error initializing SDL2: " << SDL_GetError() << endl;
+  sdl2::SDL2System sys;
+  if (!sys.isInitialized()) {
+    cout << "Error initializing SDL2: " << sys.Error() << endl;
     return 1;
   }
 
-  //SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 960, 540, SDL_WINDOW_SHOWN);
   auto win = sdl2::make_window("Hello World!", 100, 100, 960, 540, SDL_WINDOW_SHOWN);
   if (win.get() == nullptr) {
     cout << "Error creating window: " << SDL_GetError() << endl;
@@ -88,8 +121,6 @@ int main() {
     SDL_RenderPresent(ren.get());
     SDL_Delay(100);
   }
-
-  SDL_Quit();
 
   return 0;
 }
