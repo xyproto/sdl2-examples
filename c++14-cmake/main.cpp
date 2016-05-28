@@ -47,31 +47,20 @@ namespace sdl2
     private:
 
       bool _initialized = false;
-      const char* _error = nullptr;
 
     public:
 
       SDL2System() {
-        if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-          _error = SDL_GetError();
-          _initialized = false;
-          return;
-        }
-        _initialized = true;
+        _initialized = (SDL_Init(SDL_INIT_EVERYTHING) == 0);
       }
 
       ~SDL2System() {
         SDL_Quit();
         _initialized = false;
-        _error = nullptr;
       }
 
       bool isInitialized() {
         return _initialized;
-      }
-
-      const char* Error() {
-        return _error;
       }
 
   };
@@ -81,7 +70,7 @@ namespace sdl2
 int main() {
   sdl2::SDL2System sys;
   if (!sys.isInitialized()) {
-    cout << "Error initializing SDL2: " << sys.Error() << endl;
+    cout << "Error initializing SDL2: " << SDL_GetError() << endl;
     return 1;
   }
 
