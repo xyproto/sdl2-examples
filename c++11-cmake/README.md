@@ -14,9 +14,14 @@ One way of building with C++11, SDL2, CMake and ninja
 
     mkdir -p build
     cd build
-    cmake -GNinja .
+    cmake -GNinja ..
     ninja
-    mv main ..
+    cd ..
+    
+Running
+-------
+
+    build/main
 
 Cleaning up the binary file and build directory
 -----------------------------------------------
