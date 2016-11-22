@@ -5,7 +5,8 @@ aux_source_directory(. SRC_LIST)
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
 # C++14
-add_compile_options(-std=c++14)
+#add_compile_options(-std=c++14) # does not work on macOS
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 # SDL2
 include(FindPkgConfig)

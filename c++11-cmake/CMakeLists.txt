@@ -6,6 +6,7 @@ add_executable(${PROJECT_NAME} ${SRC_LIST})
 cmake_minimum_required(VERSION 2.8)
 
 # C++11
+#add_compile_options(-std=c++11) # does not work on macOS
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # SDL2
