@@ -32,7 +32,7 @@ Requirements for the various languages
 Samples that does not build
 ---------------------------
 
-* See the `doesnotbuild` branch for samples that currently does not build.
+* See the samples that are commented out at the top of the `Makefile` for a list of samples that currently does not build on 64-bit Arch Linux.
 
 Pull requests are welcome!
 
