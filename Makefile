@@ -1,4 +1,5 @@
-SAMPLES = c c++ c++11 fpc go mruby nim python lua ocaml rust pony
+SAMPLES = c c++ c++11 fpc go mruby nim python lua
+# SAMPLES += ocaml pony rust
 
 .PHONY: all run clean fullclean
 

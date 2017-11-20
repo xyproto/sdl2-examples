@@ -1,4 +1,4 @@
-.PHONY: all msg run clean fullclean
+.PHONY: all msg run clean fullclean OCamlSDL2
 
 all: msg main
 
@@ -9,12 +9,12 @@ sdl2: OCamlSDL2
 	@echo -n '[OCamlSDL2] Compiling...'
 	@make -s -C OCamlSDL2/src gen
 	@make -s -C OCamlSDL2/src dep
-	@make -s -C OCamlSDL2/src opt byte 2> /dev/null
+	@make -s -C OCamlSDL2/src opt byte 2> /dev/null || make -s -C OCamlSDL2/src opt byte
 	@echo 'ok'
 
 OCamlSDL2:
 	@echo -n '[OCamlSDL2] Checking out...'
-	@./checkout.sh > /dev/null
+	@./clone.sh > /dev/null
 	@echo 'ok'
 
 main: sdl2 main.ml
