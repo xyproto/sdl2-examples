@@ -38,3 +38,5 @@ rust/sdl2/
 
 # Cmake
 c++11-cmake/build/
+
+*.dblite
