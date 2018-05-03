@@ -2,7 +2,9 @@
 #include <memory>
 #include <iostream>
 
-using namespace std;
+using std::decay_t;
+using std::forward;
+using std::unique_ptr;
 
 // Very useful function from Eric Scott Barr.
 // https://eb2.co/blog/2014/04/c-plus-plus-14-and-sdl2-managing-resources/
@@ -21,7 +23,7 @@ namespace sdl2
   using surf_ptr_t = std::unique_ptr<SDL_Surface, decltype(&SDL_FreeSurface)>;
   using texture_ptr_t = std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)>;
 
-  // Create a windows (unique_ptr with both a window and the destructor)
+  // Create a window (unique_ptr with both a window and the destructor)
   inline window_ptr_t make_window(const char* title, int x, int y, int w, int h, Uint32 flags) {
     return make_resource(SDL_CreateWindow, SDL_DestroyWindow, title, x, y, w, h, flags);
   }
@@ -68,6 +70,9 @@ namespace sdl2
 }
 
 int main() {
+  using std::cout;
+  using std::endl;
+
   sdl2::SDL2System sys;
   if (!sys.isInitialized()) {
     cout << "Error initializing SDL2: " << SDL_GetError() << endl;

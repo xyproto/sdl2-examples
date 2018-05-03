@@ -40,3 +40,6 @@ rust/sdl2/
 c++11-cmake/build/
 
 *.dblite
+
+CMakeCache.txt
+CMakeFiles
