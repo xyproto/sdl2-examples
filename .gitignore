@@ -36,10 +36,11 @@ nimcache
 # Rust
 rust/sdl2/
 
-# Cmake
-c++11-cmake/build/
-
+# Temporary databases
 *.dblite
 
+# CMake
+build/
 CMakeCache.txt
 CMakeFiles
+inst/

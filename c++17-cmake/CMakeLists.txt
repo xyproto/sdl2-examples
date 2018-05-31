@@ -7,9 +7,9 @@ add_executable(${PROJECT_NAME} ${SRC_LIST})
 include_directories(../include)
 add_definitions(-DIMGDIR="../img/")
 
-# C++14
-#add_compile_options(-std=c++14) # does not work on macOS
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+# C++17
+#add_compile_options(-std=c++17) # does not work on macOS
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 # SDL2
 include(FindPkgConfig)
