@@ -1,7 +1,7 @@
 Hello SDL2!
 ===========
 
-[![Build Status](https://travis-ci.org/xyproto/hello_sdl2.svg?branch=master)](https://travis-ci.org/xyproto/hello_sdl2)
+[![Build Status](https://travis-ci.org/xyproto/sdl2-examples.svg?branch=master)](https://travis-ci.org/xyproto/sdl2-examples)
 
 "hello world" for SDL2 for various programming languages.
 
