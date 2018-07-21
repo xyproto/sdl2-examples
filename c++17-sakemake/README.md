@@ -1,25 +1,25 @@
-SDL2, C++14 and CMake
-=====================
+SDL2, C++14 and Sakemake
+========================
 
 Requirements
 ------------
 
-* sakemake
+* [Sakemake](https://github.com/xyproto/sakemake)
 * Compiler that supports C++17 (recent version of `g++` or `clang++`)
 * SDL2
 
 One way of building with C++14, SDL2 and sakemake
 -------------------------------------------------
 
-    sakemake
+    sm
 
-Running
--------
+Building and running
+--------------------
 
-    sakemake run
+    sm run
 
 Cleaning up the binary file and build directory
 -----------------------------------------------
 
-    sakemake clean
+    sm clean
 
