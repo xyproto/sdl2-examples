@@ -15,8 +15,9 @@ Requirements
 * See the README or README.md file per sample for more information.
 
 
-Requirements for the various languages
+Requirements for some of the languages
 --------------------------------------
+
 * C compiler that supports C11, for the C sample
 * A C++ compiler for the C++ sample
 * GCC 4.8 or later (or clang++) for the C++11 sample
@@ -40,5 +41,5 @@ Pull requests are welcome!
 General information
 ----------------------
 
-* Alexander F Rødseth, 2015
-* MIT licensed
+* Author: Alexander F. Rødseth
+* License: MIT
