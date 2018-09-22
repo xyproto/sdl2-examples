@@ -14,7 +14,7 @@ auto main() -> int
         return 1;
     }
 
-    auto win = sdl2::make_window("Hello World!", 100, 100, 960, 540, SDL_WINDOW_SHOWN);
+    auto win = sdl2::make_window("Hello World!", 100, 100, 620, 387, SDL_WINDOW_SHOWN);
     if (!win) {
         cout << "Error creating window: " << SDL_GetError() << endl;
         return 1;
@@ -27,7 +27,7 @@ auto main() -> int
         return 1;
     }
 
-    auto file = SDL_RWFromFile(IMGDIR "boxes.bmp", "rb");
+    auto file = SDL_RWFromFile(IMGDIR "grumpy-cat.bmp", "rb");
     if (file == nullptr) {
         cout << "Error reading file: " << SDL_GetError() << endl;
         return 1;

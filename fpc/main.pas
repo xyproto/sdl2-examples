@@ -13,7 +13,7 @@ begin
     Halt(1);
   end;
 
-  win := SDL_CreateWindow('Hello World', 100, 100, 960, 540, SDL_WINDOW_SHOWN);
+  win := SDL_CreateWindow('Hello World', 100, 100, 620, 387, SDL_WINDOW_SHOWN);
   if win = nil then begin
     WriteLn('SDL_CreateWindow Error: ', SDL_GetError());
     Halt(1);
@@ -25,7 +25,7 @@ begin
     Halt(1);
   end;
 
-  bmp := SDL_LoadBMP('../img/boxes.bmp');
+  bmp := SDL_LoadBMP('../img/grumpy-cat.bmp');
   if bmp = nil then begin
     WriteLn('SDL_LoadBMP Error: ', SDL_GetError());
     Halt(1);

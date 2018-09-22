@@ -21,7 +21,7 @@ if not rdr then
 	error(err)
 end
 
-local img, ret = SDL.loadBMP("../img/boxes.bmp")
+local img, ret = SDL.loadBMP("../img/grumpy-cat.bmp")
 if not img then
 	error(err)
 end

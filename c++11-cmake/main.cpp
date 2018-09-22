@@ -7,7 +7,7 @@ int main() {
     return 1;
   }
 
-  SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 960, 540, SDL_WINDOW_SHOWN);
+  SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 620, 387, SDL_WINDOW_SHOWN);
   if (win == nullptr) {
     printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
     return 1;
@@ -19,7 +19,7 @@ int main() {
     return 1;
   }
 
-  SDL_Surface *bmp = SDL_LoadBMP("../img/boxes.bmp");
+  SDL_Surface *bmp = SDL_LoadBMP("../img/grumpy-cat.bmp");
   if (bmp == nullptr) {
     printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
     return 1;

@@ -9,13 +9,13 @@ fn main() {
     let mut timer = ctx.timer().unwrap();
 
     // Create a new OpenGL window
-    let mut window  = match video_ctx.window("Hello World!", 960, 540).position_centered().opengl().build() {
+    let mut window  = match video_ctx.window("Hello World!", 620, 387).position_centered().opengl().build() {
         Ok(window) => window,
         Err(err)   => panic!("failed to create window: {}", err)
     };
 
     // Load the image as a surface
-    let surface = match Surface::load_bmp(&Path::new("../img/boxes.bmp")) {
+    let surface = match Surface::load_bmp(&Path::new("../img/grumpy-cat.bmp")) {
         Ok(surface) => surface,
         Err(err)    => panic!("failed to load surface: {}", err)
     };

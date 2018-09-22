@@ -15,7 +15,7 @@ func main() {
 	defer sdl.Quit()
 
 	// Create the window
-	win, err := sdl.CreateWindow("Hello World!", 100, 100, 960, 540, sdl.WINDOW_SHOWN)
+	win, err := sdl.CreateWindow("Hello World!", 100, 100, 620, 387, sdl.WINDOW_SHOWN)
 	if err != nil {
 		log.Fatalln("CreateWindow Error:", err)
 	}
@@ -29,7 +29,7 @@ func main() {
 	defer ren.Destroy()
 
 	// Load the image
-	bmp, err := sdl.LoadBMP("../img/boxes.bmp")
+	bmp, err := sdl.LoadBMP("../img/grumpy-cat.bmp")
 	if err != nil {
 		log.Fatalln("LoadBMP Error:", err)
 	}

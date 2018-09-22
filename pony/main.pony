@@ -53,9 +53,9 @@ actor Game
   let windowpos_undefined: I32 = 0x1FFF0000
 
   new create() =>
-    win = @SDL_CreateWindow("Hello World!".cstring(), windowpos_undefined, windowpos_undefined, 960, 540, SDL2.window_shown())
+    win = @SDL_CreateWindow("Hello World!".cstring(), windowpos_undefined, windowpos_undefined, 620, 387, SDL2.window_shown())
     ren = @SDL_CreateRenderer(win, -1, SDL2.renderer_accelerated() or SDL2.renderer_presentvsync())
-    rwop = @SDL_RWFromFile("../img/boxes.bmp".cstring(), "rb".cstring())
+    rwop = @SDL_RWFromFile("../img/grumpy-cat.bmp".cstring(), "rb".cstring())
     bmp = @SDL_LoadBMP_RW(rwop, 1)
     tex = @SDL_CreateTextureFromSurface(ren, bmp)
 

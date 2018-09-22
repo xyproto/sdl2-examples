@@ -15,7 +15,7 @@ let () =
       ~index:~-1
       ~flags:[Render.Accelerated; Render.PresentVSync]
   in
-  let img = Surface.load_bmp "../img/boxes.bmp" in
+  let img = Surface.load_bmp "../img/grumpy-cat.bmp" in
     let tex = Texture.create_from_surface ren img in
     let src_rect = Rect.make4 0 0 960 540 in
     let dst_rect = Rect.make4 0 0 960 540 in

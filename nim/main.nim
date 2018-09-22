@@ -8,7 +8,7 @@ var
 
 discard init(INIT_EVERYTHING)
 
-win = createWindow("Hello World!", 100, 100, 960, 540, SDL_WINDOW_SHOWN)
+win = createWindow("Hello World!", 100, 100, 620, 387, SDL_WINDOW_SHOWN)
 if win == nil:
   echo("createWindow Error: ", getError())
   quit(1)
@@ -18,7 +18,7 @@ if ren == nil:
   echo("createRenderer Error: ", getError())
   quit(1)
 
-bmp = loadBMP("../img/boxes.bmp")
+bmp = loadBMP("../img/grumpy-cat.bmp")
 if bmp == nil:
   echo("loadBMP Error: ", getError())
   quit(1)

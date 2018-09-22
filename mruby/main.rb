@@ -12,7 +12,7 @@ begin
   begin
     win = SDL2::Video::Window.new "Hello World!", X, Y, W, H, FLAGS
     ren = SDL2::Video::Renderer.new(win)
-    bmp = SDL2::Video::Surface::load_bmp("../img/boxes.bmp")
+    bmp = SDL2::Video::Surface::load_bmp("../img/grumpy-cat.bmp")
     tex = SDL2::Video::Texture.new(ren, bmp)
     bmp.free
 
