@@ -1,0 +1,13 @@
+{
+	"name": "example1",
+	"authors": [
+		"Peter Cartwright"
+	],
+	"description": "An example using Derelict and SDL2 in d",
+	"copyright": "Copyright © 2016, Peter Cartwright",
+	"license": "public domain",
+	"dependencies": {
+		"derelict-sdl2": "~>2.1.4"
+	},
+	"targetPath": "bin"
+}
