@@ -29,7 +29,7 @@ void main()
 
 	// Create a window
 	SDL_Window* appWin = SDL_CreateWindow(
-		"Example #1",
+		"Hello, World!",
 		SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED,
 		imgSurf.w,

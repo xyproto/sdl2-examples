@@ -1,5 +1,5 @@
 {
-	"name": "example1",
+	"name": "main",
 	"authors": [
 		"Peter Cartwright"
 	],
@@ -9,5 +9,5 @@
 	"dependencies": {
 		"derelict-sdl2": "~>2.1.4"
 	},
-	"targetPath": "bin"
+	"targetPath": "."
 }
