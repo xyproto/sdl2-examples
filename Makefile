@@ -1,5 +1,10 @@
-SAMPLES = c c++ c++11 c++14 c++17 d fpc go mruby nim python lua
-# SAMPLES += gccgo ocaml pony rust
+SAMPLES = c c++ c++11 c++14 c++17 d fpc go mruby nim pony python lua
+
+# These two currently does not build:
+# SAMPLES += ocaml rust
+
+# gccgo works, but installing gccgo conflicts with go
+# SAMPLES += gccgo
 
 .PHONY: all run clean fullclean
 
