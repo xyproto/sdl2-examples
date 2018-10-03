@@ -1,21 +1,18 @@
-NOTE! This sample currently does not build.
-Probably because the go-sdl2 package uses the syntax for a later version of Go than gccgo supports.
+Works with gccgo 8.2.1 and the latest version of go-sdl2.
 
-* Install the SDL2 library and headers.
+Requirements:
 
-* Install the latest version of Go.
-
-* Install the latest version of GCC + gccgo.
-
-* Install the sdl2 package:
-  go get github.com/veandco/go-sdl2/sdl
-
+* The SDL2 library and headers installed on your system
 * For OS X, remember to install the Development Libraries (place the SDL2 framework in /Library/Frameworks)
+* The latest version of gccgo (tested with gccgo 8.2.1).
+* The sdl2 package:
 
-* Build:
+    go get github.com/veandco/go-sdl2/sdl
+
+Building:
+
   make
- 
-* Run:
-  ./main
 
-NOTE: This sample may not build, for some configurations.
+Running:
+
+  ./main
