@@ -13,11 +13,10 @@ auto make_resource(Creator c, Destructor d, Arguments&&... args)
     using std::decay_t;
     using std::forward;
     using std::unique_ptr;
+
     auto r = c(forward<Arguments>(args)...);
     return unique_ptr<decay_t<decltype(*r)>, decltype(d)>(r, d);
 }
-
-using std::unique_ptr;
 
 // The "internal type" of the SDL System
 using SDL_System = int;
@@ -39,11 +38,11 @@ inline void SDL_DestroySDL(SDL_System* init_status)
     SDL_Quit();
 }
 
-using sdlsystem_ptr_t = unique_ptr<SDL_System, decltype(&SDL_DestroySDL)>;
-using window_ptr_t = unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)>;
-using renderer_ptr_t = unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>;
-using surf_ptr_t = unique_ptr<SDL_Surface, decltype(&SDL_FreeSurface)>;
-using texture_ptr_t = unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)>;
+using sdlsystem_ptr_t = std::unique_ptr<SDL_System, decltype(&SDL_DestroySDL)>;
+using window_ptr_t = std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)>;
+using renderer_ptr_t = std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>;
+using surf_ptr_t = std::unique_ptr<SDL_Surface, decltype(&SDL_FreeSurface)>;
+using texture_ptr_t = std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)>;
 
 // Initialize SDL (the returned int* contains the return value from SDL_Init)
 inline sdlsystem_ptr_t make_sdlsystem(Uint32 flags)

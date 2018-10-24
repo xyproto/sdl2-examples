@@ -15,6 +15,9 @@
 *.a
 *.lib
 
+# Crystal
+crystal/sdl.cr/
+
 # OCaml
 *.cmi
 *.cmx
