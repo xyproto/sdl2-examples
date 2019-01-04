@@ -6,23 +6,23 @@ CFLAGS?=$(shell pkg-config sdl2 --cflags --libs) -std=c11 -Wall -pedantic -Werro
 all: msg main
 
 msg:
-	@echo --- C ---
+	@echo --- C11 ---
 
 main: main.c
-	${CC} main.c ${CFLAGS} -O3 -o main
+	${CC} ${CFLAGS} -O3 -o $@ $<
 
 small: main.c
-	${CC} main.c ${CFLAGS} -Os -o main
-	strip main
-	sstrip main
+	${CC} ${CFLAGS} -Os -o main $<
+	-strip main
+	-sstrip main
 
 debug: main.c
-	${CC} main.c ${CFLAGS} -O1 -g -o main
+	${CC} ${CFLAGS} -O1 -g -o main $<
 
 asm: main.asm
 
 main.asm: main.c
-	${CC} main.c ${CFLAGS} -S -o main.asm
+	${CC} ${CFLAGS} -S -o main.asm $<
 
 run: msg main
 	time ./main

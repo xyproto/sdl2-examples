@@ -1,25 +1,25 @@
-SDL2, C++17 and Sakemake
-========================
+SDL2, C++17 and CXX
+===================
 
 Requirements
 ------------
 
-* [Sakemake](https://github.com/xyproto/sakemake)
+* [CXX](https://github.com/xyproto/cxx)
 * Compiler that supports C++17 (recent version of `g++` or `clang++`)
 * SDL2
 
-One way of building with C++17, SDL2 and sakemake
--------------------------------------------------
+Building with C++17, SDL2 and cxx
+---------------------------------
 
-    sm
+    cxx
 
 Building and running
 --------------------
 
-    sm run
+    cxx run
 
 Cleaning up the binary file and build directory
 -----------------------------------------------
 
-    sm clean
+    cxx clean
 

@@ -6,18 +6,18 @@ CXXFLAGS?=$(shell pkg-config sdl2 --libs --cflags) -std=c++98 -Wall -pedantic -W
 all: msg main
 
 msg:
-	@echo --- C++ ---
+	@echo --- C++98 ---
 
 main: main.cpp
-	${CXX} -O3 ${CXXFLAGS} -o $@ $<
+	${CXX} ${CXXFLAGS} -O3 -o $@ $<
 
 small: main.cpp
-	${CXX} -Os ${CXXFLAGS} -o main $<
-	strip main
-	sstrip main
+	${CXX} ${CXXFLAGS} -Os -o main $<
+	-strip main
+	-sstrip main
 
 debug: main.cpp
-	${CXX} -O0 -g ${CXXFLAGS} -o main $<
+	${CXX} ${CXXFLAGS} -O0 -g -o main $<
 
 asm: main.asm
 

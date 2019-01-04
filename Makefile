@@ -1,4 +1,4 @@
-SAMPLES = c c++ c++11 c++14 c++17 d fpc go mruby nim pony python lua
+SAMPLES = c11 c++98 c++11 d fpc go mruby nim pony python lua
 
 # These two currently does not build:
 # SAMPLES += ocaml rust
