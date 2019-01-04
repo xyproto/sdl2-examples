@@ -28,6 +28,6 @@ run: msg main
 	time ./main
 
 clean:
-	rm -f main *.o
+	rm -f main *.o main.asm
 
 fullclean: clean
