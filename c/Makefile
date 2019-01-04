@@ -1,5 +1,5 @@
 CC?=gcc
-CFLAGS?=$(shell pkg-config sdl2 --cflags --libs) -std=c11 -O2 -Wall -pedantic -Werror -Wshadow -Wstrict-aliasing -Wstrict-overflow
+CFLAGS?=$(shell pkg-config sdl2 --cflags --libs) -std=c11 -Wall -pedantic -Werror -Wshadow -Wstrict-aliasing -Wstrict-overflow
 
 .PHONY: all msg clean fullclean
 
@@ -28,6 +28,6 @@ run: msg main
 	time ./main
 
 clean:
-	rm -f main
+	rm -f main *.o
 
 fullclean: clean
