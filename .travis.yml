@@ -11,8 +11,10 @@ addons:
     packages:
       - build-essential
       - libsdl2-dev
-      - python3-sdl2
+      - libsdl2-2.0
       - cmake
+      - scons
+      - git
 
 matrix:
   include:
@@ -22,6 +24,9 @@ matrix:
       compiler: clang
 
 script:
+  - python -V
+  - cmake --version
+  - make --version
   - make -C c++11
   - make -C c++98
   - make -C c11
