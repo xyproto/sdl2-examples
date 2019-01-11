@@ -6,22 +6,15 @@ language:
 
 dist: trusty
 
-addons:
-  apt:
-    packages:
-      - build-essential
-      - libsdl2-dev
-      - libsdl2-2.0
-      - cmake
-      - scons
-      - git
-
 matrix:
   include:
     - os: linux
       compiler: gcc
     - os: linux
       compiler: clang
+
+before_install:
+  - sudo apt-get install -y build-essential libsdl2-dev libsdl2-2.0 cmake scons git
 
 script:
   - python -V
