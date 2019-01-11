@@ -10,11 +10,13 @@ matrix:
   include:
     - os: linux
       compiler: gcc
+      before_install:
+      - sudo apt-get install -y libsdl2-dev libsdl2-2.0 cmake git libegl1-mesa-dev
     - os: linux
       compiler: clang
+      before_install:
+      - sudo apt-get install -y libsdl2-dev libsdl2-2.0 cmake git libegl1-mesa-dev
 
-before_install:
-  - sudo apt-get install -y libsdl2-dev libsdl2-2.0 cmake git libegl1-mesa-dev
 
 script:
   - python -V
