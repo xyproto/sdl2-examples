@@ -10,8 +10,8 @@ addons:
   apt:
     packages:
       - build-essential
-      - libsdl2
       - libsdl2-dev
+      - python3-sdl2
       - cmake
 
 matrix:
