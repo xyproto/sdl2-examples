@@ -14,7 +14,7 @@ matrix:
       compiler: clang
 
 before_install:
-  - sudo apt-get install -y build-essential libsdl2-dev libsdl2-2.0 cmake scons git
+  - sudo apt-get install -y libsdl2-dev libsdl2 cmake git
 
 script:
   - python -V
