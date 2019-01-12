@@ -2,7 +2,9 @@ language:
   - c
   - cpp
   - go
-  - python
+  - d
+  - crystal
+  - rust
 
 addons:
   apt:
@@ -22,8 +24,6 @@ matrix:
   include:
     - os: linux
       compiler: gcc
-    - os: linux
-      compiler: clang
 
 script:
   - make -C c11
@@ -34,6 +34,9 @@ script:
   - go build
   - go test
   - popd
+  - make -C d
+  - make -C crystal
+  - make -C rust
 
 #notifications:
 #  email: false
