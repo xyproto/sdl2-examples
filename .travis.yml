@@ -2,9 +2,7 @@ language:
   - c
   - cpp
   - go
-  - python
 
-install: true
 addons:
   apt:
     packages:
@@ -19,17 +17,10 @@ addons:
     - libsdl2-ttf-2.0-0
     - libsdl2-ttf-dev
 
-matrix:
-  include:
-    - os: linux
-      compiler: gcc
-    - os: linux
-      compiler: clang
-
 script:
+  - make -C c11
   - make -C c++11
   - make -C c++98
-  - make -C c11
   - pushd go
   - go build
   - go test
