@@ -30,6 +30,7 @@ script:
   - make -C c++98
   - make -C c++11
   - pushd go
+  - go get -d -v
   - go build
   - go test
   - popd
