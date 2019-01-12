@@ -1,5 +1,6 @@
 CXX?=c++
-CXXFLAGS?=$(shell pkg-config sdl2 --libs --cflags) -std=c++98 -Wall -pedantic -Werror -Wshadow -Wstrict-aliasing -Wstrict-overflow
+SDL2FLAGS=$(shell pkg-config sdl2 --cflags --libs)
+CXXFLAGS?=-std=c++98 -Wall -pedantic -Werror -Wshadow -Wstrict-aliasing -Wstrict-overflow
 
 .PHONY: all msg clean fullclean
 
@@ -9,20 +10,20 @@ msg:
 	@echo --- C++98 ---
 
 main: main.cpp
-	${CXX} ${CXXFLAGS} -O3 -o $@ $<
+	${CXX} ${CXXFLAGS} -O3 -o $@ $< ${SDL2FLAGS}
 
 small: main.cpp
-	${CXX} ${CXXFLAGS} -Os -o main $<
+	${CXX} ${CXXFLAGS} -Os -o main $< ${SDL2FLAGS}
 	-strip main
 	-sstrip main
 
 debug: main.cpp
-	${CXX} ${CXXFLAGS} -O0 -g -o main $<
+	${CXX} ${CXXFLAGS} -O0 -g -o main $< ${SDL2FLAGS}
 
 asm: main.asm
 
 main.asm: main.cpp
-	${CC} ${CFLAGS} -S -o main.asm $<
+	${CC} ${CFLAGS} -S -o main.asm $< ${SDL2FLAGS}
 
 run: msg main
 	time ./main
