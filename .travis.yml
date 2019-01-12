@@ -4,19 +4,17 @@ language:
   - go
   - python
 
-dist: trusty
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq cppcheck
+  - sudo apt-get install -qq libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev
 
 matrix:
   include:
     - os: linux
       compiler: gcc
-      before_install:
-      - sudo apt-get install -y libsdl2-dev libsdl2-2.0 cmake git libegl1-mesa-dev
     - os: linux
       compiler: clang
-      before_install:
-      - sudo apt-get install -y libsdl2-dev libsdl2-2.0 cmake git libegl1-mesa-dev
-
 
 script:
   - python -V
