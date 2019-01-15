@@ -3,8 +3,6 @@ language:
   - cpp
   - go
   - d
-  - crystal
-  - rust
 
 addons:
   apt:
@@ -34,9 +32,6 @@ script:
   - go build
   - go test
   - popd
-  - make -C d
-  - make -C crystal
-  - make -C rust
 
 #notifications:
 #  email: false
