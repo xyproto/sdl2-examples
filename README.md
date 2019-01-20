@@ -1,5 +1,5 @@
-Hello SDL2!
-===========
+SDL2 Examples
+=============
 
 [![Build Status](https://travis-ci.org/xyproto/sdl2-examples.svg?branch=master)](https://travis-ci.org/xyproto/sdl2-examples)
 
