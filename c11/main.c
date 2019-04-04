@@ -5,31 +5,31 @@
 int main()
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		printf("SDL_Init Error: %s\n", SDL_GetError());
+		fprintf(stderr, "SDL_Init Error: %s\n", SDL_GetError());
 		return EXIT_FAILURE;
 	}
 
 	SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 620, 387, SDL_WINDOW_SHOWN);
 	if (win == NULL) {
-		printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
+		fprintf(stderr, "SDL_CreateWindow Error: %s\n", SDL_GetError());
 		return EXIT_FAILURE;
 	}
 
 	SDL_Renderer *ren = SDL_CreateRenderer(win, -1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (ren == NULL) {
-		printf("SDL_CreateRenderer Error: %s\n", SDL_GetError());
+		fprintf(stderr, "SDL_CreateRenderer Error: %s\n", SDL_GetError());
 		return EXIT_FAILURE;
 	}
 
 	SDL_Surface *bmp = SDL_LoadBMP("../img/grumpy-cat.bmp");
 	if (bmp == NULL) {
-		printf("SDL_LoadBMP Error: %s\n", SDL_GetError());
+		fprintf(stderr, "SDL_LoadBMP Error: %s\n", SDL_GetError());
 		return EXIT_FAILURE;
 	}
 
 	SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, bmp);
 	if (tex == NULL) {
-		printf("SDL_CreateTextureFromSurface Error: %s\n", SDL_GetError());
+		fprintf(stderr, "SDL_CreateTextureFromSurface Error: %s\n", SDL_GetError());
 		return EXIT_FAILURE;
 	}
 	SDL_FreeSurface(bmp);
