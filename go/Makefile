@@ -6,7 +6,7 @@ msg:
 	@echo --- Go ---
 
 go: deps main.go
-	go build
+	go build -v
 
 deps:
 	go get -d
