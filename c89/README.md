@@ -1,6 +1,6 @@
 ## Requirements
 
-* C11 compiler
+* C89 (ANSI C) compiler
 * pkg-config
 * SDL2
 

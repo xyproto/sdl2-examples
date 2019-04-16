@@ -18,7 +18,7 @@ Requirements
 Requirements for some of the languages
 --------------------------------------
 
-* C compiler that supports C11, for the C sample
+* C compiler that supports C89 (ANSI C), C99 or C11, for the C samples
 * A C++ compiler for the C++ sample
 * GCC 4.8 or later (or clang++) for the C++11 sample
 * Go 1.1 or later and the sdl2 go package (`go get github.com/veandco/go-sdl2/sdl`)
