@@ -14,9 +14,6 @@ use @SDL_RenderCopy[I32](renderer: Pointer[_SDLRenderer], texture: Pointer[_SDLT
 use @SDL_RenderPresent[None](renderer: Pointer[_SDLRenderer])
 use @SDL_LoadBMP_RW[Pointer[_SDLSurface]](src: Pointer[_SDLRWops], freesrc: I32)
 use @SDL_RWFromFile[Pointer[_SDLRWops]](filename: Pointer[U8] tag, permissions: Pointer[U8] tag)
-//use @SDL_SetRenderDrawColor[I32](renderer: Pointer[_SDLRenderer], r: U8, g: U8, b: U8, a: U8)
-//use @SDL_RenderFillRect[I32](renderer: Pointer[_SDLRenderer], rect: MaybePointer[_SDLRect])
-//use @SDL_Delay[None](ms: U32)
 
 struct _SDLRect
   var x: I32 = 0
@@ -82,8 +79,7 @@ actor Game
    @SDL_RenderClear(ren)
    @SDL_RenderCopy(ren, tex, Pointer[_SDLRect], Pointer[_SDLRect])
    @SDL_RenderPresent(ren)
-   //@SDL_Delay(100)
-    
+
   be quit() =>
     dispose()
 
@@ -93,9 +89,9 @@ actor Game
     @SDL_DestroyTexture(tex)
     @SDL_DestroyRenderer(ren)
     @SDL_DestroyWindow(win)
-  
+
 actor Main
   new create(env:Env) =>
     @SDL_Init(SDL2.init_video())
     let game = Game
- 
+
