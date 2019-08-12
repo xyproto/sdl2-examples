@@ -24,18 +24,39 @@ int main()
 	ren = SDL_CreateRenderer(win, -1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (ren == NULL) {
 		fprintf(stderr, "SDL_CreateRenderer Error: %s\n", SDL_GetError());
+		if (win != NULL) {
+			SDL_DestroyWindow(win);
+		}
+		SDL_Quit();
 		return EXIT_FAILURE;
 	}
 
 	bmp = SDL_LoadBMP("../img/grumpy-cat.bmp");
 	if (bmp == NULL) {
 		fprintf(stderr, "SDL_LoadBMP Error: %s\n", SDL_GetError());
+		if (ren != NULL) {
+			SDL_DestroyRenderer(ren);
+		}
+		if (win != NULL) {
+			SDL_DestroyWindow(win);
+		}
+		SDL_Quit();
 		return EXIT_FAILURE;
 	}
 
 	tex = SDL_CreateTextureFromSurface(ren, bmp);
 	if (tex == NULL) {
 		fprintf(stderr, "SDL_CreateTextureFromSurface Error: %s\n", SDL_GetError());
+		if (bmp != NULL) {
+			SDL_FreeSurface(bmp);
+		}
+		if (ren != NULL) {
+			SDL_DestroyRenderer(ren);
+		}
+		if (win != NULL) {
+			SDL_DestroyWindow(win);
+		}
+		SDL_Quit();
 		return EXIT_FAILURE;
 	}
 	SDL_FreeSurface(bmp);
