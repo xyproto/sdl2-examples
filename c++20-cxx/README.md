@@ -1,14 +1,14 @@
-SDL2, C++17 and CXX
+SDL2, C++20 and CXX
 ===================
 
 Requirements
 ------------
 
 * [CXX](https://github.com/xyproto/cxx)
-* Compiler that supports C++17 (recent version of `g++` or `clang++`)
+* Compiler that supports C++20 (recent version of `g++` or `clang++`)
 * SDL2
 
-Building with C++17, SDL2 and cxx
+Building with C++20, SDL2 and cxx
 ---------------------------------
 
     cxx
