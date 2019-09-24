@@ -11,12 +11,12 @@ at_exit { SDL::IMG.quit }
 png = SDL::IMG.load(File.join(__DIR__, "..", "img", "grumpy-cat.png"))
 png = png.convert(window.surface)
 
-start_time = Time.now
+start_time = Time.utc
 loop do
   png.blit(window.surface)
   window.update
 
-  if (Time.now - start_time).seconds > 2
+  if (Time.utc - start_time).seconds > 2
     break
   end
 end
