@@ -26,7 +26,6 @@ Requirements for some of the languages
 * Nimrod 0.9.4 and sdl2 installed with babel
 * Python 2 or 3 and PySDL2
 * FPC 2.6.4 (or later than 2.4.0, must have Uint8, Uint16 and Uint32)
-* OCaml and OCamlSDL2
 * Lua (tested with Lua 5.2) and lua-sdl2
 
 
