@@ -26,6 +26,8 @@ matrix:
       compiler: gcc
     - os: linux
       compiler: clang
+      env:
+        - CXX=clang++
 
 script:
   - make -C c11
