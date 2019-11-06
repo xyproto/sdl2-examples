@@ -1,7 +1,7 @@
 SAMPLES = c89 c99 c11 c18 c++98 c++11 d fpc go mruby nim pony python lua
 
 # These two currently does not build:
-# SAMPLES += ocaml rust
+# SAMPLES += ocaml
 
 # gccgo works, but installing gccgo conflicts with go
 # SAMPLES += gccgo
