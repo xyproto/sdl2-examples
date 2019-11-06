@@ -37,4 +37,4 @@ script:
   - go test
   - popd
   - mkdir -p build
-  - cd build && cmake ../c++17-cmake -D CMAKE_BUILD_TYPE=Release -G Ninja && ninja
+  - cd build && cmake '../c++17-cmake' -D CMAKE_BUILD_TYPE=Release -G Ninja && ninja
