@@ -34,6 +34,15 @@ Samples that does not build
 
 * See the samples that are commented out at the top of the `Makefile` for a list of samples that currently does not build on 64-bit Arch Linux.
 
+
+Help needed
+-----------
+
+Example code for the following programming languages are missing and wanted:
+
+* OCaml
+* Zig
+
 Pull requests are welcome!
 
 
