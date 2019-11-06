@@ -17,21 +17,28 @@ addons:
     - libsdl2-net-dev
     - libsdl2-ttf-2.0-0
     - libsdl2-ttf-dev
+    - cmake
+    - ninja-build
 
 matrix:
   include:
     - os: linux
       compiler: gcc
+    - os: linux
+      compiler: clang
 
 script:
   - make -C c11
   - make -C c++98
   - make -C c++11
+  - make -C c++17
   - pushd go
   - go get -d -v
   - go build
   - go test
   - popd
+  - mkdir -p build
+  - cd build && cmake ../c++17-cmake -D CMAKE_BUILD_TYPE=Release -G Ninja && ninja
 
 #notifications:
 #  email: false

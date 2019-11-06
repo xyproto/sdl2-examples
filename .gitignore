@@ -39,6 +39,10 @@ nimcache
 # Rust
 rust/sdl2/
 
+# C++
+c++20-cxx/c++20-cxx
+c*/*.asm
+
 # Temporary databases
 *.dblite
 

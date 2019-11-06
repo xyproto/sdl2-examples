@@ -23,7 +23,7 @@ debug: main.cpp
 asm: main.asm
 
 main.asm: main.cpp
-	${CC} ${CFLAGS} -S -o main.asm $< ${SDL2FLAGS}
+	${CXX} ${CFLAGS} -S -o main.asm $< ${SDL2FLAGS}
 
 run: msg main
 	time ./main
