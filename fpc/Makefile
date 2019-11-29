@@ -3,7 +3,7 @@
 all: msg main
 
 msg:
-	@echo --- FPC ---
+	@echo '--- FPC ---'
 
 main: sdl2 SDL2/SDL2.o main.pas
 	@echo -n '[main] Compiling...'

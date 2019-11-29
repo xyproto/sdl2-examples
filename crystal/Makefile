@@ -3,7 +3,7 @@
 all: msg main
 
 msg:
-	@echo --- Crystal ---
+	@echo '--- Crystal ---'
 
 main: sdl.cr main.cr
 	@echo -n '[main] Compiling...'

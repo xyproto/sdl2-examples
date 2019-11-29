@@ -3,7 +3,7 @@
 all: msg pony
 
 msg:
-	@echo --- pony ---
+	@echo '--- pony ---'
 
 pony: main.pony
 	ponyc

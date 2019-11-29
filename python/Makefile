@@ -5,7 +5,7 @@ all: msg
 	@true
 
 msg:
-	@echo --- Python ---
+	@echo '--- Python ---'
 
 run: msg main.py
 	time python main.py

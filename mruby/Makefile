@@ -5,7 +5,7 @@ all: msg
 	@true
 
 msg:
-	@echo --- Ruby ---
+	@echo '--- Ruby ---'
 
 run: msg main.rb
 	time mruby main.rb

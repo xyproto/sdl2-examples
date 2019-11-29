@@ -7,7 +7,7 @@ CXXFLAGS?=-std=c++98 -Wall -pedantic -Werror -Wshadow -Wstrict-aliasing -Wstrict
 all: msg main
 
 msg:
-	@echo --- C++98 ---
+	@echo '--- C++98 ---'
 
 main: main.cpp
 	${CXX} ${CXXFLAGS} -O3 -o $@ $< ${SDL2FLAGS}

@@ -3,7 +3,7 @@
 all: msg main
 
 msg:
-	@echo --- Nim ---
+	@echo '--- Nim ---'
 
 main: main.nim
 	nim c main.nim

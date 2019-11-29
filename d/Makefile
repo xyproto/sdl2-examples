@@ -3,7 +3,7 @@
 all: msg main
 
 msg:
-	@echo --- D ---
+	@echo '--- D ---'
 
 main: source/app.d
 	@echo -n '[main] Compiling...'

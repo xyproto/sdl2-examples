@@ -3,7 +3,7 @@
 all: msg main
 
 msg:
-	@echo --- Rust ---
+	@echo '--- Rust ---'
 
 main:
 	cargo build --release

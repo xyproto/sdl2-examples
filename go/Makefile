@@ -3,7 +3,7 @@
 all: msg go
 
 msg:
-	@echo --- Go ---
+	@echo '--- Go ---'
 
 go: deps main.go
 	go build -v

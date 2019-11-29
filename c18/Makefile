@@ -7,7 +7,7 @@ CFLAGS?=-std=c18 -Wall -pedantic -Werror -Wshadow -Wstrict-aliasing -Wstrict-ove
 all: msg main
 
 msg:
-	@echo --- C18 ---
+	@echo '--- C18 ---'
 
 main: main.c
 	${CC} ${CFLAGS} -O3 -o $@ $< ${SDL2FLAGS}

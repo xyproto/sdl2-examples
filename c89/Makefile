@@ -7,7 +7,7 @@ CFLAGS?=-ansi -Wall -pedantic -Werror -Wshadow -Wstrict-aliasing -Wstrict-overfl
 all: msg main
 
 msg:
-	@echo --- C89 (ANSI C) ---
+	@echo '--- C89 (ANSI C) ---'
 
 main: main.c
 	${CC} ${CFLAGS} -O3 -o $@ $< ${SDL2FLAGS}

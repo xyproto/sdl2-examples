@@ -5,7 +5,7 @@ all: msg
 	@true
 
 msg:
-	@echo --- Lua ---
+	@echo '--- Lua ---'
 
 run: msg main.lua
 	time lua main.lua
