@@ -1,20 +1,27 @@
+.PHONY: all clean debug main msg run small static 
+
 CFLAGS?=$(shell pkg-config sdl2 --cflags --libs)
 
-all:
-	go build -compiler gccgo -gccgoflags '-O3 ${CFLAGS}' -o main
+all: CFLAGS+=-O3
+all: main
 
-small:
-	go build -compiler gccgo -gccgoflags '-Os ${CFLAGS}' -o main
+small: CFLAGS+=-Os
+small: main
 	sstrip main
 
-debug:
-	go build -compiler gccgo -gccgoflags '-O0 -g ${CFLAGS}' -o main
+debug: CFLAGS+=-O0 -g
+debug: main
 
-static:
-	go build -compiler gccgo -gccgoflags '-O2 ${CFLAGS} -static' -o main
+static: CFLAGS+=-O2 -static
+static: main
+
+main:
+	go build -compiler gccgo -gccgoflags '${CFLAGS}' -o main
+
+msg:
+	@echo '--- GCCGO ---'
 
 run:
-	@echo --- GccGo ---
 	./main
 
 clean:
