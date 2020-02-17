@@ -1,10 +1,10 @@
 [package]
 name = "hello_sdl2"
 version = "1.0.0"
-authors = ["jdeseno", "Alexander F Rødseth <xyproto@archlinux.org>"]
+authors = ["jdeseno", "Alexander F. Rødseth <xyproto@archlinux.org>"]
 
-[dependencies.sdl2]
-git = "https://github.com/AngryLawyer/rust-sdl2.git"
+[dependencies]
+sdl2 = "0.29.0"
 
 [[bin]]
 name = "rust"

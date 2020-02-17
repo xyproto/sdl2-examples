@@ -38,6 +38,7 @@ nimcache
 
 # Rust
 rust/sdl2/
+Cargo.lock
 
 # C++
 c++20-cxx/c++20-cxx
