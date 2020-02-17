@@ -38,6 +38,10 @@ Samples that does not build
 Help needed
 -----------
 
+Rust
+
+* The SDL2 example for Rust should be upgraded to use the `sdl2` crate, version `0.33` or later.
+
 Example code for the following programming languages are missing and wanted:
 
 * OCaml
