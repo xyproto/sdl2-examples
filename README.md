@@ -29,29 +29,24 @@ Requirements for some of the languages
 * Lua (tested with Lua 5.2) and lua-sdl2
 
 
-Samples that does not build
----------------------------
-
-* See the samples that are commented out at the top of the `Makefile` for a list of samples that currently does not build on 64-bit Arch Linux.
-
-
-Help needed
+Contribute
 -----------
 
-Rust
+The following samples needs some extra work:
+
+### Rust
 
 * The SDL2 example for Rust should be upgraded to use the `sdl2` crate, version `0.33` or later.
 
-Example code for the following programming languages are missing and wanted:
+The following languages are missing, but wanted:
 
 * OCaml
 * Zig
 
-Pull requests are welcome!
+Pull requests are welcome.
 
 
 General information
 ----------------------
 
-* Author: Alexander F. Rødseth
 * License: MIT
