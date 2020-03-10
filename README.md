@@ -32,16 +32,15 @@ Requirements for some of the languages
 Contribute
 -----------
 
-The following samples needs some extra work:
-
-### Rust
-
-* The SDL2 example for Rust should be upgraded to use the `sdl2` crate, version `0.33` or later.
-
-The following languages are missing, but wanted:
+The following samples are missing, but wanted:
 
 * OCaml
 * Zig
+* Modern C++ in combination with Bazel
+
+The following samples needs and upgrade and/or being looked at:
+
+* Rust (should be upgraded to use version `0.33` or later of the `sdl2` crate)
 
 Pull requests are welcome.
 
