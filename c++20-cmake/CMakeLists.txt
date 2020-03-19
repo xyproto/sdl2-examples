@@ -7,8 +7,7 @@ add_executable(${PROJECT_NAME} ${SRC_LIST})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ../include)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
-
-add_definitions(-DIMGDIR="../img/")
+target_compile_definitions(${PROJECT_NAME} PRIVATE -DIMGDIR="../img/")
 
 # The modern way, using cmake config files
 #find_package(SDL2 REQUIRED)
