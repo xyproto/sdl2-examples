@@ -10,5 +10,12 @@ target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_14)
 
 add_definitions(-DIMGDIR="../img/")
 
-find_package(SDL2 REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
+# The modern way, using cmake config files
+#find_package(SDL2 REQUIRED)
+#target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
+
+# The trusty old way, using pkg-config
+include(FindPkgConfig)
+pkg_search_module(SDL2 REQUIRED sdl2)
+include_directories(${SDL2_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
