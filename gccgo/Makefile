@@ -2,7 +2,7 @@
 
 CFLAGS?=$(shell pkg-config sdl2 --cflags --libs)
 
-all: CFLAGS+=-O3
+all: CFLAGS+=-O2
 all: main
 
 small: CFLAGS+=-Os
