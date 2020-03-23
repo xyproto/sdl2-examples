@@ -68,11 +68,7 @@ void main()
 	bool quit = false;
 	while(!quit) {
 			while (SDL_PollEvent(&event)) {
-				if (event.type == SDL_QUIT) {
-					quit = true;
-				}
-
-				if (event.type == SDL_KEYDOWN) {
+				if (event.type == SDL_QUIT || event.type == SDL_KEYDOWN) {
 					quit = true;
 				}
 			}
