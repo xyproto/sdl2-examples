@@ -16,5 +16,5 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE IMGDIR="../img/")
 # The trusty old way, using pkg-config
 include(FindPkgConfig)
 pkg_search_module(SDL2 REQUIRED sdl2)
-include_directories(${SDL2_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARIES})
