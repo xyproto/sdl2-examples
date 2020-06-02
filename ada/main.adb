@@ -26,6 +26,7 @@ procedure Main is
    Tex : Textures.Texture;
 
    Event : SDL.Events.Events.Events;
+   Dummy : Boolean;
 begin
    --  Initialise SDL
    if not SDL.Initialise or not SDL.Images.Initialise then
@@ -40,12 +41,13 @@ begin
                           Title    => Window_Title,
                           Position => (100, 100),
                           Size     => (620, 387),
-                          Flags    => Windows.Windowed or Windows.Shown);
+                          Flags    => Windows.Shown);
 
    --  Create renderer
    Renderers.Makers.Create (Rend   => Ren,
                             Window => Win,
-                            Flags  => Renderers.Accelerated or Renderers.Present_V_Sync);
+                            Flags  => (Renderers.Accelerated or
+                                         Renderers.Present_V_Sync));
 
    --  Create image
    SDL.Images.IO.Create (Surface   => Bmp,
@@ -62,8 +64,9 @@ begin
    Ren.Present;
 
    --  Event loop
-   loop
-      SDL.Events.Events.Wait (Event);
+   --  Exit after 2 seconds
+   for I in 1 .. 200 loop
+      Dummy := SDL.Events.Events.Poll (Event);
       exit when Event.Common.Event_Type = SDL.Events.Quit;
       delay 0.010;
    end loop;
