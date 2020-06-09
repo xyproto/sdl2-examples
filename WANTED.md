@@ -3,9 +3,9 @@
 Examples for:
 
 * Modern C++ in combination with Bazel
-* The Zig programming language
-* The OCaml programming language
-* The Haskell programing language
+* Zig
+* OCaml
+* Haskell
 
 An update to the latest version of the compiler and/or ecosystem:
 
