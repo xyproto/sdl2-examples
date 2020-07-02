@@ -29,10 +29,17 @@ Requirements for some of the languages
 * Lua (tested with Lua 5.2) and lua-sdl2
 
 
-Contribute
------------
+Languages that are not added yet
+--------------------------------
 
-Take a look at [WANTED.md](WANTED.md) for a list of desired additions and improvements.
+I found no straightforward way to add examples for for the following languages:
+
+* Zig
+* OCaml
+* Haskell
+* Modern C++ in combination with Bazel
+
+For OCaml and Haskell especially, they are not added because the dependencies are **impossible**.
 
 Pull requests are welcome.
 
