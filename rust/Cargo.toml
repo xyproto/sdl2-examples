@@ -1,10 +1,10 @@
 [package]
 name = "hello_sdl2"
-version = "1.0.0"
+version = "1.1.0"
 authors = ["jdeseno", "Alexander F. Rødseth <xyproto@archlinux.org>"]
 
 [dependencies]
-sdl2 = "0.29.0"
+sdl2 = "0.34.3"
 
 [[bin]]
 name = "rust"
