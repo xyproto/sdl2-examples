@@ -25,16 +25,16 @@ fn main() {
         Err(err) => panic!("failed to load surface: {}", err),
     };
 
-    // Get the window canvas
+    // Get the window surface, and prepare to handle events
     let event_pump = ctx.event_pump().unwrap();
-    let mut screen = window.surface(&event_pump).unwrap();
+    let mut window_surf = window.surface(&event_pump).unwrap();
 
-    // Blit the image to the window
-    surface.blit(None, &mut screen, None).unwrap();
+    // Blit the image to the window surface
+    surface.blit(None, &mut window_surf, None).unwrap();
 
     for _ in 0..20 {
-        // Update the window to display the changed surface
-        if let Err(err) = screen.update_window() {
+        // Display the contents of the window surface on the screen
+        if let Err(err) = window_surf.update_window() {
             panic!("failed to update window surface: {}", err);
         }
 
