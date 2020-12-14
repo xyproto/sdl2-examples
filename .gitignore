@@ -52,3 +52,10 @@ build/
 CMakeCache.txt
 CMakeFiles
 inst/
+
+# Ada
+*.ali
+*.ads
+*.adb
+*.adb.std*
+*.bexch
