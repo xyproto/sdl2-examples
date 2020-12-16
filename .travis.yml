@@ -6,6 +6,9 @@ language:
   - go
   - d
 
+go:
+  - "1.15"
+
 addons:
   apt:
     packages:
