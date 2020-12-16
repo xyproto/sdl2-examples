@@ -10,15 +10,15 @@ msg:
 	@echo '--- Zig ---'
 
 main: main.zig
-	zig build-exe -lc -lSDL2 -OReleaseFast main.zig
+	zig build-exe -lc -lSDL2 -OReleaseFast main.zig --name main
 
 small: main.zig
-	zig build-exe -lc -lSDL2 -OReleaseSmall --strip main.zig
+	zig build-exe -lc -lSDL2 -OReleaseSmall --strip main.zig --name small
 	-strip main
 	-sstrip main
 
 debug: main.zig
-	zig build-exe -lc -lSDL2 main.zig
+	zig build-exe -lc -lSDL2 main.zig --name debug
 
 main.s: main.zig
 	@# This only works after clearing the cache!

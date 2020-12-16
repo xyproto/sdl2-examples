@@ -63,3 +63,4 @@ inst/
 # Zig
 zig/zig-cache
 zig/*.s
+zig/zig
