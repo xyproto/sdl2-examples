@@ -59,3 +59,7 @@ inst/
 *.adb
 *.adb.std*
 *.bexch
+
+# Zig
+zig/zig-cache
+zig/*.s

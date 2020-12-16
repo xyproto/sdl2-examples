@@ -34,7 +34,6 @@ Languages that are not added yet
 
 I found no straightforward way to add examples for for the following languages:
 
-* Zig
 * OCaml
 * Haskell
 * Modern C++ in combination with Bazel
