@@ -5,11 +5,8 @@ all: msg go
 msg:
 	@echo '--- Go ---'
 
-go: deps main.go
-	go build -v
-
-deps:
-	go get -d
+go: main.go
+	go build -mod=vendor -v
 
 run: msg go
 	time ./go
