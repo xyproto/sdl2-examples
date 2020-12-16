@@ -39,9 +39,8 @@ script:
   - make -C c++98
   - make -C c++11
   - pushd go
-  - go get -d -v
-  - go build
-  - go test
+  - go build -mod=vendor || GO111MODULES=on go build
+  - go test -mod=vendor || GO111MODULES=on go test
   - popd
   - mkdir -p build
   - cd build && cmake -G Ninja -- ../c++17-cmake && ninja
