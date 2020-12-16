@@ -1,3 +1,5 @@
+distro: focal
+
 language:
   - c
   - cpp
