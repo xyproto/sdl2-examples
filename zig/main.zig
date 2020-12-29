@@ -44,12 +44,11 @@ pub fn main() !u8 {
 
     // Render the SDL_Texture to the SDL_Window, repeatedly
     var i: usize = 0;
-    while (i < 20) {
+    while (i < 20) : (i += 1) {
         _ = sdl2.SDL_RenderClear(ren);
         _ = sdl2.SDL_RenderCopy(ren, tex, null, null);
         sdl2.SDL_RenderPresent(ren);
         sdl2.SDL_Delay(100);
-        i += 1;
     }
 
     return 0;
