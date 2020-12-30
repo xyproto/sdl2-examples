@@ -39,11 +39,12 @@ I found no straightforward way to add examples for for the following languages:
 
 Pull requests are welcome.
 
-If you give it a shot that doesn't result in a pull request, please let me know, and I'll increase these counters:
+If you give it a shot that doesn't result in a pull request, please send a pull request with updated attempt counters:
 
+```
 OCaml: 1
 Haskell: 1
-
+```
 
 General information
 ----------------------
