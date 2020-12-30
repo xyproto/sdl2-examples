@@ -39,7 +39,7 @@ I found no straightforward way to add examples for for the following languages:
 
 Pull requests are welcome.
 
-If you give it a shot that doesn't result in a pull request, please send a pull request with updated attempt counters:
+If you give it a shot that doesn't result in a pull request, please submit a pull request with updated attempt counters:
 
 ```
 OCaml: 1
