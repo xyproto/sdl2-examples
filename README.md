@@ -36,11 +36,13 @@ I found no straightforward way to add examples for for the following languages:
 
 * OCaml
 * Haskell
-* Modern C++ in combination with Bazel
-
-For OCaml and Haskell especially, they are not added because the dependencies are **impossible**.
 
 Pull requests are welcome.
+
+If you give it a shot that doesn't result in a pull request, please let me know, and I'll increase these counters:
+
+OCaml: 1
+Haskell: 1
 
 
 General information
