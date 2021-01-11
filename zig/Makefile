@@ -30,6 +30,10 @@ asm: main.s
 run: msg main
 	time ./main
 
+zigbuild:
+	zig build
+	ln -sf zig-cache/bin/zig zig
+
 clean:
 	rm -f main *.o *.s
 
