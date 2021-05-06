@@ -22,9 +22,7 @@ int main()
         = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (ren == nullptr) {
         cerr << "SDL_CreateRenderer Error" << SDL_GetError() << endl;
-        if (win != nullptr) {
-            SDL_DestroyWindow(win);
-        }
+        SDL_DestroyWindow(win);
         SDL_Quit();
         return EXIT_FAILURE;
     }
@@ -32,12 +30,8 @@ int main()
     SDL_Surface* bmp = SDL_LoadBMP("../img/grumpy-cat.bmp");
     if (bmp == nullptr) {
         cerr << "SDL_LoadBMP Error: " << SDL_GetError() << endl;
-        if (ren != nullptr) {
-            SDL_DestroyRenderer(ren);
-        }
-        if (win != nullptr) {
-            SDL_DestroyWindow(win);
-        }
+        SDL_DestroyRenderer(ren);
+        SDL_DestroyWindow(win);
         SDL_Quit();
         return EXIT_FAILURE;
     }
@@ -45,15 +39,9 @@ int main()
     SDL_Texture* tex = SDL_CreateTextureFromSurface(ren, bmp);
     if (tex == nullptr) {
         cerr << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << endl;
-        if (bmp != nullptr) {
-            SDL_FreeSurface(bmp);
-        }
-        if (ren != nullptr) {
-            SDL_DestroyRenderer(ren);
-        }
-        if (win != nullptr) {
-            SDL_DestroyWindow(win);
-        }
+        SDL_FreeSurface(bmp);
+        SDL_DestroyRenderer(ren);
+        SDL_DestroyWindow(win);
         SDL_Quit();
         return EXIT_FAILURE;
     }
