@@ -4,10 +4,10 @@
 
 int main()
 {
-	SDL_Window * win;
-	SDL_Renderer *ren;
-	SDL_Surface *bmp;
-	SDL_Texture *tex;
+	SDL_Window* win;
+	SDL_Renderer* ren;
+	SDL_Surface* bmp;
+	SDL_Texture* tex;
 	int i;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
@@ -21,12 +21,10 @@ int main()
 		return EXIT_FAILURE;
 	}
 
-	ren = SDL_CreateRenderer(win, -1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (ren == NULL) {
 		fprintf(stderr, "SDL_CreateRenderer Error: %s\n", SDL_GetError());
-		if (win != NULL) {
-			SDL_DestroyWindow(win);
-		}
+		SDL_DestroyWindow(win);
 		SDL_Quit();
 		return EXIT_FAILURE;
 	}
@@ -34,12 +32,8 @@ int main()
 	bmp = SDL_LoadBMP("../img/grumpy-cat.bmp");
 	if (bmp == NULL) {
 		fprintf(stderr, "SDL_LoadBMP Error: %s\n", SDL_GetError());
-		if (ren != NULL) {
-			SDL_DestroyRenderer(ren);
-		}
-		if (win != NULL) {
-			SDL_DestroyWindow(win);
-		}
+		SDL_DestroyRenderer(ren);
+		SDL_DestroyWindow(win);
 		SDL_Quit();
 		return EXIT_FAILURE;
 	}
@@ -47,25 +41,19 @@ int main()
 	tex = SDL_CreateTextureFromSurface(ren, bmp);
 	if (tex == NULL) {
 		fprintf(stderr, "SDL_CreateTextureFromSurface Error: %s\n", SDL_GetError());
-		if (bmp != NULL) {
-			SDL_FreeSurface(bmp);
-		}
-		if (ren != NULL) {
-			SDL_DestroyRenderer(ren);
-		}
-		if (win != NULL) {
-			SDL_DestroyWindow(win);
-		}
+		SDL_FreeSurface(bmp);
+		SDL_DestroyRenderer(ren);
+		SDL_DestroyWindow(win);
 		SDL_Quit();
 		return EXIT_FAILURE;
 	}
 	SDL_FreeSurface(bmp);
 
-	for (i=0; i < 20; i++) {
-			SDL_RenderClear(ren);
-			SDL_RenderCopy(ren, tex, NULL, NULL);
-			SDL_RenderPresent(ren);
-			SDL_Delay(100);
+	for (i = 0; i < 20; i++) {
+		SDL_RenderClear(ren);
+		SDL_RenderCopy(ren, tex, NULL, NULL);
+		SDL_RenderPresent(ren);
+		SDL_Delay(100);
 	}
 
 	SDL_DestroyTexture(tex);
