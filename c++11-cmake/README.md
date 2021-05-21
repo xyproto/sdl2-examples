@@ -9,7 +9,7 @@ Requirements
 * SDL2
 * ninja (or make, just drop the `-GNinja` flag and build with `make`)
 
-One way of building with C++11, SDL2, CMake and ninja
+One way of building with C++11, SDL2, CMake and Ninja
 -----------------------------------------------------
 
     mkdir -p build
@@ -17,7 +17,7 @@ One way of building with C++11, SDL2, CMake and ninja
     cmake -GNinja ..
     ninja
     cd ..
-    
+
 Running
 -------
 
@@ -27,4 +27,3 @@ Cleaning up the binary file and build directory
 -----------------------------------------------
 
     rm -rf build/ main
-
