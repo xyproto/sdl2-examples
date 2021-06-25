@@ -64,14 +64,8 @@ void main()
     SDL_UpdateWindowSurface(appWin);
 
     // Polling for events
-    SDL_Event event;
-    bool quit = false;
-    while(!quit) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT || event.type == SDL_KEYDOWN) {
-                quit = true;
-            }
-        }
+    for (int i = 0; i < 20; i++) {
+        SDL_Delay(100);
     }
 
     // Close and destroy the window
