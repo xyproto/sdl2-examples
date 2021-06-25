@@ -19,8 +19,8 @@ https://www.libsdl.org/download-2.0.php
 
 Then either place csc.exe in the PATH and build with that, using:
 
-    csc /unsafe main.cs
+    csc /target:winexe /unsafe main.cs
 
 Or use the full path, for example:
 
-    C:\Windows\Microsoft.NET\Framework\v3.5\csc /unsafe main.cs
+    C:\Windows\Microsoft.NET\Framework\v3.5\csc /target:winexe /unsafe main.cs
