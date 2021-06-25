@@ -16,68 +16,68 @@ public class HelloWorld
     [DllImport("SDL2")]
     private static extern unsafe IntPtr SDL_CreateWindow(
         [MarshalAs(UnmanagedType.LPStr)]String title,
-        [MarshalAs(UnmanagedType.I4)]Int32 x,
-        [MarshalAs(UnmanagedType.I4)]Int32 y,
-        [MarshalAs(UnmanagedType.I4)]Int32 w,
-        [MarshalAs(UnmanagedType.I4)]Int32 h,
-        [MarshalAs(UnmanagedType.U4)]UInt32 flags
+        int x,
+        int y,
+        int w,
+        int h,
+        uint flags
     );
 
     [DllImport("SDL2")]
     private static extern unsafe IntPtr SDL_CreateRenderer(
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr win,
-        [MarshalAs(UnmanagedType.I4)]Int32 index,
-        [MarshalAs(UnmanagedType.U4)]UInt32 flags
+        IntPtr win,
+        int index,
+        uint flags
     );
 
     [DllImport("SDL2")]
     private static extern unsafe IntPtr SDL_CreateTextureFromSurface(
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr renderer,
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr surface
+        IntPtr renderer,
+        IntPtr surface
     );
 
     [DllImport("SDL2")]
     private static extern unsafe void SDL_DestroyRenderer(
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr renderer
+        IntPtr renderer
     );
 
     [DllImport("SDL2")]
     private static extern unsafe void SDL_DestroyWindow(
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr window
+        IntPtr window
     );
 
     [DllImport("SDL2")]
     private static extern unsafe void SDL_FreeSurface(
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr surface
+        IntPtr surface
     );
 
     [DllImport("SDL2")]
     private static extern unsafe void SDL_DestroyTexture(
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr texture
+        IntPtr texture
     );
 
     [DllImport("SDL2")]
     private static extern unsafe Int32 SDL_RenderClear(
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr renderer
+        IntPtr renderer
     );
 
     [DllImport("SDL2")]
     private static extern unsafe Int32 SDL_RenderCopy(
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr renderer,
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr texture,
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr srcrect,
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr dstrect
+        IntPtr renderer,
+        IntPtr texture,
+        IntPtr srcrect,
+        IntPtr dstrect
     );
 
     [DllImport("SDL2")]
     private static extern unsafe void SDL_RenderPresent(
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr renderer
+        IntPtr renderer
     );
 
     [DllImport("SDL2")]
     private static extern unsafe IntPtr SDL_LoadBMP_RW(
-        [MarshalAs(UnmanagedType.LPStruct)]IntPtr src,
-        [MarshalAs(UnmanagedType.I4)]Int32 freesrc
+        IntPtr src,
+        int freesrc
     );
 
     [DllImport("SDL2")]
