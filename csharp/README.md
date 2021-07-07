@@ -14,13 +14,13 @@ Running:
 
     mono main.exe
 
-### Building and running a native executable
+### Building and running as a native executable
 
 `mkbundle` comes with `mono`.
 
 Building:
 
-Either run `make` or use a command similar to the one in the `Makefile`.
+    make
 
 Running:
 
