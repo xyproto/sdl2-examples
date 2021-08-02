@@ -1,4 +1,4 @@
-.PHONY: all clean debug main msg run small static 
+.PHONY: all clean debug main msg run small static
 
 CFLAGS?=$(shell pkg-config sdl2 --cflags --libs)
 
@@ -16,7 +16,7 @@ static: CFLAGS+=-O2 -static
 static: main
 
 main:
-	go build -compiler gccgo -gccgoflags '${CFLAGS}' -o main
+	go build -v -compiler gccgo -gccgoflags '${CFLAGS}' -o main
 
 msg:
 	@echo '--- GCCGO ---'
