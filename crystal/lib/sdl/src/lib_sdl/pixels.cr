@@ -1,0 +1,157 @@
+lib LibSDL
+  ALPHA_OPAQUE = 255
+  ALPHA_TRANSPARENT = 0
+
+  enum PixelType
+    UNKNOWN
+    INDEX1
+    INDEX4
+    INDEX8
+    PACKED8
+    PACKED16
+    PACKED32
+    ARRAYU8
+    ARRAYU16
+    ARRAYU32
+    ARRAYF16
+    ARRAYF32
+  end
+
+  enum BitmapOrder
+    SDL_BITMAPORDER_NONE
+    SDL_BITMAPORDER_4321
+    SDL_BITMAPORDER_1234
+  end
+
+  enum PackedOrder
+    NONE
+    XRGB
+    RGBX
+    ARGB
+    RGBA
+    XBGR
+    BGRX
+    ABGR
+    BGRA
+  end
+
+  enum ArrayOrder
+    NONE
+    RGB
+    RGBA
+    ARGB
+    BGR
+    BGRA
+    ABGR
+  end
+
+  enum PackedLayout
+    NONE
+    L332
+    L4444
+    L1555
+    L5551
+    L565
+    L8888
+    L2101010
+    L1010102
+  end
+
+  #macro DEFINE_PIXELFOURCC(A, B, C, D)
+  #  {{A}}.to_u32 << 0 |
+  #  {{B}}.to_u32 << 8 |
+  #  {{C}}.to_u32 << 16 |
+  #  {{D}}.to_u32 << 24
+  #end
+
+  #macro DEFINE_PIXELFORMAT(type, order, layout, bits, bytes)
+  #  ((1 << 28) | ({{type}} << 24) | ({{order}} << 20) | ({{layout}} << 16) | ({{bits}} << 8) | ({{bytes}} << 0))
+  #end
+
+  #enum PixelFormatEnum : UInt32
+  #  UNKNOWN
+  #  INDEX1LSB = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX1, SDL_BITMAPORDER_4321, 0, 1, 0)
+  #  INDEX1MSB = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX1, SDL_BITMAPORDER_1234, 0, 1, 0)
+  #  INDEX4LSB = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX4, SDL_BITMAPORDER_4321, 0, 4, 0)
+  #  INDEX4MSB = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX4, SDL_BITMAPORDER_1234, 0, 4, 0)
+  #  INDEX8 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_INDEX8, 0, 0, 8, 1)
+  #  RGB332 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED8, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_332, 8, 1)
+  #  RGB444 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_4444, 12, 2)
+  #  RGB555 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_1555, 15, 2)
+  #  BGR555 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XBGR, SDL_PACKEDLAYOUT_1555, 15, 2)
+  #  ARGB4444 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ARGB, SDL_PACKEDLAYOUT_4444, 16, 2)
+  #  RGBA4444 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_RGBA, SDL_PACKEDLAYOUT_4444, 16, 2)
+  #  ABGR4444 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ABGR, SDL_PACKEDLAYOUT_4444, 16, 2)
+  #  BGRA4444 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_BGRA, SDL_PACKEDLAYOUT_4444, 16, 2)
+  #  ARGB1555 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ARGB, SDL_PACKEDLAYOUT_1555, 16, 2)
+  #  RGBA5551 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_RGBA, SDL_PACKEDLAYOUT_5551, 16, 2)
+  #  ABGR1555 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ABGR, SDL_PACKEDLAYOUT_1555, 16, 2)
+  #  BGRA5551 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_BGRA, SDL_PACKEDLAYOUT_5551, 16, 2)
+  #  RGB565 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_565, 16, 2)
+  #  BGR565 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XBGR, SDL_PACKEDLAYOUT_565, 16, 2)
+  #  RGB24 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYU8, SDL_ARRAYORDER_RGB, 0, 24, 3)
+  #  BGR24 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_ARRAYU8, SDL_ARRAYORDER_BGR, 0, 24, 3)
+  #  RGB888 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_XRGB, SDL_PACKEDLAYOUT_8888, 24, 4)
+  #  RGBX8888 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_RGBX, SDL_PACKEDLAYOUT_8888, 24, 4)
+  #  BGR888 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_XBGR, SDL_PACKEDLAYOUT_8888, 24, 4)
+  #  BGRX8888 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_BGRX, SDL_PACKEDLAYOUT_8888, 24, 4)
+  #  ARGB8888 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_ARGB, SDL_PACKEDLAYOUT_8888, 32, 4)
+  #  RGBA8888 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_RGBA, SDL_PACKEDLAYOUT_8888, 32, 4)
+  #  ABGR8888 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_ABGR, SDL_PACKEDLAYOUT_8888, 32, 4)
+  #  BGRA8888 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_BGRA, SDL_PACKEDLAYOUT_8888, 32, 4)
+  #  ARGB2101010 = SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED32, SDL_PACKEDORDER_ARGB, SDL_PACKEDLAYOUT_2101010, 32, 4)
+  #  YV12 = SDL_DEFINE_PIXELFOURCC('Y', 'V', '1', '2')
+  #  IYUV = SDL_DEFINE_PIXELFOURCC('I', 'Y', 'U', 'V')
+  #  YUY2 = SDL_DEFINE_PIXELFOURCC('Y', 'U', 'Y', '2')
+  #  UYVY = SDL_DEFINE_PIXELFOURCC('U', 'Y', 'V', 'Y')
+  #  YVYU = SDL_DEFINE_PIXELFOURCC('Y', 'V', 'Y', 'U')
+  #end
+
+  alias Color = SDL::Color
+
+  struct Palette
+    ncolors : Int
+    colors : Color*
+    version : UInt32
+    refcount : Int
+  end
+
+  struct PixelFormat
+    format : UInt32
+    palette : Palette*
+    bitsPerPixel : UInt8
+    bytesPerPixel : UInt8
+    padding : UInt8[2]
+    r_mask : UInt32
+    g_mask : UInt32
+    b_mask : UInt32
+    a_mask : UInt32
+    r_loss  : UInt8
+    g_loss  : UInt8
+    b_loss  : UInt8
+    a_loss  : UInt8
+    r_shift : UInt8
+    g_shift : UInt8
+    b_shift : UInt8
+    a_shift : UInt8
+    refcount : Int
+    next : PixelFormat*
+  end
+
+  fun get_pixel_format_name = SDL_GetPixelFormatName(format : UInt32) : Char*
+  fun pixel_format_enum_to_masks = SDL_PixelFormatEnumToMasks(format : UInt32, bpp : Int*, r_mask : UInt32*, g_mask : UInt32*, b_mask : UInt32*, a_mask : UInt32*) : Bool
+  fun masks_to_pixel_format_enum = SDL_MasksToPixelFormatEnum(bpp : Int, r_mask : UInt32, g_mask : UInt32, b_mask : UInt32, a_mask : UInt32) : UInt32
+  fun alloc_format = SDL_AllocFormat(pixel_format : UInt32) : PixelFormat*
+  fun free_format = SDL_FreeFormat(format : PixelFormat*)
+
+  fun alloc_palette = SDL_AllocPalette(ncolors : Int) : Palette*
+  fun set_pixel_format_palette = SDL_SetPixelFormatPalette(format : PixelFormat*, palette : Palette*) : Int
+  fun set_palette_colors = SDL_SetPaletteColors(palette : Palette*, colors : Color*, firstcolor : Int, ncolors : Int) : Int
+  fun free_palette = SDL_FreePalette(palette : Palette*)
+
+  fun map_rgb = SDL_MapRGB(format : PixelFormat*, r : UInt8, g : UInt8, b : UInt8) : UInt32
+  fun map_rgba = SDL_MapRGBA(format : PixelFormat*, r : UInt8, g : UInt8, b : UInt8, a : UInt8) : UInt32
+  fun get_rgb = SDL_GetRGB(pixel : UInt32, format : PixelFormat*, r : UInt8*, g : UInt8*, b : UInt8*)
+  fun get_rgba = SDL_GetRGBA(pixel : UInt32, format : PixelFormat*, r : UInt8*, g : UInt8*, b : UInt8*, a : UInt8*)
+  fun calculate_gamma_ramp = SDL_CalculateGammaRamp(gamma : Float, ramp : UInt16*)
+end

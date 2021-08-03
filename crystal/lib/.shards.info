@@ -1,0 +1,6 @@
+---
+version: 1.0
+shards:
+  sdl:
+    git: https://github.com/ysbaddaden/sdl.cr.git
+    version: 0.1.0+git.commit.a2d71972bdaabf0ffaaeaf09e0d3bcd0ca5c975f
