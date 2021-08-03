@@ -1,16 +1,16 @@
 .PHONY: all msg sdl2 clean fullclean
 
-all: msg main
+all: msg bin/main
 
 msg:
 	@echo '--- Crystal ---'
 
-main: shard.yml src/main.cr
+bin/main: shard.yml src/main.cr
 	@echo -n '[main] Compiling...'
-	@shards build
+	@shards -q build
 	@echo 'ok'
 
-run: msg main
+run: msg bin/main
 	time ./bin/main
 
 clean:
