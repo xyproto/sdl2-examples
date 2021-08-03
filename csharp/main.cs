@@ -93,7 +93,7 @@ public class HelloWorld
     private static extern unsafe byte* SDL_GetError();
 
     // Call SDL_GetError() and return the C string as a C# String
-    private static unsafe String getErr() {
+    private static unsafe String SDL_GetErrorString() {
         StringBuilder sb = new StringBuilder();
         byte* errStr = SDL_GetError();
         int i = 0;
@@ -106,7 +106,7 @@ public class HelloWorld
 
     // Print the SDL_GetError() error message to stderr, with a preceding topic and also " Error: "
     private static void printErr(String topic) {
-        Console.Error.WriteLine(topic + " Error: " + getErr());
+        Console.Error.WriteLine(topic + " Error: " + SDL_GetErrorString());
     }
 
     public static int Main(string[] args)
