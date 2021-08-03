@@ -5,21 +5,16 @@ all: msg main
 msg:
 	@echo '--- Crystal ---'
 
-main: sdl.cr main.cr
+main: shard.yml src/main.cr
 	@echo -n '[main] Compiling...'
-	@crystal build main.cr
-	@echo 'ok'
-
-sdl.cr: checkout.sh
-	@echo -n '[SDL2 for Crystal] Checking out...'
-	@./checkout.sh > /dev/null
+	@shards build
 	@echo 'ok'
 
 run: msg main
-	time ./main
+	time ./bin/main
 
 clean:
-	rm -f main
+	rm -f bin/main
 
 fullclean: clean
-	rm -rf sdl.cr
+	rm -rf bin lib

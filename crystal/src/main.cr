@@ -1,5 +1,5 @@
-require "./sdl.cr/src/sdl"
-require "./sdl.cr/src/image"
+require "sdl"
+require "sdl/image"
 
 SDL.init(SDL::Init::VIDEO)
 at_exit { SDL.quit }

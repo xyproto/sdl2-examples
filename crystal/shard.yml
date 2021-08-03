@@ -1,0 +1,17 @@
+name: main
+version: 0.1.0
+
+authors:
+  - Alexander F. Rødseth <xyproto@archlinux.org>
+
+dependencies:
+  sdl:
+    github: ysbaddaden/sdl.cr
+
+targets:
+  main:
+    main: src/main.cr
+
+crystal: 1.1.1
+
+license: MIT
