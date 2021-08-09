@@ -12,11 +12,8 @@ Requirements
 One way of building with C++11, SDL2, CMake and Ninja
 -----------------------------------------------------
 
-    mkdir -p build
-    cd build
-    cmake -GNinja ..
-    ninja
-    cd ..
+    cmake -S . -B build -G Ninja
+    ninja -C build
 
 Running
 -------
