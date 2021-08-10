@@ -1,7 +1,7 @@
 SDL2 Examples
 =============
 
-[![Build Status](https://travis-ci.com/xyproto/sdl2-examples.svg?branch=main)](https://travis-ci.com/xyproto/sdl2-examples)
+[![sdl2-examples](https://github.com/xyproto/sdl2-examples/actions/workflows/main.yml/badge.svg)](https://github.com/xyproto/sdl2-examples/actions/workflows/main.yml)
 
 "hello world" for SDL2 for various programming languages.
 
