@@ -1,0 +1,57 @@
+name: sdl2-examples
+
+on:
+  push:
+    branches:
+    - '*'
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches:
+    - '*'
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  cmake:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tests_list:
+        - { folder: "c++11-cmake" }
+        - { folder: "c++14-cmake" }
+        - { folder: "c++17-cmake" }
+        - { folder: "c++20-cmake" }
+#        - { folder: "c++23-cmake" }
+    steps:
+      - uses: actions/checkout@v2
+      - name: install_dependencies
+        run: |
+          sudo apt-get install -y libsdl2-dev ninja-build cmake
+      - name: build
+        run: |
+              cd ${{ matrix.tests_list.folder }}
+              cmake -S . -B build -G Ninja
+              ninja -C build
+  make:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tests_list:
+        - { folder: "c89" }
+        - { folder: "c++98" }
+        - { folder: "c99" }
+        - { folder: "c11" }
+        - { folder: "c2x" }
+    steps:
+      - uses: actions/checkout@v2
+      - name: install_dependencies
+        run: |
+          sudo apt-get install -y libsdl2-dev ninja-build cmake
+      - name: build
+        run: |
+              cd ${{ matrix.tests_list.folder }}
+              make all
