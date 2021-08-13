@@ -4,11 +4,16 @@ using System.Text;
 
 public class HelloWorld
 {
-    private const Int32 windowpos_undefined    = 0x1FFF0000;
-    private const UInt32 init_video            = 0x00000020;
-    private const UInt32 window_shown          = 0x00000004;
-    private const UInt32 renderer_accelerated  = 0x00000002;
-    private const UInt32 renderer_presentvsync = 0x00000004;
+    // From SDL.h
+    private const UInt32 SDL_INIT_VIDEO            = 0x00000020;
+
+    // From SDL_video.h
+    private const Int32 SDL_WINDOWPOS_UNDEFINED    = 0x1FFF0000;
+    private const UInt32 SDL_WINDOW_SHOWN          = 0x00000004;
+
+    // From SDL_render.h
+    private const UInt32 SDL_RENDERER_ACCELERATED  = 0x00000002;
+    private const UInt32 SDL_RENDERER_PRESENTVSYNC = 0x00000004;
 
     [DllImport("SDL2")]
     private static extern unsafe Int32 SDL_Init(UInt32 flags);
@@ -111,18 +116,18 @@ public class HelloWorld
 
     public static int Main(string[] args)
     {
-        if (SDL_Init(init_video) != 0) {
+        if (SDL_Init(SDL_INIT_VIDEO) != 0) {
             printErr("SDL_Init");
             return 1;
         }
 
-        IntPtr win = SDL_CreateWindow("Hello, World!", windowpos_undefined, windowpos_undefined, 620, 387, window_shown);
+        IntPtr win = SDL_CreateWindow("Hello, World!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 620, 387, SDL_WINDOW_SHOWN);
         if (win == IntPtr.Zero) {
             printErr("SDL_CreateWindow");
             return 1;
         }
 
-        IntPtr ren = SDL_CreateRenderer(win, -1, renderer_accelerated | renderer_presentvsync);
+        IntPtr ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
         if (ren == IntPtr.Zero) {
             printErr("SDL_CreateRenderer");
             SDL_DestroyWindow(win);
