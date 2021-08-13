@@ -1,20 +1,14 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from sdl2 import *
-
-X = SDL_WINDOWPOS_UNDEFINED
-Y = SDL_WINDOWPOS_UNDEFINED
-W = 960
-H = 540
-FLAGS = SDL_WINDOW_SHOWN
 
 # There are more pythonic ways of doing this, by using the sdl2.ext module.
 
 def main():
     SDL_Init(SDL_INIT_VIDEO)
 
-    win = SDL_CreateWindow(b"Hello World!", X, Y, W, H, FLAGS)
+    win = SDL_CreateWindow(b"Hello World!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 960, 540, SDL_WINDOW_SHOWN)
     ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)
     bmp = SDL_LoadBMP(b"../img/grumpy-cat.bmp")
     tex = SDL_CreateTextureFromSurface(ren, bmp)
@@ -30,6 +24,7 @@ def main():
     SDL_DestroyRenderer(ren)
     SDL_DestroyWindow(win)
     SDL_Quit()
+
 
 if __name__ == "__main__":
     main()
