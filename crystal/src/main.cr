@@ -1,22 +1,30 @@
 require "sdl"
 require "sdl/image"
 
-SDL.init(SDL::Init::VIDEO)
-at_exit { SDL.quit }
-window = SDL::Window.new("Hello, World!", 620, 387)
+begin
+  SDL.init(SDL::Init::VIDEO)
 
-SDL::IMG.init(SDL::IMG::Init::PNG)
-at_exit { SDL::IMG.quit }
+  at_exit { SDL.quit }
 
-png = SDL::IMG.load(File.join("..", "img", "grumpy-cat.png"))
-png = png.convert(window.surface)
+  window = SDL::Window.new("Hello, World!", 620, 387)
 
-start_time = Time.utc
-loop do
-  png.blit(window.surface)
-  window.update
+  SDL::IMG.init(SDL::IMG::Init::PNG)
+  at_exit { SDL::IMG.quit }
 
-  if (Time.utc - start_time).seconds > 2
-    break
+  png = SDL::IMG.load(File.join("..", "img", "grumpy-cat.png"))
+  png = png.convert(window.surface)
+
+  start_time = Time.utc
+  loop do
+    png.blit(window.surface)
+    window.update
+
+    if (Time.utc - start_time).seconds > 2
+      break
+    end
   end
+
+rescue ex
+  puts "Error: " + ex.message.to_s
+  exit 1
 end
