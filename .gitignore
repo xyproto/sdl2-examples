@@ -16,6 +16,7 @@ S Compiled Object files
 
 # Crystal
 crystal/sdl.cr/
+crystal/lib
 
 # OCaml
 *.cmi
