@@ -15,6 +15,16 @@ Requirements
 * See the README.md file per sample for more information.
 
 
+Wanted
+------
+
+Examples for:
+
+* OCaml
+* Haskell
+* Scheme
+
+
 Requirements for some of the languages
 --------------------------------------
 
