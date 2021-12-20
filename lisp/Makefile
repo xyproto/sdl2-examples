@@ -8,6 +8,9 @@ quicklisp.lisp:
 quicklisp/setup.lisp: quicklisp.lisp
 	@sbcl \
 	  --non-interactive \
+	  --noprint \
+	  --no-sysinit \
+	  --no-userinit \
 	  --load quicklisp.lisp \
 	  --eval "(quicklisp-quickstart:install :path \"quicklisp\")"
 msg:
@@ -17,6 +20,9 @@ main: quicklisp/setup.lisp
 	@echo -n '[main] Compiling...'
 	@sbcl \
 	  --non-interactive \
+	  --noprint \
+	  --no-sysinit \
+	  --no-userinit \
 	  --load quicklisp/setup.lisp \
 	  --eval "(ql:quickload 'sdl2)" \
 	  --eval "(ql:quickload 'cl-opengl)" \
@@ -27,6 +33,9 @@ main: quicklisp/setup.lisp
 run: msg quicklisp/setup.lisp
 	@time sbcl \
 	  --non-interactive \
+	  --noprint \
+	  --no-sysinit \
+	  --no-userinit \
 	  --load quicklisp/setup.lisp \
 	  --eval "(ql:quickload 'sdl2)" \
 	  --eval "(ql:quickload 'cl-opengl)" \
