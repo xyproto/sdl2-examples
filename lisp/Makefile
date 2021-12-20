@@ -3,39 +3,38 @@
 all: msg main
 
 quicklisp.lisp:
-	curl -O 'https://beta.quicklisp.org/quicklisp.lisp'
+	@curl -Os 'https://beta.quicklisp.org/quicklisp.lisp'
 
 quicklisp/setup.lisp: quicklisp.lisp
-	sbcl \
+	@sbcl \
+	  --non-interactive \
 	  --load quicklisp.lisp \
-	  --eval "(quicklisp-quickstart:install :path \"quicklisp\")" \
-	  --eval "(quit)"
-
+	  --eval "(quicklisp-quickstart:install :path \"quicklisp\")"
 msg:
 	@echo '--- Common Lisp ---'
 
-main: quicklisp.lisp quicklisp/setup.lisp
+main: quicklisp/setup.lisp
 	@echo -n '[main] Compiling...'
 	@sbcl \
+	  --non-interactive \
 	  --load quicklisp/setup.lisp \
 	  --eval "(ql:quickload 'sdl2)" \
 	  --eval "(ql:quickload 'cl-opengl)" \
 	  --load main.lisp \
-	  --eval "(sb-ext:save-lisp-and-die \"main\" :executable t :toplevel 'sdl2-examples:basic-test)" \
-	  --eval "(quit)"
+	  --eval "(sb-ext:save-lisp-and-die \"main\" :executable t :toplevel 'sdl2-examples:basic-test)"
 	@echo 'ok'
 
-run: quicklisp/setup.lisp msg
-	time sbcl \
+run: msg quicklisp/setup.lisp
+	@time sbcl \
+	  --non-interactive \
 	  --load quicklisp/setup.lisp \
 	  --eval "(ql:quickload 'sdl2)" \
 	  --eval "(ql:quickload 'cl-opengl)" \
 	  --load main.lisp \
-	  --eval "(sdl2-examples:basic-test)" \
-	  --eval "(quit)"
+	  --eval "(sdl2-examples:basic-test)"
 
 clean:
-	rm -f main
+	@-rm -f main
 
 fullclean: clean
-	rm -fr quicklisp quicklisp.lisp
+	@-rm -fr quicklisp quicklisp.lisp
