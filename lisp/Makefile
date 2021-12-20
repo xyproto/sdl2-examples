@@ -14,7 +14,7 @@ quicklisp/setup.lisp: quicklisp.lisp
 msg:
 	@echo '--- Common Lisp ---'
 
-main: quicklisp quicklisp/setup.lisp
+main: quicklisp.lisp quicklisp/setup.lisp
 	@echo -n '[main] Compiling...'
 	@sbcl \
 	  --load quicklisp/setup.lisp \
