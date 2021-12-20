@@ -13,6 +13,7 @@ quicklisp/setup.lisp: quicklisp.lisp
 	  --no-userinit \
 	  --load quicklisp.lisp \
 	  --eval "(quicklisp-quickstart:install :path \"quicklisp\")"
+
 msg:
 	@echo '--- Common Lisp ---'
 
