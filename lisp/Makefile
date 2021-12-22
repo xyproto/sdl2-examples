@@ -31,7 +31,21 @@ main: quicklisp/setup.lisp main.lisp
 	  --eval "(ql:quickload 'sdl2)" \
 	  --eval "(ql:quickload 'cl-opengl)" \
 	  --load main.lisp \
-	  --eval "(sb-ext:save-lisp-and-die \"$@\" :executable t :toplevel '$(PACKAGE_NAME):$(MAIN_FUNCTION))"
+	  --eval "(sb-ext:save-lisp-and-die \"$@\" :executable t :compression 9 :toplevel '${PACKAGE_NAME}:${MAIN_FUNCTION})"
+	@echo 'ok'
+
+small: quicklisp/setup.lisp main.lisp
+	@echo -n '[main] Compiling, with compression enabled...'
+	@sbcl \
+	  --non-interactive \
+	  --noprint \
+	  --no-sysinit \
+	  --no-userinit \
+	  --load quicklisp/setup.lisp \
+	  --eval "(ql:quickload 'sdl2)" \
+	  --eval "(ql:quickload 'cl-opengl)" \
+	  --load main.lisp \
+	  --eval "(sb-ext:save-lisp-and-die \"$@\" :executable t :compression 9 :toplevel '${PACKAGE_NAME}:${MAIN_FUNCTION})"
 	@echo 'ok'
 
 run: msg quicklisp/setup.lisp main.lisp
@@ -44,10 +58,10 @@ run: msg quicklisp/setup.lisp main.lisp
 	  --eval "(ql:quickload 'sdl2)" \
 	  --eval "(ql:quickload 'cl-opengl)" \
 	  --load main.lisp \
-	  --eval "($(PACKAGE_NAME):$(MAIN_FUNCTION))"
+	  --eval "(${PACKAGE_NAME}:${MAIN_FUNCTION})"
 
 clean:
-	@-rm -f main
+	@-rm -f main small *.fas *.o
 
 fullclean: clean
 	@-rm -fr quicklisp quicklisp.lisp
