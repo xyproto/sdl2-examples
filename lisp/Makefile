@@ -1,9 +1,12 @@
 .PHONY: all clean fullclean msg2 run
 
+PACKAGE_NAME := sdl2-examples
+MAIN_FUNCTION := basic-test
+
 all: msg main
 
 quicklisp.lisp:
-	@curl -Os 'https://beta.quicklisp.org/quicklisp.lisp'
+	@curl -Os "https://beta.quicklisp.org/$@"
 
 quicklisp/setup.lisp: quicklisp.lisp
 	@sbcl \
@@ -11,13 +14,13 @@ quicklisp/setup.lisp: quicklisp.lisp
 	  --noprint \
 	  --no-sysinit \
 	  --no-userinit \
-	  --load quicklisp.lisp \
+	  --load $< \
 	  --eval "(quicklisp-quickstart:install :path \"quicklisp\")"
 
 msg:
 	@echo '--- Common Lisp ---'
 
-main: quicklisp/setup.lisp
+main: quicklisp/setup.lisp main.lisp
 	@echo -n '[main] Compiling...'
 	@sbcl \
 	  --non-interactive \
@@ -28,10 +31,10 @@ main: quicklisp/setup.lisp
 	  --eval "(ql:quickload 'sdl2)" \
 	  --eval "(ql:quickload 'cl-opengl)" \
 	  --load main.lisp \
-	  --eval "(sb-ext:save-lisp-and-die \"main\" :executable t :toplevel 'sdl2-examples:basic-test)"
+	  --eval "(sb-ext:save-lisp-and-die \"$@\" :executable t :toplevel '$(PACKAGE_NAME):$(MAIN_FUNCTION))"
 	@echo 'ok'
 
-run: msg quicklisp/setup.lisp
+run: msg quicklisp/setup.lisp main.lisp
 	@time sbcl \
 	  --non-interactive \
 	  --noprint \
@@ -41,7 +44,7 @@ run: msg quicklisp/setup.lisp
 	  --eval "(ql:quickload 'sdl2)" \
 	  --eval "(ql:quickload 'cl-opengl)" \
 	  --load main.lisp \
-	  --eval "(sdl2-examples:basic-test)"
+	  --eval "($(PACKAGE_NAME):$(MAIN_FUNCTION))"
 
 clean:
 	@-rm -f main
