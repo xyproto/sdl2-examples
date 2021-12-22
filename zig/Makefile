@@ -6,20 +6,19 @@ msg:
 	@echo '--- Zig ---'
 
 main: main.zig
-	zig build-exe -lc -lSDL2 -OReleaseFast main.zig --name main
+	zig build-exe -lc -lSDL2 -OReleaseFast --name $@ $<
 
 small: main.zig
-	zig build-exe -lc -lSDL2 -OReleaseSmall --strip main.zig --name small
-	-strip main
-	-sstrip main
+	zig build-exe -lc -lSDL2 -OReleaseSmall --strip --name $@ $<
+	-sstrip "$@"
 
 debug: main.zig
-	zig build-exe -lc -lSDL2 main.zig --name debug
+	zig build-exe -lc -lSDL2 --name $@ $<
 
 main.s: main.zig
 	@# This only works after clearing the cache!
 	@-rm -rf zig-cache
-	zig build-exe -lc -lSDL2 -OReleaseFast -femit-asm main.zig
+	zig build-exe -lc -lSDL2 -OReleaseFast -femit-asm $<
 
 asm: main.s
 
@@ -31,7 +30,7 @@ zigbuild:
 	ln -sf zig-cache/bin/zig zig
 
 clean:
-	rm -f main *.o *.s
+	rm -f main small *.o *.s
 
 fullclean: clean
 	rm -rf zig-cache
