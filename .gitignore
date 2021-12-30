@@ -27,6 +27,7 @@ crystal/lib
 *.out
 *.app
 main
+small
 go/go
 
 # Pascal units
