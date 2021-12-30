@@ -1,4 +1,4 @@
-.PHONY: all msg clean fullclean
+.PHONY: all clean fullclean msg sdlada
 
 all: msg main
 
