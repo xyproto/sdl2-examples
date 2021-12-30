@@ -31,7 +31,7 @@ main: quicklisp/setup.lisp main.lisp
 	  --eval "(ql:quickload 'sdl2)" \
 	  --eval "(ql:quickload 'cl-opengl)" \
 	  --load main.lisp \
-	  --eval "(sb-ext:save-lisp-and-die \"$@\" :executable t :compression 9 :toplevel '${PACKAGE_NAME}:${MAIN_FUNCTION})"
+	  --eval "(sb-ext:save-lisp-and-die \"$@\" :executable t :toplevel '${PACKAGE_NAME}:${MAIN_FUNCTION})"
 	@echo 'ok'
 
 small: quicklisp/setup.lisp main.lisp
