@@ -27,11 +27,13 @@ procedure Main is
 
    Event : SDL.Events.Events.Events;
    Dummy : Boolean;
+
 begin
+
    --  Initialise SDL
    if not SDL.Initialise or not SDL.Images.Initialise then
       Ada.Text_IO.Put_Line (Ada.Text_IO.Standard_Error,
-                            "SDL.Initialise error: " & SDL.Error.Get);
+                            "SDL.Initialize error: " & SDL.Error.Get);
       Ada.Command_Line.Set_Exit_Status (Ada.Command_Line.Failure);
       return;
    end if;
@@ -68,7 +70,7 @@ begin
    for I in 1 .. 200 loop
       Dummy := SDL.Events.Events.Poll (Event);
       exit when Event.Common.Event_Type = SDL.Events.Quit;
-      delay 0.010;
+      delay 0.01;
    end loop;
 
    --  Cleanup
