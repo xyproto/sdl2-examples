@@ -8,7 +8,7 @@ from sdl2 import *
 def main():
     SDL_Init(SDL_INIT_VIDEO)
 
-    win = SDL_CreateWindow(b"Hello World!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 960, 540, SDL_WINDOW_SHOWN)
+    win = SDL_CreateWindow(b"Hello World!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 620, 540, SDL_WINDOW_SHOWN)
     ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)
     bmp = SDL_LoadBMP(b"../img/grumpy-cat.bmp")
     tex = SDL_CreateTextureFromSurface(ren, bmp)

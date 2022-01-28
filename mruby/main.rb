@@ -2,8 +2,8 @@ SDL2::init
 
 X = SDL2::Video::Window::SDL_WINDOWPOS_UNDEFINED
 Y = SDL2::Video::Window::SDL_WINDOWPOS_UNDEFINED
-W = 960
-H = 540
+W = 620
+H = 387
 FLAGS = SDL2::Video::Window::SDL_WINDOW_SHOWN
 
 # Note that error checking is built in for many of the functions below.
@@ -17,7 +17,7 @@ begin
     bmp.free
 
     for i in 0..20
-      # Show the image 
+      # Show the image
       ren.clear
       ren.copy(tex)
       ren.present

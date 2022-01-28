@@ -3,27 +3,27 @@ local image	= require "SDL.image"
 
 local ret, err = SDL.init { SDL.flags.Video }
 if not ret then
-	error(err)
+    error(err)
 end
 
 local win, err = SDL.createWindow {
-	title	= "Hello World!",
-	width	= 960,
-	height	= 540,
-    flags   = SDL.window.Shown
+    title    = "Hello World!",
+    width    = 620,
+    height   = 387,
+    flags    = SDL.window.Shown
 }
 if not win then
-	error(err)
+    error(err)
 end
 
 local rdr, err = SDL.createRenderer(win, -1, SDL.rendererFlags.Accelerated + SDL.rendererFlags.PresentVSYNC)
 if not rdr then
-	error(err)
+    error(err)
 end
 
 local img, ret = SDL.loadBMP("../img/grumpy-cat.bmp")
 if not img then
-	error(err)
+    error(err)
 end
 
 tex = rdr:createTextureFromSurface(img)
