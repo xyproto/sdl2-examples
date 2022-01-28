@@ -1,7 +1,7 @@
 .PHONY: all clean fullclean msg2 run
 
 PACKAGE_NAME := sdl2-examples
-MAIN_FUNCTION := basic-test
+MAIN_FUNCTION := renderer-test
 
 all: msg main
 
