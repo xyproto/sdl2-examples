@@ -13,4 +13,4 @@ Instructions
 
 # Running
 
-If `lua main.lua` does not work, try using a specific Lua version, like `lua5.3 main.lua`.
+If `lua main.lua` does not work, try using a specific Lua version that may have the SDL2 bindings available on your system, like `lua5.3 main.lua`.
