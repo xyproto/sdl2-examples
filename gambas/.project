@@ -7,5 +7,4 @@ Component=gb.sdl2
 Component=gb.opengl
 TabSize=2
 Language=en_US
-SourcePath=/home/afr/gambasprojects/grumpycat
 Packager=1
