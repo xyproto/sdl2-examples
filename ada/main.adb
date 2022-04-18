@@ -73,12 +73,10 @@ begin
       delay 0.01;
    end loop;
 
-   --  Cleanup
-   --  Not needed really when soon out of scope
+   --  Not really needed since these will soon go out of scope
    Tex.Finalize;
    Ren.Finalize;
    Win.Finalize;
-
    SDL.Finalise;
 
 end Main;
