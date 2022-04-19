@@ -23,7 +23,7 @@ debug: main.cpp
 asm: main.asm
 
 main.asm: main.cpp
-	${CXX} ${CFLAGS} -S -o main.asm $< ${SDL2FLAGS}
+	${CXX} ${CFLAGS} -S -masm=intel -Og -o main.asm $< ${SDL2FLAGS}
 
 run: msg main
 	time ./main

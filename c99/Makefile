@@ -23,7 +23,7 @@ debug: main.c
 asm: main.asm
 
 main.asm: main.c
-	${CC} ${CFLAGS} -S -o main.asm $< ${SDL2FLAGS}
+	${CC} ${CFLAGS} -S -masm=intel -Og -o main.asm $< ${SDL2FLAGS}
 
 run: msg main
 	time ./main
