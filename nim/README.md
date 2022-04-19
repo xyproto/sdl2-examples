@@ -1,5 +1,8 @@
-Install sdl2, nim and nimble (the nim package manager), then:
+# SDL2 example for Nim
 
-* ´nimble install sdl2´
+Requirements:
 
-Now everything is ready to compile and run.
+* Nim
+* Nimble (the Nim package manager)
+
+On some platforms, `nimble install sdl2` might be required before building with `nim c main.nim`.

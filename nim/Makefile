@@ -1,11 +1,14 @@
-.PHONY: all msg clean fullclean
+.PHONY: all clean fullclean msg sdl2
 
 all: msg main
 
 msg:
 	@echo '--- Nim ---'
 
-main: main.nim
+sdl2:
+	@-if [ ! -n "$$(find ~/.nimble/pkgs -maxdepth 1 -type d -name "sdl2-*" | head -1)" ]; then nimble install -y sdl2; fi
+
+main: sdl2 main.nim
 	nim c main.nim
 
 run: msg main
@@ -15,3 +18,4 @@ clean:
 	rm -rf main nimcache
 
 fullclean: clean
+	rm -rf sdl2
