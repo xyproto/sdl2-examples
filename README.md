@@ -32,7 +32,6 @@ Requirements for some of the languages
 Languages that are not added yet
 --------------------------------
 
-* Haskell
 * OCaml
 * Scheme
 
