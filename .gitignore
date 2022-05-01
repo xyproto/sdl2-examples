@@ -69,3 +69,6 @@ zig/zig
 # Common Lisp
 lisp/quicklisp/
 lisp/quicklisp.lisp
+
+# FreeBASIC
+freebasic/main
