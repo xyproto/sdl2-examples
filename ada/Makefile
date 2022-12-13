@@ -6,7 +6,7 @@ msg:
 	@echo '--- Ada ---'
 
 sdlada:
-	test -f /usr/share/gpr/sdlada.gpr || (echo 'sdlada must be installed' && exit 1)
+	@test -f /usr/share/gpr/sdlada.gpr || (echo 'error: sdlada must be installed (/usr/share/gpr/sdlada.gpr must exist)' && exit 1)
 
 main: sdlada main.adb main.gpr
 	gprbuild -largs $(shell pkg-config sdl2 SDL2_image --libs)
