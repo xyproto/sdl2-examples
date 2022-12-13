@@ -1,5 +1,7 @@
 .PHONY: all msg clean fullclean
 
+MONO_VERSION ?= 4.5
+
 all: msg main
 
 msg:
@@ -9,7 +11,7 @@ main.exe: main.cs
 	mcs -unsafe -out:$@ $<
 
 main: main.exe
-	mkbundle -o $@ --deps --simple --static --i18n none --machine-config /etc/mono/4.5/machine.config --config /etc/mono/config $<
+	mkbundle -o $@ --deps --simple --static --i18n none --machine-config /etc/mono/$(MONO_VERSION)/machine.config --config /etc/mono/config $<
 	rm -f main.exe
 
 run: msg main
