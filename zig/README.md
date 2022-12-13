@@ -1,3 +1,7 @@
 # Zig SDL2 example
 
-Tested with Zig 0.7.1 and Zig 0.8.0 on Arch Linux.
+Tested with these versions of Zig on Arch Linux:
+
+* 0.7.1
+* 0.8.0
+* 0.9.1
