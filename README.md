@@ -41,4 +41,4 @@ Pull requests are welcome.
 General information
 ----------------------
 
-* License: MIT
+* License: BSD-3
