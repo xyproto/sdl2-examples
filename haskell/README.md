@@ -1,8 +1,6 @@
-# Haskell
+## SDL2 example for Haskell.
 
-SDL2 example for Haskell
-
-## This example is a work in progress!
+Requires `stack` and `SDL2`.
 
 ### Building
 
@@ -12,3 +10,7 @@ SDL2 example for Haskell
 ### Running
 
     stack exec grumpycat-exe
+
+Or simply
+
+    stack run

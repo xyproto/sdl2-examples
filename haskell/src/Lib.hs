@@ -4,20 +4,15 @@ module Lib
     ) where
 
 import SDL
-import Linear (V4(..))
-import Control.Monad (unless)
 
-mainLoop :: Renderer -> IO ()
-mainLoop renderer = do
-  events <- pollEvents
-  let eventIsQPress event =
-        case eventPayload event of
-          KeyboardEvent keyboardEvent ->
-            keyboardEventKeyMotion keyboardEvent == Pressed &&
-            keysymKeycode (keyboardEventKeysym keyboardEvent) == KeycodeQ
-          _ -> False
-      qPressed = any eventIsQPress events
-  rendererDrawColor renderer $= V4 0 0 255 255
-  clear renderer
-  present renderer
-  unless qPressed (mainLoop renderer)
+mainLoop :: Renderer -> Texture -> Int -> IO ()
+mainLoop ren tex n = do
+  -- Present the texture and wait 100 ms
+  SDL.clear ren
+  SDL.copy ren tex Nothing Nothing
+  SDL.present ren
+  SDL.delay 100
+  -- Call mainLoop recursively until n is 0
+  if n > 0
+    then mainLoop ren tex (n - 1)
+    else return ()
