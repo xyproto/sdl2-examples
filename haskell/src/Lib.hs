@@ -6,6 +6,7 @@ module Lib
 import SDL
 
 mainLoop :: Renderer -> Texture -> Int -> IO ()
+mainLoop ren tex 0 = return ()
 mainLoop ren tex n = do
   -- Present the texture and wait 100 ms
   SDL.clear ren
@@ -13,6 +14,4 @@ mainLoop ren tex n = do
   SDL.present ren
   SDL.delay 100
   -- Call mainLoop recursively until n is 0
-  if n > 0
-    then mainLoop ren tex (n - 1)
-    else return ()
+  mainLoop ren tex (n - 1)
