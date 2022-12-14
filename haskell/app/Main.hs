@@ -6,8 +6,6 @@ import Foreign.C.Types
 import SDL.Vect
 import qualified SDL
 import System.FilePath
-
-import Paths_grumpycat (getDataFileName)
 import System.Directory (getCurrentDirectory)
 
 screenWidth, screenHeight :: CInt
