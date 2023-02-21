@@ -1,4 +1,4 @@
-SAMPLES = c89 c99 c11 c18 c++98 c++11 d fpc go haskell mruby nim pony python rust v zig odin
+SAMPLES = c89 c99 c11 c18 c++98 c++11 d fpc go haskell mruby nim odin pony python rust v zig
 
 # These two currently does not build:
 # SAMPLES += ocaml

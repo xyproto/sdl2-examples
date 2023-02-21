@@ -1,20 +1,20 @@
 .PHONY: all msg clean fullclean
 
-all: msg odin
+all: msg main
 
 msg:
 	@echo '--- Odin ---'
 
-odin: main.odin
-	odin build main.odin -file
+main: main.odin
+	odin build main.odin -file -out:main
 
-run: msg odin
-	time ./main.bin
+run: msg main
+	time ./main
 
 odinrun: main.odin
 	odin run main.odin -file
 
 clean:
-	rm -f ./main.bin
+	rm -f main
 
 fullclean: clean

@@ -72,3 +72,6 @@ lisp/quicklisp.lisp
 
 # FreeBASIC
 freebasic/main
+
+# Odin
+odin/main
