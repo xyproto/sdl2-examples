@@ -60,17 +60,21 @@ begin
                            Renderer => Ren,
                            Surface  => Bmp);
 
-   --  Present texture
-   Ren.Clear;
-   Ren.Copy (Copy_From => Tex);
-   Ren.Present;
-
    --  Event loop
-   --  Exit after 2 seconds
+   --  Exit after 2 seconds, but present the image for each loop
    for I in 1 .. 200 loop
+
+      --  Present texture
+      Ren.Clear;
+      Ren.Copy (Copy_From => Tex);
+      Ren.Present;
+
+      --  Check for the Quit event
       Dummy := SDL.Events.Events.Poll (Event);
       exit when Event.Common.Event_Type = SDL.Events.Quit;
+
       delay 0.01;
+
    end loop;
 
    --  Not really needed since these will soon go out of scope
