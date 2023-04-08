@@ -67,3 +67,7 @@ https://www.libsdl.org/
 This library is distributed under the terms of the zlib license:
 http://www.zlib.net/zlib_license.html
 ```
+
+## macOS
+
+On a macOS with a M2 CPU, a main.exe and main file is built, but they did not run correctly here, neither directly, with mono or with wine. Pull requests are welcome.
