@@ -3,7 +3,15 @@ open Tsdl
 let run () =
   let (let*) = Result.bind in
   let* _ = Sdl.init Sdl.Init.everything in
-  let* (w, r) = Sdl.create_window_and_renderer ~w:620 ~h:387 Sdl.Window.shown in
+  let* w = Sdl.create_window "Hello World!"
+             ~x:Sdl.Window.pos_centered
+             ~y:Sdl.Window.pos_centered
+             ~w:620
+             ~h:387
+             Sdl.Window.shown in
+  let* r = Sdl.create_renderer w
+             ~index:(-1)
+             ~flags:Sdl.Renderer.software in
   let* bmp = Sdl.load_bmp "../img/grumpy-cat.bmp" in
   let* txt = Sdl.create_texture_from_surface r bmp in
   Sdl.free_surface bmp;
