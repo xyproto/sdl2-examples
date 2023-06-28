@@ -29,7 +29,7 @@ Requirements for some of the languages
 * Lua (tested with Lua 5.3) and lua-sdl2
 
 
-A selection of languages that are not added yet
+Languages that are not added yet
 -----------------------------------------------
 
 * Java
