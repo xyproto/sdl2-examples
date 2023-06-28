@@ -10,12 +10,8 @@ namespace sdl2 {
 template <typename Creator, typename Destructor, typename... Arguments>
 auto make_resource(Creator c, Destructor d, Arguments&&... args)
 {
-    using std::decay_t;
-    using std::forward;
-    using std::unique_ptr;
-
-    auto r = c(forward<Arguments>(args)...);
-    return unique_ptr<decay_t<decltype(*r)>, decltype(d)>(r, d);
+    auto r = c(std::forward<Arguments>(args)...);
+    return std::unique_ptr<std::decay_t<decltype(*r)>, decltype(d)>(r, d);
 }
 
 // The "internal type" of the SDL System
