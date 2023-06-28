@@ -29,9 +29,10 @@ Requirements for some of the languages
 * Lua (tested with Lua 5.3) and lua-sdl2
 
 
-Languages that are not added yet
---------------------------------
+A selection of languages that are not added yet
+-----------------------------------------------
 
+* Java
 * Scheme
 
 Pull requests are welcome.
