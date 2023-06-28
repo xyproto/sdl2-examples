@@ -8,7 +8,6 @@
 | c++14-cmake  |           | yes      |                                                  |
 | c++17-cmake  |           | yes      |                                                  |
 | c++20-cmake  |           | yes      |                                                  |
-| c++20-cxx    |           | no       | add paths to cxx                                 |
 | c++23-cmake  |           | yes      |                                                  |
 | c++98        |           | yes      |                                                  |
 | c2x          |           | yes      |                                                  |
