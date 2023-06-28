@@ -50,6 +50,23 @@ Or use the full path, for example:
 
     C:\Windows\Microsoft.NET\Framework\v3.5\csc /target:winexe /unsafe main.cs
 
+## macOS
+
+macOS on M1/M2/aarch64 is not currently supported (as of 2023-06-28).
+
+Running `make run` will:
+
+* Create a `main.exe` file, but for the wrong CPU.
+* Bundle the `main.exe` file into a `main` executable, which will look correct when using `file`.
+
+But running `./main` will output an error message a bit like this one:
+
+     Error mapping file: mono_file_map_error failed file:./main length:0x4685824X offset:0x3944448X error:Invalid argument(0x16)
+
+Here is the status of macOS/M1/M2/aarch64 support for Mono:
+
+* https://github.com/mono/mono/issues/21092
+
 ### SDL2
 
 `SDL2.dll` is included (zlib license). It can also be downloaded from here: https://www.libsdl.org/download-2.0.php
