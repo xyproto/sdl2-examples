@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.26)
 
 project(main)
 
@@ -9,12 +9,22 @@ target_include_directories(${PROJECT_NAME} PRIVATE ../include)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_14)
 target_compile_definitions(${PROJECT_NAME} PRIVATE IMGDIR="../img/")
 
-# The modern way, using cmake config files
-#find_package(SDL2 REQUIRED)
-#target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
+# For macOS M2 systems with SDL2 installed via Homebrew
+list(APPEND CMAKE_MODULE_PATH "/usr/local/lib/cmake/SDL2" "/opt/homebrew/lib/cmake/SDL2")
+list(APPEND CMAKE_PREFIX_PATH "/usr/local" "/opt/homebrew")
 
-# The trusty old way, using pkg-config
-include(FindPkgConfig)
-pkg_search_module(SDL2 REQUIRED sdl2)
-target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARIES})
+# Try the modern way first
+find_package(SDL2 QUIET)
+
+if (SDL2_FOUND)
+    message("Using SDL2 from find_package")
+    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARIES})
+else()
+    # Fall back on pkg-config
+    include(FindPkgConfig)
+    pkg_search_module(SDL2 REQUIRED sdl2)
+    message("Using SDL2 from pkg-config")
+    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARIES})
+endif()

@@ -1,27 +1,29 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.26)
 
 project(main)
 
 aux_source_directory(. SRC_LIST)
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
-# This can probably be used with GCC 12 and above
-#target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23)
-
-# These three lines are probably needed for GCC 11 and below
-set(CMAKE_CXX_STANDARD 23)
-set(CMaKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2b")
-
 target_include_directories(${PROJECT_NAME} PRIVATE ../include)
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23)
 target_compile_definitions(${PROJECT_NAME} PRIVATE IMGDIR="../img/")
 
-# The modern way, using cmake config files
-#find_package(SDL2 REQUIRED)
-#target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
+# For macOS M2 systems with SDL2 installed via Homebrew
+list(APPEND CMAKE_MODULE_PATH "/usr/local/lib/cmake/SDL2" "/opt/homebrew/lib/cmake/SDL2")
+list(APPEND CMAKE_PREFIX_PATH "/usr/local" "/opt/homebrew")
 
-# The trusty old way, using pkg-config
-include(FindPkgConfig)
-pkg_search_module(SDL2 REQUIRED sdl2)
-target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARIES})
+find_package(SDL2 QUIET)
+
+if (SDL2_FOUND)
+    message("Using SDL2 from find_package")
+    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARIES})
+else()
+    # Fall back on pkg-config
+    include(FindPkgConfig)
+    pkg_search_module(SDL2 REQUIRED sdl2)
+    message("Using SDL2 from pkg-config")
+    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARIES})
+endif()
