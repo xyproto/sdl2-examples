@@ -15,9 +15,19 @@ Then just:
 
 ## Build on macOS
 
+Previously, these steps worked:
+
 * Change `sdlada` to `SDLAda` in `main.gpr`.
 * SDL2 and SDL2_image must be installed in `/Library/Frameworks`.
 
 Then just:
 
     gprbuild -largs -F/Library/Frameworks -framework SDL2 -framework SDL2_image
+
+But now it seems like Alire is the way to go:
+
+* https://alire.ada.dev/
+
+However, I could not find a way to build this example with Alire, yet (on an M2 mac).
+
+Pull requests are welcome.
