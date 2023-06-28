@@ -75,3 +75,6 @@ freebasic/main
 
 # Odin
 odin/main
+
+# Object Pascal
+fpc/*.res
