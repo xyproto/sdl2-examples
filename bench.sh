@@ -68,11 +68,11 @@ main() {
   for f in *-cmake; do
     cmakebench "$f" main
   done
-  cxxbench c++20-cxx c++20-cxx
+  #cxxbench c++20-cxx c++20-cxx
   bench crystal bin/main
   bench csharp main
   bench d main
-  bench fpc main
+  bench objectivepascal main
   bench freebasic main
   stackbench haskell
   # TODO: Add the other languages as well, except for gccgo, mruby, lua and python
