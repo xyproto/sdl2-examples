@@ -2,7 +2,9 @@ package main
 
 import (
 	"log"
+	"path/filepath"
 
+	"github.com/veandco/go-sdl2/img"
 	"github.com/veandco/go-sdl2/sdl"
 )
 
@@ -28,21 +30,12 @@ func main() {
 	}
 	defer ren.Destroy()
 
-	// Load the image
-	bmp, err := sdl.LoadBMP("../img/grumpy-cat.bmp")
+	// Load the image as a texture
+	tex, err := img.LoadTexture(ren, filepath.Join("..", "img", "grumpy-cat.png"))
 	if err != nil {
-		log.Fatalln("LoadBMP Error:", err)
-	}
-
-	// Use the image as a texture
-	tex, err := ren.CreateTextureFromSurface(bmp)
-	if err != nil {
-		log.Fatalln("CreateTextureFromSurface Error:", err)
+		log.Fatalln("LoadTexture Error:", err)
 	}
 	defer tex.Destroy()
-
-	// No need for the image data after the texture has been created
-	bmp.Free()
 
 	for i := 0; i < 20; i++ {
 		// Clear the renderer and display the image/texture
