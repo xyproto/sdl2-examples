@@ -15,10 +15,8 @@ static inline SDL_bool SDL_IsTablet()
 }
 
 #endif
-
 */
 import "C"
-
 
 // IsTablet returns true if the current device is a tablet
 // TODO: (https://wiki.libsdl.org/SDL_IsTablet)

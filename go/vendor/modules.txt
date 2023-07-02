@@ -1,2 +1,3 @@
-# github.com/veandco/go-sdl2 v0.4.8
+# github.com/veandco/go-sdl2 v0.4.35
+github.com/veandco/go-sdl2/_libs
 github.com/veandco/go-sdl2/sdl

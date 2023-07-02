@@ -87,6 +87,33 @@ static inline SDL_Surface* SDL_CreateRGBSurfaceWithFormatFrom(void* pixels, int 
 	return NULL;
 }
 #endif
+
+
+#if !(SDL_VERSION_ATLEAST(2,0,16))
+
+#if defined(WARN_OUTDATED)
+#pragma message("SDL_SoftStretchLinear is not supported before SDL 2.0.16")
+#endif
+
+static int SDL_SoftStretchLinear(SDL_Surface * src, const SDL_Rect * srcrect, SDL_Surface * dst, const SDL_Rect * dstrect)
+{
+	return -1;
+}
+
+#endif
+
+#if !(SDL_VERSION_ATLEAST(2,0,18))
+
+#if defined(WARN_OUTDATED)
+#pragma message("SDL_PremultiplyAlpha is not supported before SDL 2.0.18")
+#endif
+
+static int SDL_PremultiplyAlpha(int width, int height, Uint32 src_format, const void * src, int src_pitch, Uint32 dst_format, void * dst, int dst_pitch)
+{
+	return -1;
+}
+
+#endif
 */
 import "C"
 import (
@@ -599,18 +626,8 @@ func (surface *Surface) Bounds() image.Rectangle {
 func (surface *Surface) At(x, y int) color.Color {
 	pix := surface.Pixels()
 	i := int32(y)*surface.Pitch + int32(x)*int32(surface.Format.BytesPerPixel)
-	switch surface.Format.Format {
-	/*
-		case PIXELFORMAT_ARGB8888:
-			return color.RGBA{pix[i+3], pix[i], pix[i+1], pix[i+2]}
-		case PIXELFORMAT_ABGR8888:
-			return color.RGBA{pix[i], pix[i+3], pix[i+2], pix[i+1]}
-	*/
-	case PIXELFORMAT_RGB888:
-		return color.RGBA{pix[i], pix[i+1], pix[i+2], 0xff}
-	default:
-		panic("Not implemented yet")
-	}
+	r, g, b, a := GetRGBA(*((*uint32)(unsafe.Pointer(&pix[i]))), surface.Format)
+	return color.RGBA{r, g, b, a}
 }
 
 // Set the color of the pixel at (x, y) using this surface's color model to
@@ -643,49 +660,49 @@ func (surface *Surface) Set(x, y int, c color.Color) {
 		pix[i+1] = col.G
 		pix[i+0] = col.B
 	case PIXELFORMAT_RGB444:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(RGB444)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 4 & 0x0F
 		g := uint32(col.G) >> 4 & 0x0F
 		b := uint32(col.B) >> 4 & 0x0F
 		*buf = r<<8 | g<<4 | b
 	case PIXELFORMAT_RGB332:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(RGB332)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 5 & 0x0F
 		g := uint32(col.G) >> 5 & 0x0F
 		b := uint32(col.B) >> 6 & 0x0F
 		*buf = r<<5 | g<<2 | b
 	case PIXELFORMAT_RGB565:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(RGB565)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 3 & 0xFF
 		g := uint32(col.G) >> 2 & 0xFF
 		b := uint32(col.B) >> 3 & 0xFF
 		*buf = r<<11 | g<<5 | b
 	case PIXELFORMAT_RGB555:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(RGB555)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 3 & 0xFF
 		g := uint32(col.G) >> 3 & 0xFF
 		b := uint32(col.B) >> 3 & 0xFF
 		*buf = r<<10 | g<<5 | b
 	case PIXELFORMAT_BGR565:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(BGR565)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 3 & 0xFF
 		g := uint32(col.G) >> 2 & 0xFF
 		b := uint32(col.B) >> 3 & 0xFF
 		*buf = b<<11 | g<<5 | r
 	case PIXELFORMAT_BGR555:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(BGR555)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 3 & 0xFF
 		g := uint32(col.G) >> 3 & 0xFF
 		b := uint32(col.B) >> 3 & 0xFF
 		*buf = b<<10 | g<<5 | r
 	case PIXELFORMAT_ARGB4444:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(ARGB4444)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		a := uint32(col.A) >> 4 & 0x0F
 		r := uint32(col.R) >> 4 & 0x0F
@@ -693,7 +710,7 @@ func (surface *Surface) Set(x, y int, c color.Color) {
 		b := uint32(col.B) >> 4 & 0x0F
 		*buf = a<<12 | r<<8 | g<<4 | b
 	case PIXELFORMAT_ABGR4444:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(ABGR4444)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		a := uint32(col.A) >> 4 & 0x0F
 		r := uint32(col.R) >> 4 & 0x0F
@@ -701,7 +718,7 @@ func (surface *Surface) Set(x, y int, c color.Color) {
 		b := uint32(col.B) >> 4 & 0x0F
 		*buf = a<<12 | b<<8 | g<<4 | r
 	case PIXELFORMAT_RGBA4444:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(RGBA4444)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 4 & 0x0F
 		g := uint32(col.G) >> 4 & 0x0F
@@ -709,7 +726,7 @@ func (surface *Surface) Set(x, y int, c color.Color) {
 		a := uint32(col.A) >> 4 & 0x0F
 		*buf = r<<12 | g<<8 | b<<4 | a
 	case PIXELFORMAT_BGRA4444:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(BGRA4444)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 4 & 0x0F
 		g := uint32(col.G) >> 4 & 0x0F
@@ -717,7 +734,7 @@ func (surface *Surface) Set(x, y int, c color.Color) {
 		a := uint32(col.A) >> 4 & 0x0F
 		*buf = b<<12 | g<<8 | r<<4 | a
 	case PIXELFORMAT_ARGB1555:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(ARGB1555)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 3 & 0xFF
 		g := uint32(col.G) >> 3 & 0xFF
@@ -728,7 +745,7 @@ func (surface *Surface) Set(x, y int, c color.Color) {
 		}
 		*buf = a<<15 | r<<10 | g<<5 | b
 	case PIXELFORMAT_RGBA5551:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(RGBA5551)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 3 & 0xFF
 		g := uint32(col.G) >> 3 & 0xFF
@@ -739,7 +756,7 @@ func (surface *Surface) Set(x, y int, c color.Color) {
 		}
 		*buf = r<<11 | g<<6 | b<<1 | a
 	case PIXELFORMAT_ABGR1555:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(ABGR1555)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 3 & 0xFF
 		g := uint32(col.G) >> 3 & 0xFF
@@ -750,7 +767,7 @@ func (surface *Surface) Set(x, y int, c color.Color) {
 		}
 		*buf = a<<15 | b<<10 | g<<5 | r
 	case PIXELFORMAT_BGRA5551:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(BGRA5551)
 		buf := (*uint32)(unsafe.Pointer(&pix[i]))
 		r := uint32(col.R) >> 3 & 0xFF
 		g := uint32(col.G) >> 3 & 0xFF
@@ -761,7 +778,7 @@ func (surface *Surface) Set(x, y int, c color.Color) {
 		}
 		*buf = b<<11 | g<<6 | r<<1 | a
 	case PIXELFORMAT_RGBA8888:
-		col := surface.ColorModel().Convert(c).(color.RGBA)
+		col := surface.ColorModel().Convert(c).(RGBA8888)
 		pix[i+3] = col.R
 		pix[i+2] = col.G
 		pix[i+1] = col.B
@@ -775,4 +792,30 @@ func (surface *Surface) Set(x, y int, c color.Color) {
 	default:
 		panic("Unknown pixel format!")
 	}
+}
+
+// SoftStretchLinear performs bilinear scaling between two surfaces of the same format, 32BPP.
+// (https://wiki.libsdl.org/SDL_SoftStretchLinear)
+func (surface *Surface) SoftStretchLinear(srcRect *Rect, dst *Surface, dstRect *Rect) (err error) {
+	return errorFromInt(int(C.SDL_SoftStretchLinear(surface.cptr(), srcRect.cptr(), dst.cptr(), dstRect.cptr())))
+}
+
+// PremultiplyAlpha premultiplies the alpha on a block of pixels.
+//
+// This is safe to use with src == dst, but not for other overlapping areas.
+//
+// This function is currently only implemented for SDL_PIXELFORMAT_ARGB8888.
+//
+// (https://wiki.libsdl.org/SDL_PremultiplyAlpha)
+func PremultiplyAlpha(width, height int, srcFormat uint32, src []byte, srcPitch int, dstFormat uint32, dst []byte, dstPitch int) (err error) {
+	_width := C.int(width)
+	_height := C.int(height)
+	_srcFormat := C.Uint32(srcFormat)
+	_src := unsafe.Pointer(&src[0])
+	_srcPitch := C.int(srcPitch)
+	_dstFormat := C.Uint32(dstFormat)
+	_dst := unsafe.Pointer(&dst[0])
+	_dstPitch := C.int(dstPitch)
+	err = errorFromInt(int(C.SDL_PremultiplyAlpha(_width, _height, _srcFormat, _src, _srcPitch, _dstFormat, _dst, _dstPitch)))
+	return
 }
