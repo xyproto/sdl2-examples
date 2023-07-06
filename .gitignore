@@ -81,8 +81,8 @@ fpc/SDL2/
 objectpascal/SDL2/
 
 # Scala
-scala/project/build.properties
-scala/target/
-scala/project/target/
-scala/project/project/
-scala/main.jar
+scalanative/project/build.properties
+scalanative/target/
+scalanative/project/target/
+scalanative/project/project/
+scalanative/main.jar
