@@ -8,7 +8,6 @@ import scalanative.unsafe._
 import scala.scalanative.unsigned._
 
 import SDL._
-import SDLHelpers._
 import SDLNonExternal._
 
 @extern
@@ -93,29 +92,13 @@ object SDLNonExternal {
   // From SDL_render.h
   final val SDL_RENDERER_ACCELERATED: UInt = 0x00000002.toUInt
   final val SDL_RENDERER_PRESENTVSYNC: UInt = 0x00000004.toUInt
-}
 
-object SDLHelpers {
-
-  // fromString reads a CString until null is encountered and returns a String
-  def fromCString(cstr: CString): String = {
-    import scala.collection.mutable.StringBuilder
-    Zone { implicit z =>
-      val builder = new StringBuilder()
-      var i = 0
-      // trust that the string returned from SDL_GetError() is properly terminated
-      while (!(cstr(i) == 0.toByte)) {
-        builder.append(cstr(i).toChar)
-        i += 1
-      }
-      builder.result()
-    }
-  }
-
-  // printErr retrieves the error message from SDL_GetError() and printes it to stderr, together with a topic
+  // printErr is a helper function that prints a topic for the error,
+  // and the error message from SDL_GetError() to stderr.
   def printErr(topic: String): Unit = {
     Console.err.println(s"$topic Error: ${fromCString(SDL.SDL_GetError())}")
   }
+
 }
 
 class HelloSDL {
