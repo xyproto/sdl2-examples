@@ -6,13 +6,15 @@ msg:
 	@echo '--- Scala Native ---'
 
 main: Main.scala build.sbt project/plugins.sbt
-	@sbt nativeLink
+	sbt nativeLink
 	@mv -f ./target/scala-*/scalanative-out ./main
 
 run: msg main
-	@./main
+	@#time sbt run
+	time ./main
 
 clean:
+	@#sbt clean
 	@-rm -f main
 
 fullclean: clean
