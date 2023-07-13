@@ -30,10 +30,20 @@ Requirements for some of the languages
 
 
 Languages that are not added yet
------------------------------------------------
+--------------------------------
 
-* Java
-* Scheme
+- [ ] Java
+- [ ] Kotlin
+- [ ] Scheme
+- [ ] Fortran
+
+Pull requests are welcome.
+
+
+Languages that stopped working and needs a fixup
+------------------------------------------------
+
+- [ ] Ada
 
 Pull requests are welcome.
 
