@@ -154,15 +154,14 @@ public class HelloWorld
         }
 
         IntPtr tex = SDL_CreateTextureFromSurface(ren, bmp);
+        SDL_FreeSurface(bmp);
         if (tex == IntPtr.Zero) {
             printErr("SDL_CreateTextureFromSurface");
-            SDL_FreeSurface(bmp);
             SDL_DestroyRenderer(ren);
             SDL_DestroyWindow(win);
             SDL_Quit();
             return 1;
         }
-        SDL_FreeSurface(bmp);
 
         for (int i = 0; i < 20; i++) {
             SDL_RenderClear(ren);
