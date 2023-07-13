@@ -10,7 +10,7 @@ main:
 	ld main.o -o main -dynamic-linker /lib/ld-linux.so.* -lc -lSDL2
 
 run: msg main
-	./main
+	time ./main
 
 clean:
 	rm -f main main.o
