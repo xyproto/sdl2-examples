@@ -1,5 +1,0 @@
-with "sdlada";
-
-project Main is
-   for Main use ("main.adb");
-end Main;
