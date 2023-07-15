@@ -86,3 +86,7 @@ scalanative/target/
 scalanative/project/target/
 scalanative/project/project/
 scalanative/main.jar
+
+# Dart
+dart/.dart_tool
+dart/pubspec.lock
