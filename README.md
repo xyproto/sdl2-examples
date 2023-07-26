@@ -40,11 +40,6 @@ Languages that are not added yet
 
 Pull requests are welcome.
 
-Other plans
------------
-
-- [ ] Switch to `just` instead of `make`
-
 General information
 ----------------------
 
