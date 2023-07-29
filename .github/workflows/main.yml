@@ -24,7 +24,7 @@ jobs:
         - { folder: "c++14-cmake" }
         - { folder: "c++17-cmake" }
         - { folder: "c++20-cmake" }
-#        - { folder: "c++23-cmake" }
+        - { folder: "c++23-cmake" }
     steps:
       - uses: actions/checkout@v3
       - name: install_dependencies
@@ -41,16 +41,27 @@ jobs:
       fail-fast: false
       matrix:
         tests_list:
+        - { folder: "assembly" }
         - { folder: "c89" }
-        - { folder: "c++98" }
         - { folder: "c99" }
         - { folder: "c11" }
+        - { folder: "c18" }
         - { folder: "c2x" }
+        - { folder: "c++98" }
+        - { folder: "c++11" }
+        - { folder: "crystal" }
+        - { folder: "csharp" }
     steps:
       - uses: actions/checkout@v3
       - name: install_dependencies
         run: |
-          sudo apt-get install -y libsdl2-dev ninja-build cmake
+          sudo apt-get install -y cmake libsdl2-dev nasm ninja-build
+          sudo apt-get install -y curl gnupg
+          curl -sL "https://keybase.io/crystal/pgp_keys.asc" | sudo apt-key add -
+          echo "deb https://dist.crystal-lang.org/apt crystal main" | sudo tee /etc/apt/sources.list.d/crystal.list
+          sudo apt-get update
+          sudo apt-get install -y crystal libgmp-dev
+          sudo apt-get install -y mono-devel mono-runtime mono-mcs mono-vbnc mono-dmcs libmono-corlib4.0-cil libmono-system-data4.0-cil libmono-system-web4.0-cil libmono-system-xml4.0-cil libmono-system-runtime-serialization4.0-cil libc6-dev
       - name: build
         run: |
               cd ${{ matrix.tests_list.folder }}
