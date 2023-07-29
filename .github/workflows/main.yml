@@ -55,11 +55,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: install_dependencies
         run: |
-          sudo apt-get install -y cmake libsdl2-dev nasm ninja-build curl gnupg
-          curl -sL "https://keybase.io/crystal/pgp_keys.asc" | sudo apt-key add -
-          echo "deb https://dist.crystal-lang.org/apt crystal main" | sudo tee /etc/apt/sources.list.d/crystal.list
-          sudo apt-get update
-          sudo apt-get install -y crystal libgmp-dev mono-devel mono-runtime mono-mcs mono-vbnc
+          sudo apt-get install -y cmake curl gnupg libgmp-dev libsdl2-dev mono-devel mono-mcs mono-runtime mono-vbnc nasm ninja-build
+          curl -fsSL https://crystal-lang.org/install.sh | sudo bash -s -- --channel=stable
       - name: build
         run: |
               cd ${{ matrix.tests_list.folder }}
