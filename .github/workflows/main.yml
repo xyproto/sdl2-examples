@@ -41,7 +41,7 @@ jobs:
       fail-fast: false
       matrix:
         tests_list:
-        - { folder: "assembly" }
+        - { folder: "assembly/linux-x86_64" }
         - { folder: "c89" }
         - { folder: "c99" }
         - { folder: "c11" }
