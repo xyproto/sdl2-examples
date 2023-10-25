@@ -27,7 +27,7 @@ Requirements for some of the languages
 * Python 2 or 3 and PySDL2
 * FPC 2.6.4 (or later than 2.4.0, must have Uint8, Uint16 and Uint32)
 * Lua (tested with Lua 5.3) and lua-sdl2
-
+* If `tcc` is used for compiling one of the C examples, make sure to add [`-DSDL_DISABLE_IMMINTRIN_H=1`](https://www.mail-archive.com/tinycc-devel@nongnu.org/msg08821.html).
 
 Languages that are not added yet
 --------------------------------
