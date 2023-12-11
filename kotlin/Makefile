@@ -1,24 +1,21 @@
-all: prepare cinterop kotlin-native
+all: build/main.kexe
 
-prepare:
+build/sdl2.klib: sdl2.def
 	mkdir -p build
-
-kotlin-native: prepare
-	kotlinc-native \
-		-o build/main \
-		-l build/sdl.klib \
-		-linker-options /opt/homebrew/lib/libSDL2.dylib \
-		main.kt
-
-cinterop: prepare
 	cinterop \
-		-o build/sdl \
-		-def sdl.def \
-		-compiler-options -I/usr/local/include/SDL2
+		-compiler-options -I/usr/local/include/SDL2 \
+		-def sdl2.def \
+		-o build/sdl2
 
-run:
+build/main.kexe: build/sdl2.klib Main.kt
+	kotlinc-native \
+		-l build/sdl2.klib \
+		-linker-options /opt/homebrew/lib/libSDL2.dylib \
+		-o build/main \
+		Main.kt
+
+run: build/main.kexe
 	build/main.kexe
 
 clean:
-	@if [ -d build ]; then rm -rf build; fi
-	@if [ -d sdl-build ]; then rm -rf sdl-build; fi
+	@-rm -rfv build sdl2-build
