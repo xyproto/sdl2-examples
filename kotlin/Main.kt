@@ -1,3 +1,4 @@
+import kotlin.OptIn
 import kotlinx.cinterop.*
 import sdl2.*
 
@@ -9,9 +10,8 @@ fun main() {
     }
 
     val window = SDL_CreateWindow(
-        "Hello, World!",
-        100,
-        100,
+        "Hello World!", // Match the window title with the C program
+        100, 100,
         620, 387,
         SDL_WINDOW_SHOWN
     )
@@ -64,7 +64,7 @@ fun main() {
         SDL_RenderClear(renderer)
         SDL_RenderCopy(renderer, tex, null, null)
         SDL_RenderPresent(renderer)
-        SDL_Delay(100u)
+        SDL_Delay(100u) // Use 'u' suffix for unsigned int
     }
 
     SDL_DestroyTexture(tex)

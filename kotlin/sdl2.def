@@ -6,8 +6,7 @@ headerFilter = SDL* stdlib.h time.h
 compilerOpts = -D_POSIX_SOURCE
 compilerOpts.osx = -I/opt/homebrew/include/SDL2 -I/usr/local/include/SDL2
 compilerOpts.linux = -I/usr/include/SDL2 -D_REENTRANT
-compilerOpts.ios =
 
 linkerOpts =
 linkerOpts.osx = -L/opt/homebrew/lib -L/usr/local/lib -lSDL2
-linkerOpts.linux = -L/usr/local/lib -lSDL2
+linkerOpts.linux = -I/usr/lib -lSDL2
