@@ -34,8 +34,8 @@ Languages that are not added yet
 
 - [ ] Ada
 - [ ] Fortran
+- [ ] F#
 - [ ] Java
-- [ ] Kotlin
 - [ ] Scheme
 
 Pull requests are welcome.
