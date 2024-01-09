@@ -64,7 +64,7 @@ fun main() {
         SDL_RenderClear(renderer)
         SDL_RenderCopy(renderer, tex, null, null)
         SDL_RenderPresent(renderer)
-        SDL_Delay(100u) // Use 'u' suffix for unsigned int
+        SDL_Delay(100u)
     }
 
     SDL_DestroyTexture(tex)
