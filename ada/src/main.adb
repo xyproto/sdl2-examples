@@ -3,7 +3,7 @@ with Ada.Command_Line;
 
 with SDL.Video.Windows.Makers;
 with SDL.Video.Renderers.Makers;
-with SDL.Video.Surfaces.Makers;
+with SDL.Video.Surfaces;
 with SDL.Video.Textures.Makers;
 
 with SDL.Images.IO;
@@ -16,8 +16,7 @@ procedure Main is
    Image_Name   : constant String := "../img/grumpy-cat.png";
 
    use SDL.Video;
-   use type Windows.Window_Flags;
-   use type Renderers.Renderer_flags;
+   use type Renderers.Renderer_Flags;
    use type SDL.Events.Event_Types;
 
    Win : Windows.Window;
@@ -31,7 +30,7 @@ procedure Main is
 begin
 
    --  Initialise SDL
-   if not SDL.Initialise or not SDL.Images.Initialise then
+   if not SDL.Initialise or else not SDL.Images.Initialise then
       Ada.Text_IO.Put_Line (Ada.Text_IO.Standard_Error,
                             "SDL.Initialize error: " & SDL.Error.Get);
       Ada.Command_Line.Set_Exit_Status (Ada.Command_Line.Failure);
