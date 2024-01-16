@@ -1,5 +1,5 @@
 with "sdlada";
-with "config/ada_example_config.gpr";
+with "config/main_config.gpr";
 
 project Main is
    for Main use ("main.adb");
@@ -8,7 +8,7 @@ project Main is
    for Exec_Dir use "bin";
 
    package Compiler is
-      for Switches ("ada") use Ada_Example_Config.Ada_Compiler_Switches;
+      for Switches ("ada") use Main_Config.Ada_Compiler_Switches;
    end Compiler;
 
    package Linker is
