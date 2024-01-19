@@ -61,3 +61,70 @@ jobs:
         run: |
               cd ${{ matrix.tests_list.folder }}
               make all
+  alire:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - ubuntu-latest
+          - macos-latest
+    steps:
+    -
+      name: Checkout
+      uses: actions/checkout@v3
+    -
+      name: Set up Alire
+      uses: alire-project/setup-alire@v2
+      with:
+        version: "nightly"
+    -
+      name: Install toolchain
+      run: |
+        alr --non-interactive config --global --set toolchain.assistant false
+        alr --non-interactive toolchain --install gnat_native
+        alr --non-interactive toolchain --install gprbuild
+        alr --non-interactive toolchain --select gnat_native
+        alr --non-interactive toolchain --select gprbuild
+    -
+      name: Build
+      run: |
+        cd ada
+        alr --non-interactive build
+  alire-macos-13:
+    # This job runs with macOS 13 and the latest stable Xcode (v15),
+    # which introduced the problem with ld-new (the default
+    # implementation of ld) and ld-classic). The main effect seen with
+    # this is sometimes-failing exception handling, shouldn't be a
+    # problem here.
+    runs-on: macos-13
+    steps:
+    -
+      name: Set Xcode version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    -
+      name: Check ld version
+      run: ld -v
+    -
+      name: Checkout
+      uses: actions/checkout@v3
+    -
+      name: Set up Alire
+      uses: alire-project/setup-alire@v2
+      with:
+        version: "nightly"
+    -
+      name: Install toolchain
+      run: |
+        alr --non-interactive config --global --set toolchain.assistant false
+        alr --non-interactive toolchain --install gnat_native
+        alr --non-interactive toolchain --install gprbuild
+        alr --non-interactive toolchain --select gnat_native
+        alr --non-interactive toolchain --select gprbuild
+    -
+      name: Build
+      run: |
+        cd ada
+        alr --non-interactive build
