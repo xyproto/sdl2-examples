@@ -14,6 +14,12 @@ Once `alr` is installed, just `alr build`. This will, as necessary, download a c
 
 This suite (and SDLada) aren't written to use the framework SDL2 libraries.  A sufficiently recent `alr` will install external libraries using either [Homebrew](https://brew.sh) or [MacPorts](https://www.macports.org).
 
+Make sure to install not only `sdl2`, but also `sdl2_image`, `sdl2_mixer`, `sdl2_ttf` and `make`. For instance:
+
+    brew install sdl2_image sdl2_mixer sdl2_ttf make
+
+`alr update; alr build` may also have helpful output messages.
+
 ### macOS on Intel silicon ###
 
 To get a "sufficiently recent" `alr`, visit the [v2.0.0-beta1](https://github.com/alire-project/alire/releases/tag/v2.0.0-beta1) or [nightly](https://github.com/alire-project/alire/releases/tag/nightly) releases.
