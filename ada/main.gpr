@@ -3,9 +3,9 @@ with "config/main_config.gpr";
 
 project Main is
    for Main use ("main.adb");
-   for Source_Dirs use ("src");
-   for Object_Dir use "obj";
-   for Exec_Dir use "bin";
+   for Source_Dirs use (".");
+   for Object_Dir use ".";
+   for Exec_Dir use ".";
 
    package Compiler is
       for Switches ("ada") use Main_Config.Ada_Compiler_Switches;

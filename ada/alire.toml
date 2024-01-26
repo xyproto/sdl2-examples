@@ -1,12 +1,12 @@
 name = "main"
 description = "Ada example for SDL2"
-version = "0.1.0-dev"
+version = "1.0.0"
 
-authors = ["Alexander F. Rødseth"]
+authors = ["Alexander F. Rødseth <xyproto@archlinux.org>", "Simon Wright <simon@pushface.org>"]
 maintainers = ["Simon Wright <simon@pushface.org>"]
 maintainers-logins = ["xyproto", "simonjwright"]
 licenses = "BSD-3-Clause"
-website = ""
+website = "https://github.com/xyproto/sdl2-examples"
 tags = ["sdl2", "ada", "example"]
 
 executables = ["main"]
