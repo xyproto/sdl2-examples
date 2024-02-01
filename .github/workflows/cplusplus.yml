@@ -5,12 +5,12 @@ on:
     branches:
     - '*'
     paths:
-    - c++*/**
+    - 'c++*/**'
   pull_request:
     branches:
     - '*'
     paths:
-    - c++*/**
+    - 'c++*/**'
   workflow_dispatch:
 
 jobs:
