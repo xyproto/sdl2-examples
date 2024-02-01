@@ -5,24 +5,12 @@ on:
     branches:
     - '*'
     paths:
-    - 'c++98/**'
-    - 'c++11/**'
-    - 'c++11-cmake/**'
-    - 'c++14-cmake/**'
-    - 'c++17-cmake/**'
-    - 'c++20-cmake/**'
-    - 'c++23-cmake/**'
+    - 'c*-*/**'
   pull_request:
     branches:
     - '*'
     paths:
-    - 'c++98/**'
-    - 'c++11/**'
-    - 'c++11-cmake/**'
-    - 'c++14-cmake/**'
-    - 'c++17-cmake/**'
-    - 'c++20-cmake/**'
-    - 'c++23-cmake/**'
+    - 'c*-*/**'
 
 jobs:
   cmake:
