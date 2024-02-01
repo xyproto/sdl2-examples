@@ -1,0 +1,5 @@
+Requirements
+------------
+
+* nasm
+* sdl2

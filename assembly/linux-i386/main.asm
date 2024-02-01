@@ -21,118 +21,145 @@ extern SDL_Quit
 extern SDL_GetError
 
 _start:
-  mov rdi, 62001
+  push 62001
   call SDL_Init
-  cmp rax, 0
+  add esp, 4
+  cmp eax, 0
   jl init_err
-  mov rdi, create_window_arg0
-  mov rsi, 100
-  mov rdx, 100
-  mov rcx, 620
-  mov r8, 387
-  mov r9, 4
+  push 4
+  push 387
+  push 620
+  push 100
+  push 100
+  push create_window_arg0
   call SDL_CreateWindow
-  cmp rax, 0
+  add esp, 24
+  cmp eax, 0
   je create_window_err
-  mov r12, rax
-  mov rdi, rax
-  mov rsi, -1
-  mov rdx, 6
+  mov ebx, eax
+  push 6
+  push -1
+  push eax
   call SDL_CreateRenderer
-  cmp rax, 0
+  add esp, 12
+  cmp eax, 0
   je create_renderer_err
-  mov r13, rax
-  mov rdi, bmp_path
-  mov rsi, readbin
+  mov esi, eax
+  push readbin
+  push bmp_path
   call SDL_RWFromFile
-  mov rdi, rax
-  mov rsi, 1
+  add esp, 8
+  push 1
+  push eax
   call SDL_LoadBMP_RW
-  cmp rax, 0
+  add esp, 8
+  cmp eax, 0
   je load_bmp_err
-  mov r14, rax
-  mov rdi, r13
-  mov rsi, rax
+  mov edi, eax
+  push eax
+  push esi
   call SDL_CreateTextureFromSurface
-  cmp rax, 0
+  add esp, 8
+  cmp eax, 0
   je create_tfs_err
-  mov r15, rax
-  mov rdi, r14
+  push edi
+  mov edi, eax
   call SDL_FreeSurface
-  xor r14, r14
+  add esp, 4
+  push ebx
+  xor ebx, ebx
 loop0:
-  mov rdi, r13
+  push esi
   call SDL_RenderClear
-  mov rdi, r13
-  mov rsi, r15
-  mov rdx, 0
-  mov rcx, 0
+  add esp, 4
+  push 0
+  push 0
+  push edi
+  push esi
   call SDL_RenderCopy
-  mov rdi, r13
+  add esp, 16
+  push esi
   call SDL_RenderPresent
-  mov rdi, 100
+  add esp, 4
+  push 100
   call SDL_Delay
-  inc r14
-  cmp r14, 20
+  add esp, 4
+  inc ebx
+  cmp ebx, 20
   jl loop0
-  mov rdi, r15
+  pop ebx
+  push edi
   call SDL_DestroyTexture
-  mov rdi, r13
+  add esp, 4
+  push esi
   call SDL_DestroyRenderer
-  mov rdi, r12
+  add esp, 4
+  push ebx
   call SDL_DestroyWindow
+  add esp, 4
   call SDL_Quit
-  mov rdi, 0
+  push 0
   call exit
 init_err:
   call SDL_GetError
-  mov rsi, rax
-  mov rdi, init_err_msg
+  push eax
+  push init_err_msg
   call printf
-  mov rdi, 8
+  add esp, 8
+  push 8
   call exit
 create_window_err:
   call SDL_GetError
-  mov rsi, rax
-  mov rdi, create_window_err_msg
+  push eax
+  push create_window_err_msg
   call printf
-  mov rdi, 8
+  add esp, 8
+  push 8
   call exit
 create_renderer_err:
   call SDL_GetError
-  mov rsi, rax
-  mov rdi, create_renderer_err_msg
+  push eax
+  push create_renderer_err_msg
   call printf
-  mov rdi, r12
+  add esp, 8
+  push ebx
   call SDL_DestroyWindow
+  add esp, 4
   call SDL_Quit
-  mov rdi, 8
+  push 8
   call exit
 load_bmp_err:
   call SDL_GetError
-  mov rsi, rax
-  mov rdi, load_bmp_err_msg
+  push eax
+  push load_bmp_err_msg
   call printf
-  mov rdi, r13
+  add esp, 8
+  push esi
   call SDL_DestroyRenderer
-  mov rdi, r12
+  add esp, 4
+  push ebx
   call SDL_DestroyWindow
+  add esp, 4
   call SDL_Quit
-  mov rdi, 8
+  push 8
   call exit
 create_tfs_err:
   call SDL_GetError
-  mov rsi, rax
-  mov rdi, create_tfs_err_msg
+  push eax
+  push create_tfs_err_msg
   call printf
-  mov rdi, r14
+  add esp, 8
+  push edi
   call SDL_FreeSurface
-  mov rdi, r13
+  add esp, 4
+  push esi
   call SDL_DestroyRenderer
-  mov rdi, r12
+  add esp, 4
+  push ebx
   call SDL_DestroyWindow
+  add esp, 4
   call SDL_Quit
-  mov rdi, 8
+  push 8
   call exit
 
 

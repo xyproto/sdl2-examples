@@ -1,4 +1,4 @@
-# github.com/veandco/go-sdl2 v0.4.35
+# github.com/veandco/go-sdl2 v0.4.36
 ## explicit; go 1.15
 github.com/veandco/go-sdl2/_libs
 github.com/veandco/go-sdl2/img
