@@ -7,16 +7,12 @@ on:
     paths:
       - crystal/
       - csharp/
-    paths-ignore:
-      - '**.md'
   pull_request:
     branches:
     - '*'
     paths:
       - crystal/
       - csharp/
-    paths-ignore:
-      - '**.md'
   workflow_dispatch:
 
 jobs:

@@ -6,15 +6,11 @@ on:
     - '*'
     paths:
       - ada/**
-    paths-ignore:
-      - '**.md'
   pull_request:
     branches:
     - '*'
     paths:
       - ada/**
-    paths-ignore:
-      - '**.md'
   workflow_dispatch:
 
 jobs:
