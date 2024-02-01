@@ -1,68 +1,23 @@
-name: sdl2-examples
+name: ada-examples
 
 on:
   push:
     branches:
     - '*'
+    paths:
+      - ada/**
     paths-ignore:
       - '**.md'
   pull_request:
     branches:
     - '*'
+    paths:
+      - ada/**
     paths-ignore:
       - '**.md'
   workflow_dispatch:
 
 jobs:
-  cmake:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        tests_list:
-        - { folder: "c++11-cmake" }
-        - { folder: "c++14-cmake" }
-        - { folder: "c++17-cmake" }
-        - { folder: "c++20-cmake" }
-        - { folder: "c++23-cmake" }
-    steps:
-      - uses: actions/checkout@v4
-      - name: install_dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y libsdl2-dev ninja-build cmake
-      - name: build
-        run: |
-              cd ${{ matrix.tests_list.folder }}
-              cmake -S . -B build -G Ninja
-              ninja -C build
-  make:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        tests_list:
-        - { folder: "assembly/linux-x86_64" }
-        - { folder: "c89" }
-        - { folder: "c99" }
-        - { folder: "c11" }
-        - { folder: "c18" }
-        - { folder: "c2x" }
-        - { folder: "c++98" }
-        - { folder: "c++11" }
-        - { folder: "crystal" }
-        - { folder: "csharp" }
-    steps:
-      - uses: actions/checkout@v4
-      - name: install_dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y cmake curl gnupg libgmp-dev libsdl2-dev libsdl2-image-dev mono-devel mono-mcs mono-runtime mono-vbnc nasm ninja-build
-          curl -fsSL https://crystal-lang.org/install.sh | sudo bash -s -- --channel=stable
-      - name: build
-        run: |
-              cd ${{ matrix.tests_list.folder }}
-              make all
   alire:
     runs-on: ${{ matrix.os }}
     strategy:

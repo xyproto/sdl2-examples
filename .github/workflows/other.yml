@@ -1,0 +1,41 @@
+name: other-examples
+
+on:
+  push:
+    branches:
+    - '*'
+    paths:
+      - crystal/
+      - csharp/
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches:
+    - '*'
+    paths:
+      - crystal/
+      - csharp/
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tests_list:
+        - { folder: "crystal" }
+        - { folder: "csharp" }
+    steps:
+      - uses: actions/checkout@v4
+      - name: install_dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y cmake curl gnupg libgmp-dev libsdl2-dev libsdl2-image-dev mono-devel mono-mcs mono-runtime mono-vbnc nasm ninja-build
+          curl -fsSL https://crystal-lang.org/install.sh | sudo bash -s -- --channel=stable
+      - name: build
+        run: |
+              cd ${{ matrix.tests_list.folder }}
+              make all
