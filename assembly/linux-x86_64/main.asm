@@ -153,3 +153,5 @@ readbin                 db "rb", 0
 load_bmp_err_msg        db "SDL_LoadBMP Error: %s", 10, 0
 
 create_tfs_err_msg      db "SDL_CreateTextureFromSurface Error: %s", 10, 0
+
+;asdf
