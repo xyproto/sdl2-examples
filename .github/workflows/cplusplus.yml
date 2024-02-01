@@ -1,17 +1,28 @@
-name: sdl2-examples
+name: c-plus-plus-examples
 
 on:
   push:
     branches:
     - '*'
     paths:
-    - 'c++*/**'
+    - 'c++98/**'
+    - 'c++11/**'
+    - 'c++11-cmake/**'
+    - 'c++14-cmake/**'
+    - 'c++17-cmake/**'
+    - 'c++20-cmake/**'
+    - 'c++23-cmake/**'
   pull_request:
     branches:
     - '*'
     paths:
-    - 'c++*/**'
-  workflow_dispatch:
+    - 'c++98/**'
+    - 'c++11/**'
+    - 'c++11-cmake/**'
+    - 'c++14-cmake/**'
+    - 'c++17-cmake/**'
+    - 'c++20-cmake/**'
+    - 'c++23-cmake/**'
 
 jobs:
   cmake:
