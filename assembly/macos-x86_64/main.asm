@@ -71,10 +71,10 @@ loop0:
 	call _SDL_RenderCopy	
 	mov rdi, r13
 	call _SDL_RenderPresent	
-	mov rdi, 1000
+	mov rdi, 100
 	call _SDL_Delay
 	inc r14
-	cmp r14, 5
+	cmp r14, 20
 	jl loop0
 	mov rdi, r15
 	call _SDL_DestroyTexture
