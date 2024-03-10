@@ -35,7 +35,7 @@ Requirements for some of the languages
 Languages that are not added yet
 --------------------------------
 
-- [ ] Ada (stopped working on Linux, see the `ada` directory in the `ada` branch if you wish to give it a spin).
+- [ ] Ada (see the `ada` directory in the `ada` branch if you wish to give it a spin, please create a PR if it works on Arch Linux and/or the Linux CI test also passes).
 - [ ] Fortran
 - [ ] F#
 - [ ] Java (but I gave it a shot).
