@@ -27,7 +27,7 @@ jobs:
       uses: actions/checkout@v4
     -
       name: Set up Alire
-      uses: alire-project/setup-alire@v2
+      uses: alire-project/setup-alire@v3
       with:
         version: "nightly"
     -
@@ -64,7 +64,7 @@ jobs:
       uses: actions/checkout@v4
     -
       name: Set up Alire
-      uses: alire-project/setup-alire@v2
+      uses: alire-project/setup-alire@v3
       with:
         version: "nightly"
     -
