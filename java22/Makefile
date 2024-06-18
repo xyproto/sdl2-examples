@@ -30,31 +30,31 @@ BUILD_DIR=build
 # Function to check for SDL2 library in multiple locations
 find_sdl2_lib = \
   if command -v pkg-config >/dev/null 2>&1; then \
-    echo $(shell pkg-config --libs-only-L sdl2 | sed 's/-L//')/libSDL2.so; \
+	echo $(shell pkg-config --libs-only-L sdl2 | sed 's/-L//')/libSDL2.so; \
   elif [ -f /usr/local/lib/libSDL2.so ]; then \
-    echo /usr/local/lib/libSDL2.so; \
+	echo /usr/local/lib/libSDL2.so; \
   elif [ -f /usr/lib/libSDL2.so ]; then \
-    echo /usr/lib/libSDL2.so; \
+	echo /usr/lib/libSDL2.so; \
   elif [ -f /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0 ]; then \
-    echo /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0; \
+	echo /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0; \
   else \
-    echo ""; \
+	echo ""; \
   fi
 
 # Detect OS and set library path
 ifeq ($(shell uname), Darwin)
-    SDL2_LIB_PATH=/opt/homebrew/Cellar/sdl2/2.30.3/lib/libSDL2-2.0.0.dylib
+	SDL2_LIB_PATH=/opt/homebrew/lib/libSDL2-2.0.0.dylib
 else ifeq ($(shell uname), Linux)
-    SDL2_LIB_PATH=$(shell $(find_sdl2_lib))
-    ifeq ($(SDL2_LIB_PATH),)
-        $(error SDL2 library not found. Please install SDL2 or set SDL2_LIB_PATH manually.)
-    endif
+	SDL2_LIB_PATH=$(shell $(find_sdl2_lib))
+	ifeq ($(SDL2_LIB_PATH),)
+		$(error SDL2 library not found. Please install SDL2 or set SDL2_LIB_PATH manually.)
+	endif
 else ifeq ($(shell uname), FreeBSD)
-    SDL2_LIB_PATH=/usr/local/lib/libSDL2.so
+	SDL2_LIB_PATH=/usr/local/lib/libSDL2.so
 else ifeq ($(OS), Windows_NT)
-    SDL2_LIB_PATH=./SDL2.dll
+	SDL2_LIB_PATH=./SDL2.dll
 else
-    $(error Unsupported OS)
+	$(error Unsupported OS)
 endif
 
 .PHONY: all clean build run
