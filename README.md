@@ -37,7 +37,6 @@ Languages that are not added yet
 
 - [ ] Ada (see the `ada` directory in the `ada` branch if you wish to give it a spin, please create a PR if it works on Arch Linux and/or the Linux CI test also passes).
 - [ ] Fortran
-- [ ] Java (but I gave it a shot).
 - [ ] Scheme
 
 Pull requests are welcome.
