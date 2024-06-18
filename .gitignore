@@ -1,4 +1,10 @@
-S Compiled Object files
+# macOS
+.DS_Store
+
+# Java
+*.jar
+
+# Compiled Object files
 *.slo
 *.lo
 *.o
