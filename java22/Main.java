@@ -76,7 +76,9 @@ public class Main {
             System.out.println("SDL_Init succeeded");
 
             MemorySegment title = allocateString(arena, "Hello, World!");
+            System.out.println("Title segment address: " + title.address());
             MemorySegment window = (MemorySegment) SDL_CreateWindow.invoke(title, 100, 100, 620, 387, SDL_WINDOW_SHOWN);
+            System.out.println("Window segment address: " + window.address());
             if (window.address() == 0) {
                 System.err.println("SDL_CreateWindow failed: " + getError(SDL_GetError));
                 SDL_Quit.invoke();

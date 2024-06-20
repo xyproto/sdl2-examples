@@ -1,5 +1,4 @@
-# Ensure JAVA_HOME is set and points to Java 22 or later
-
+# Ensure JAVA_HOME is set and points to Java 22 or later, for example:
 export JAVA_HOME=/opt/homebrew/Cellar/openjdk/22.0.1/
 
 ifndef JAVA_HOME
@@ -10,7 +9,7 @@ JAVA=$(JAVA_HOME)/bin/java
 JAVAC=$(JAVA_HOME)/bin/javac
 JAR=$(JAVA_HOME)/bin/jar
 
-JAVA_VERSION_CHECK=$(shell $(JAVA) -version 2>&1 | grep 'openjdk version "22' || echo "not found")
+JAVA_VERSION_CHECK=$(shell $(JAVA) -version 2>&1 | grep 'version "22' || echo "not found")
 ifeq ($(JAVA_VERSION_CHECK), not found)
 $(error JAVA_HOME does not point to Java 22 or later)
 endif
