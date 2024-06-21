@@ -35,8 +35,7 @@ public class Main {
         }
 
         try (Arena arena = Arena.ofConfined()) {
-            lib = SymbolLookup.libraryLookup(Path.of(libPath), arena);
-            System.out.println("Successfully created SymbolLookup for SDL2 library.");
+            lib = SymbolLookup.libraryLookup(libPath, arena);
 
             MethodHandle SDL_Init = loadFunction("SDL_Init", FunctionDescriptor.of(JAVA_INT, JAVA_INT));
             MethodHandle SDL_Quit = loadFunction("SDL_Quit", FunctionDescriptor.ofVoid());
@@ -69,7 +68,6 @@ public class Main {
                 System.err.println("SDL_Init failed with error code: " + result);
                 return;
             }
-            System.out.println("SDL_Init succeeded");
 
             MemorySegment title = allocateString(arena, "Hello, World!");
             MemorySegment window = (MemorySegment) SDL_CreateWindow.invoke(title, 100, 100, 620, 387, SDL_WINDOW_SHOWN);
@@ -150,8 +148,6 @@ public class Main {
             SDL_DestroyRenderer.invoke(renderer);
             SDL_DestroyWindow.invoke(window);
             SDL_Quit.invoke();
-
-            System.out.println("SDL_Quit called successfully.");
         }
     }
 
@@ -186,7 +182,6 @@ public class Main {
     private static MethodHandle loadFunction(String name, FunctionDescriptor descriptor) {
         Optional<MemorySegment> address = lib.find(name);
         if (address.isPresent()) {
-            System.out.println("Loaded function: " + name);
             return linker.downcallHandle(address.get(), descriptor);
         } else {
             System.err.println("Failed to load function: " + name);
