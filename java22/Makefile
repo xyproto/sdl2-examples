@@ -1,9 +1,5 @@
 .PHONY: all clean build run
 
-JAVA=$(JAVA_HOME)/bin/java
-JAVAC=$(JAVA_HOME)/bin/javac
-JAR=$(JAVA_HOME)/bin/jar
-
 JAVA_VERSION_CHECK=$(shell $(JAVA) -version 2>&1 | grep 'version "22' || echo "not found")
 ifeq ($(JAVA_VERSION_CHECK), not found)
 export JAVA_HOME=/usr/lib/jvm/default
@@ -14,11 +10,16 @@ endif
 
 JAVA_VERSION_CHECK=$(shell $(JAVA) -version 2>&1 | grep 'version "22' || echo "not found")
 ifeq ($(JAVA_VERSION_CHECK), not found)
-$(error JAVA_HOME does not point to Java 22 or later)
+$(error JAVA_HOME needs to point to Java 22 or later)
 endif
+
+JAVA=$(JAVA_HOME)/bin/java
+JAVAC=$(JAVA_HOME)/bin/javac
+JAR=$(JAVA_HOME)/bin/jar
 
 JAVA_OPTS=--enable-preview --enable-native-access=ALL-UNNAMED
 JAVAC_OPTS=--enable-preview --source 22
+
 TARGET_JAR=main.jar
 JAVA_FILES=Main.java
 MAIN_CLASS=Main
