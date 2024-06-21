@@ -4,6 +4,7 @@ import java.lang.invoke.MethodHandle;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main {
     private static final Linker linker = Linker.nativeLinker();
@@ -15,23 +16,15 @@ public class Main {
     private static final int SDL_WINDOW_SHOWN = 0x00000004;
     private static final int SDL_RENDERER_ACCELERATED = 0x00000002;
     private static final int SDL_RENDERER_PRESENTVSYNC = 0x00000004;
+    private static final int SDL_QUIT = 0x100;
+    private static final int SDL_KEYDOWN = 0x300;
+    private static final int SDLK_ESCAPE = 0x1B;
 
     public static void main(String[] args) {
-        // Ensure the code runs on the main thread
-        if (!java.awt.EventQueue.isDispatchThread()) {
-            java.awt.EventQueue.invokeLater(() -> {
-                try {
-                    runSDL();
-                } catch (Throwable e) {
-                    e.printStackTrace();
-                }
-            });
-        } else {
-            try {
-                runSDL();
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
+        try {
+            runSDL();
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
     }
 
@@ -60,10 +53,13 @@ public class Main {
             MethodHandle SDL_LoadBMP_RW = loadFunction("SDL_LoadBMP_RW", FunctionDescriptor.of(ADDRESS, ADDRESS, JAVA_INT));
             MethodHandle SDL_RWFromFile = loadFunction("SDL_RWFromFile", FunctionDescriptor.of(ADDRESS, ADDRESS, ADDRESS));
             MethodHandle SDL_GetError = loadFunction("SDL_GetError", FunctionDescriptor.of(ADDRESS));
+            MethodHandle SDL_PollEvent = loadFunction("SDL_PollEvent", FunctionDescriptor.of(JAVA_INT, ADDRESS));
+            MethodHandle SDL_Delay = loadFunction("SDL_Delay", FunctionDescriptor.ofVoid(JAVA_INT));
 
             if (SDL_Init == null || SDL_Quit == null || SDL_CreateWindow == null || SDL_CreateRenderer == null || SDL_CreateTextureFromSurface == null ||
                 SDL_DestroyRenderer == null || SDL_DestroyWindow == null || SDL_FreeSurface == null || SDL_DestroyTexture == null ||
-                SDL_RenderClear == null || SDL_RenderCopy == null || SDL_RenderPresent == null || SDL_LoadBMP_RW == null || SDL_RWFromFile == null || SDL_GetError == null) {
+                SDL_RenderClear == null || SDL_RenderCopy == null || SDL_RenderPresent == null || SDL_LoadBMP_RW == null || SDL_RWFromFile == null || SDL_GetError == null ||
+                SDL_PollEvent == null || SDL_Delay == null) {
                 System.err.println("Failed to load one or more SDL functions");
                 return;
             }
@@ -76,9 +72,7 @@ public class Main {
             System.out.println("SDL_Init succeeded");
 
             MemorySegment title = allocateString(arena, "Hello, World!");
-            System.out.println("Title segment address: " + title.address());
             MemorySegment window = (MemorySegment) SDL_CreateWindow.invoke(title, 100, 100, 620, 387, SDL_WINDOW_SHOWN);
-            System.out.println("Window segment address: " + window.address());
             if (window.address() == 0) {
                 System.err.println("SDL_CreateWindow failed: " + getError(SDL_GetError));
                 SDL_Quit.invoke();
@@ -122,11 +116,34 @@ public class Main {
                 return;
             }
 
-            for (int i = 0; i < 20; i++) {
+            AtomicBoolean quit = new AtomicBoolean(false);
+            long startTime = System.currentTimeMillis();
+
+            MemorySegment event = arena.allocate(56);  // Size of SDL_Event structure
+
+            while (!quit.get()) {
+                while ((int) SDL_PollEvent.invoke(event) != 0) {
+                    int type = event.get(JAVA_INT, 0);
+                    if (type == SDL_QUIT) {
+                        quit.set(true);
+                    }
+                    if (type == SDL_KEYDOWN) {
+                        int key = event.get(JAVA_INT, 4);
+                        if (key == SDLK_ESCAPE) {
+                            quit.set(true);
+                        }
+                    }
+                }
+
+                long elapsedTime = System.currentTimeMillis() - startTime;
+                if (elapsedTime > 2000) {
+                    break;
+                }
+
                 SDL_RenderClear.invoke(renderer);
                 SDL_RenderCopy.invoke(renderer, texture, MemorySegment.NULL, MemorySegment.NULL);
                 SDL_RenderPresent.invoke(renderer);
-                Thread.sleep(100);
+                SDL_Delay.invoke(100);
             }
 
             SDL_DestroyTexture.invoke(texture);
