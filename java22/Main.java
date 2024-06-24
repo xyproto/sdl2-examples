@@ -2,7 +2,6 @@ import static java.lang.foreign.ValueLayout.*;
 import java.lang.foreign.*;
 import java.lang.invoke.MethodHandle;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -122,10 +121,11 @@ public class Main {
             while (!quit.get()) {
                 while ((int) SDL_PollEvent.invoke(event) != 0) {
                     int type = event.get(JAVA_INT, 0);
-                    if (type == SDL_QUIT) {
+                    switch (type) {
+                    case SDL_QUIT:
                         quit.set(true);
-                    }
-                    if (type == SDL_KEYDOWN) {
+                        break;
+                    case SDL_KEYDOWN:
                         int key = event.get(JAVA_INT, 4);
                         if (key == SDLK_ESCAPE) {
                             quit.set(true);
