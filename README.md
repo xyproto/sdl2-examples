@@ -9,7 +9,7 @@ Each sample creates a window, displays an image, then waits two seconds and quit
 
 All executables should ideally build and run on Linux, macOS, Windows, BSD* and more, but they should at least work on Linux. Most subdirectories contains `README.md` files with more details, and a `Makefile` to have one way of building each sample.
 
-For macOS, the programs also appear to need an event loop for the window to show up, so I'm in the process of adding that to each example. The window just isn't shown if there is no event loop.
+For newer versions of macOS, the programs also appear to need an event loop for the window to show up, so I'm in the process of adding that to each example. The window just isn't shown if there is no event loop.
 
 
 Requirements
