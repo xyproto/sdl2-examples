@@ -25,6 +25,10 @@ crystal/sdl.cr/
 crystal/lib
 crystal/bin/
 
+# F#
+fsharp/bin/
+fsharp/obj/
+
 # OCaml
 *.cmi
 *.cmx
