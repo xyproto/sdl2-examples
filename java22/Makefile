@@ -58,5 +58,12 @@ $(TARGET_JAR): $(JAVA_FILES)
 run:
 	@$(JAVA) $(JAVA_OPTS) -Dsdl2.library.path=$(SDL2_LIB_PATH) -jar $(TARGET_JAR)
 
+script_with_jar.sh: $(TARGET_JAR)
+	@echo '#!/bin/bash' > $@
+	@echo 'me=`realpath $$0`' >> $@
+	@echo 'exec $(JAVA) $(JAVA_OPTS) -Dsdl2.library.path=$(SDL2_LIB_PATH) -jar $$me "$$@"' >> $@
+	@cat $(TARGET_JAR) >> $@
+	@chmod +x $@
+
 clean:
-	@rm -f $(TARGET_JAR)
+	@rm -f $(TARGET_JAR) script_with_jar.sh
