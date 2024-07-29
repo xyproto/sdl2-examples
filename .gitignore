@@ -1,6 +1,9 @@
 # macOS
 .DS_Store
 
+# C3
+*.dSYM
+
 # Java
 *.jar
 
