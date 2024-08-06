@@ -5,14 +5,14 @@ using System.Text;
 public class HelloWorld
 {
     // From SDL.h
-    private const UInt32 SDL_INIT_VIDEO            = 0x00000020;
+    private const UInt32 SDL_INIT_VIDEO = 0x00000020;
 
     // From SDL_video.h
-    private const Int32 SDL_WINDOWPOS_UNDEFINED    = 0x1FFF0000;
-    private const UInt32 SDL_WINDOW_SHOWN          = 0x00000004;
+    private const Int32 SDL_WINDOWPOS_UNDEFINED = 0x1FFF0000;
+    private const UInt32 SDL_WINDOW_SHOWN = 0x00000004;
 
     // From SDL_render.h
-    private const UInt32 SDL_RENDERER_ACCELERATED  = 0x00000002;
+    private const UInt32 SDL_RENDERER_ACCELERATED = 0x00000002;
     private const UInt32 SDL_RENDERER_PRESENTVSYNC = 0x00000004;
 
     [DllImport("SDL2")]
@@ -20,7 +20,7 @@ public class HelloWorld
 
     [DllImport("SDL2")]
     private static extern unsafe IntPtr SDL_CreateWindow(
-        [MarshalAs(UnmanagedType.LPStr)]String title,
+        [MarshalAs(UnmanagedType.LPStr)] string title,
         int x,
         int y,
         int w,
@@ -87,8 +87,8 @@ public class HelloWorld
 
     [DllImport("SDL2")]
     private static extern unsafe IntPtr SDL_RWFromFile(
-        [MarshalAs(UnmanagedType.LPStr)]String filename,
-        [MarshalAs(UnmanagedType.LPStr)]String permissions
+        [MarshalAs(UnmanagedType.LPStr)] string filename,
+        [MarshalAs(UnmanagedType.LPStr)] string permissions
     );
 
     [DllImport("SDL2")]
@@ -98,11 +98,13 @@ public class HelloWorld
     private static extern unsafe byte* SDL_GetError();
 
     // Call SDL_GetError() and return the C string as a C# String
-    private static unsafe String SDL_GetErrorString() {
+    private static unsafe string SDL_GetErrorString()
+    {
         StringBuilder sb = new StringBuilder();
         byte* errStr = SDL_GetError();
         int i = 0;
-        while (errStr[i] != 0) { // trust that the string returned from SDL_GetError() is properly terminated
+        while (errStr[i] != 0) // trust that the string returned from SDL_GetError() is properly terminated
+        {
             sb.Append(Convert.ToChar(errStr[i]));
             i++;
         }
@@ -110,69 +112,119 @@ public class HelloWorld
     }
 
     // Print the SDL_GetError() error message to stderr, with a preceding topic and also " Error: "
-    private static void printErr(String topic) {
+    private static void PrintErr(string topic)
+    {
         Console.Error.WriteLine(topic + " Error: " + SDL_GetErrorString());
+    }
+
+    public class SDLWindow : IDisposable
+    {
+        public IntPtr Handle { get; private set; }
+
+        public SDLWindow(string title, int x, int y, int w, int h, uint flags)
+        {
+            Handle = SDL_CreateWindow(title, x, y, w, h, flags);
+            if (Handle == IntPtr.Zero)
+            {
+                throw new Exception("SDL_CreateWindow Error: " + SDL_GetErrorString());
+            }
+        }
+
+        public void Dispose()
+        {
+            if (Handle != IntPtr.Zero)
+            {
+                SDL_DestroyWindow(Handle);
+                Handle = IntPtr.Zero;
+            }
+        }
+    }
+
+    public class SDLRenderer : IDisposable
+    {
+        public IntPtr Handle { get; private set; }
+
+        public SDLRenderer(SDLWindow window, int index, uint flags)
+        {
+            Handle = SDL_CreateRenderer(window.Handle, index, flags);
+            if (Handle == IntPtr.Zero)
+            {
+                throw new Exception("SDL_CreateRenderer Error: " + SDL_GetErrorString());
+            }
+        }
+
+        public void Dispose()
+        {
+            if (Handle != IntPtr.Zero)
+            {
+                SDL_DestroyRenderer(Handle);
+                Handle = IntPtr.Zero;
+            }
+        }
+    }
+
+    public class SDLTexture : IDisposable
+    {
+        public IntPtr Handle { get; private set; }
+
+        public SDLTexture(SDLRenderer renderer, IntPtr surface)
+        {
+            Handle = SDL_CreateTextureFromSurface(renderer.Handle, surface);
+            if (Handle == IntPtr.Zero)
+            {
+                throw new Exception("SDL_CreateTextureFromSurface Error: " + SDL_GetErrorString());
+            }
+        }
+
+        public void Dispose()
+        {
+            if (Handle != IntPtr.Zero)
+            {
+                SDL_DestroyTexture(Handle);
+                Handle = IntPtr.Zero;
+            }
+        }
     }
 
     public static int Main(string[] args)
     {
-        if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-            printErr("SDL_Init");
+        if (SDL_Init(SDL_INIT_VIDEO) != 0)
+        {
+            PrintErr("SDL_Init");
             return 1;
         }
 
-        IntPtr win = SDL_CreateWindow("Hello, World!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 620, 387, SDL_WINDOW_SHOWN);
-        if (win == IntPtr.Zero) {
-            printErr("SDL_CreateWindow");
-            return 1;
+        using (var window = new SDLWindow("Hello, World!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 620, 387, SDL_WINDOW_SHOWN))
+        using (var renderer = new SDLRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC))
+        {
+            IntPtr rwop = SDL_RWFromFile("../img/grumpy-cat.bmp", "rb");
+            if (rwop == IntPtr.Zero)
+            {
+                PrintErr("SDL_RWFromFile");
+                return 1;
+            }
+
+            IntPtr bmp = SDL_LoadBMP_RW(rwop, 1); // this also frees rwop
+            if (bmp == IntPtr.Zero)
+            {
+                PrintErr("SDL_LoadBMP_RW");
+                return 1;
+            }
+
+            using (var texture = new SDLTexture(renderer, bmp))
+            {
+                SDL_FreeSurface(bmp);
+
+                for (int i = 0; i < 20; i++)
+                {
+                    SDL_RenderClear(renderer.Handle);
+                    SDL_RenderCopy(renderer.Handle, texture.Handle, IntPtr.Zero, IntPtr.Zero);
+                    SDL_RenderPresent(renderer.Handle);
+                    System.Threading.Thread.Sleep(100);
+                }
+            }
         }
 
-        IntPtr ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-        if (ren == IntPtr.Zero) {
-            printErr("SDL_CreateRenderer");
-            SDL_DestroyWindow(win);
-            SDL_Quit();
-            return 1;
-        }
-
-        IntPtr rwop = SDL_RWFromFile("../img/grumpy-cat.bmp", "rb");
-        if (rwop == IntPtr.Zero) {
-            printErr("SDL_RWFromFile");
-            SDL_DestroyRenderer(ren);
-            SDL_DestroyWindow(win);
-            SDL_Quit();
-            return 1;
-        }
-
-        IntPtr bmp = SDL_LoadBMP_RW(rwop, 1); // this also frees rwop
-        if (bmp == IntPtr.Zero) {
-            printErr("SDL_LoadBMP_RW");
-            SDL_DestroyRenderer(ren);
-            SDL_DestroyWindow(win);
-            SDL_Quit();
-            return 1;
-        }
-
-        IntPtr tex = SDL_CreateTextureFromSurface(ren, bmp);
-        SDL_FreeSurface(bmp);
-        if (tex == IntPtr.Zero) {
-            printErr("SDL_CreateTextureFromSurface");
-            SDL_DestroyRenderer(ren);
-            SDL_DestroyWindow(win);
-            SDL_Quit();
-            return 1;
-        }
-
-        for (int i = 0; i < 20; i++) {
-            SDL_RenderClear(ren);
-            SDL_RenderCopy(ren, tex, IntPtr.Zero, IntPtr.Zero);
-            SDL_RenderPresent(ren);
-            System.Threading.Thread.Sleep(100);
-        }
-
-        SDL_DestroyTexture(tex);
-        SDL_DestroyRenderer(ren);
-        SDL_DestroyWindow(win);
         SDL_Quit();
 
         return 0;
