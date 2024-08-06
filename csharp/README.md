@@ -52,7 +52,7 @@ Or use the full path, for example:
 
 ## macOS
 
-macOS on M1/M2/aarch64 is not currently supported (as of 2023-06-28).
+Apple Silicon (M1/M2/M3/aarch64) is not currently supported (as of 2024-08-06).
 
 Running `make run` will:
 
