@@ -37,7 +37,7 @@ Requirements for some of the languages
 Languages that are not added yet
 --------------------------------
 
-- [ ] Ada (see the `ada` directory in the `ada` branch if you wish to give it a spin, please create a PR if it works on Arch Linux and/or the Linux CI test also passes).
+- [ ] Ada (but there is an `ada` branch if you wish to give it a spin. Please create a PR if it works on Arch Linux and/or the Linux CI test passes!).
 - [ ] C3 (but there is a `c3` branch with "Hello World" in C3).
 - [ ] Fortran
 - [ ] Scheme
