@@ -30,6 +30,7 @@ run: msg main
 
 clean:
 	rm -f main main.exe temp.* *crash*.json
+	rm -rf ./bin/ ./obj/
 
 check-config:
 	@if [ ! -f $(MACHINE_CONFIG) ]; then \
