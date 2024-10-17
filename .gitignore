@@ -103,3 +103,8 @@ scalanative/main.jar
 # Dart
 dart/.dart_tool
 dart/pubspec.lock
+
+# C#
+csharp/bin/
+csharp/obj/
+csharp/*.exe
