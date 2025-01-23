@@ -27,7 +27,7 @@ cmakebench() {
   echo -n "$1;"
   pushd "$1" > /dev/null
   test -d build && rm -r build || true
-  echo -n $(time -f "%es" cmake -S . -B build -G Ninja 2>&1 > /dev/null && ninja -C build 2>&1 >/dev/null | tr -d '\n')
+  echo -n $(time -f "%es" cmake -S . -B build 2>&1 > /dev/null && make -C build 2>&1 >/dev/null | tr -d '\n')
   echo -n ';'
   echo -n $(du -b "build/$2" | sed 's/[^0-9]//g')
   popd > /dev/null

@@ -7,13 +7,12 @@ Requirements
 * CMake
 * Compiler that supports C++ (recent version of g++ or clang++)
 * SDL2
-* ninja (or make, just drop the `-GNinja` flag and build with `make`)
 
-One way of building with C++11, SDL2, CMake and Ninja
------------------------------------------------------
+One way of building with C++11, SDL2 and CMake
+----------------------------------------------
 
-    cmake -S . -B build -G Ninja
-    ninja -C build
+    cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+    make -C build
 
 Running
 -------
