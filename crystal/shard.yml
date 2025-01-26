@@ -10,7 +10,7 @@ dependencies:
 
 targets:
   main:
-    main: src/main.cr
+    main: main.cr
 
 crystal: 1.1.1
 

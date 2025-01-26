@@ -5,7 +5,7 @@ all: msg bin/main
 msg:
 	@echo '--- Crystal ---'
 
-bin/main: shard.yml src/main.cr
+bin/main: shard.yml main.cr
 	@echo -n '[main] Compiling...'
 	@shards -q build
 	@echo 'ok'
