@@ -3,7 +3,7 @@
 * Requires Java 22 or later. Tested with OpenJDK 22.
 * Requires `make` and `SDL2`.
 * Builds and runs on Arch Linux.
-* Builds and crashes on macOS.
+* ❗ Builds and crashes on macOS❗
 * Other platforms are a work in progress.
 
 ## Build and run
