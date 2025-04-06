@@ -1,20 +1,33 @@
 .PHONY: all clean build run
-
 # Java setup
 JAVA_HOME ?= $(shell if [ -x /usr/libexec/java_home ]; then /usr/libexec/java_home -v 22; elif [ -d /opt/homebrew/Cellar/openjdk/22.0.1 ]; then echo /opt/homebrew/Cellar/openjdk/22.0.1; else echo /usr/lib/jvm/java-22-openjdk; fi)
 JAVA=$(JAVA_HOME)/bin/java
 JAVAC=$(JAVA_HOME)/bin/javac
 JAR=$(JAVA_HOME)/bin/jar
 
-# Check Java version
-JAVA_VERSION_CHECK=$(shell $(JAVA) -version 2>&1 | grep 'version "22' || echo "not found")
+# Get Java version information once
+JAVA_VERSION_INFO=$(shell $(JAVA) -version 2>&1 | awk -F '"' '/version/ {split($$2,v,"."); print v[1]}')
+JAVA_VERSION=$(JAVA_VERSION_INFO)
+
+# Check if Java version is sufficient
+ifeq ($(shell expr $(JAVA_VERSION) \>= 22 2>/dev/null), 1)
+  JAVA_VERSION_CHECK=found
+else
+  JAVA_VERSION_CHECK=not found
+endif
+
 ifeq ($(JAVA_VERSION_CHECK), not found)
 $(error JAVA_HOME needs to point to Java 22 or later)
 endif
 
-# Java options
-JAVA_OPTS=--enable-preview --enable-native-access=ALL-UNNAMED
-JAVAC_OPTS=--enable-preview --source 22
+# Java options - conditional on Java version
+ifeq ($(JAVA_VERSION), 22)
+  JAVA_OPTS=--enable-preview --enable-native-access=ALL-UNNAMED
+  JAVAC_OPTS=--enable-preview --source 22
+else
+  JAVA_OPTS=--enable-native-access=ALL-UNNAMED
+  JAVAC_OPTS=--source $(JAVA_VERSION)
+endif
 
 # Project setup
 TARGET_JAR=main.jar
