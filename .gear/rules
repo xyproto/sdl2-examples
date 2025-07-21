@@ -1,0 +1,2 @@
+tar: @version@:.
+spec: .gear/sdl2-examples.spec
