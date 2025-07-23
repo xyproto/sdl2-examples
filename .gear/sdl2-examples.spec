@@ -38,15 +38,20 @@ there is no event loop.
 Currently packaged examples:
  - Python
  - C++20 CMake
+ - C++17 CMake
+ - C++11
 
 %prep
 %setup
 
 # https://packages.altlinux.org/en/sisyphus/srpms/python-module-sdl2/
-# this module is removed, so i decided to change version of python
+# This module is removed, so i decided to change version of python
 sed -i '1s|/usr/bin/env python|/usr/bin/python3|' python/main.py
 
 sed -i 's|IMGDIR="../img/"|IMGDIR="%_datadir/%name/img/"|' c++20-cmake/CMakeLists.txt
+sed -i 's|IMGDIR="../img/"|IMGDIR="%_datadir/%name/img/"|' c++17-cmake/CMakeLists.txt
+
+sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c++11/main.cpp
 
 %build
 
@@ -57,10 +62,19 @@ pushd c++20-cmake
 %cmake_build
 popd
 
+pushd c++17-cmake
+%cmake
+%cmake_build
+popd
+
+pushd c++11
+%make_build
+popd
+
 %install
 mkdir -p \
   %buildroot%_datadir/%name/python \
-  %buildroot%_datadir/%name/cpp20-cmake \
+  %buildroot%_datadir/%name/cpp11 \
   %buildroot%_bindir \
   %buildroot%_desktopdir \
   %buildroot%_iconsdir/hicolor/64x64/apps \
@@ -74,13 +88,19 @@ cp -a python/* %buildroot%_datadir/%name/python
 cat <<'EOF' > %buildroot%_bindir/sdl2-python-example
 #!/bin/sh
 cd %_datadir/%name/python
-exec python3 main.py
+exec ./main.py
 EOF
 
 chmod +x %buildroot%_bindir/sdl2-python-example
 
 # C++20 cmake
 install -p -m 755 c++20-cmake/x86_64-alt-linux/main %buildroot%_bindir/sdl2-cpp20-cmake-example
+
+# C++17 cmake
+install -p -m 755 c++17-cmake/x86_64-alt-linux/main %buildroot%_bindir/sdl2-cpp17-cmake-example
+
+# C++11
+install -p -m 755 c++11/main %buildroot%_bindir/sdl2-cpp11-example
 
 cat << EOF > %buildroot%_desktopdir/sdl2-python-example.desktop
 [Desktop Entry]
@@ -102,6 +122,26 @@ Icon=grumpy-cat
 Categories=Other;
 EOF
 
+cat << EOF > %buildroot%_desktopdir/sdl2-cpp17-cmake-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 C++17 CMake Example
+Exec=sdl2-cpp17-cmake-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
+
+cat << EOF > %buildroot%_desktopdir/sdl2-cpp11-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 C++11 Example
+Exec=sdl2-cpp11-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
+
 install -pm 644 img/grumpy-cat.png %buildroot%_iconsdir/hicolor/64x64/apps/grumpy-cat.png
 
 %files
@@ -112,9 +152,14 @@ install -pm 644 img/grumpy-cat.png %buildroot%_iconsdir/hicolor/64x64/apps/grump
 %_iconsdir/hicolor/64x64/apps/grumpy-cat.png
 
 %_bindir/sdl2-python-example
-%_datadir/%name/python
+%_datadir/%name/python/
 
 %_bindir/sdl2-cpp20-cmake-example
+
+%_bindir/sdl2-cpp17-cmake-example
+
+%_bindir/sdl2-cpp11-example
+%_datadir/%name/cpp11/
 
 %changelog
 * Mon Jul 21 2025 Fedor Moseichuck <fedor@altlinux.org> 1.0-alt1
