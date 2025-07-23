@@ -41,6 +41,7 @@ of adding that to each example. The window just isn't shown if
 there is no event loop.
 
 Currently packaged examples:
+ - Rust
  - Python
  - C++23 CMake
  - C++20 CMake
@@ -52,7 +53,9 @@ Currently packaged examples:
  - C11
 
 %prep
-%setup
+%setup -a1
+mv vendor rust/vendor
+pushd rust
 mkdir -p .cargo
 cat >> .cargo/config.toml <<EOF
 [source.crates-io]
@@ -74,6 +77,7 @@ rustflags = ["-Copt-level=3", "-Cdebuginfo=1"]
 [profile.release]
 strip = false
 EOF
+popd
 
 sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' rust/src/main.rs
 
@@ -95,7 +99,7 @@ sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c18/mai
 %build
 
 pushd rust
-cargo build --release
+cargo build --release -j12 --offline
 popd
 
 python3 -m compileall python/
