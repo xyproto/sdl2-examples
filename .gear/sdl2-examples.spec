@@ -18,6 +18,7 @@ BuildRequires: libSDL2_image-devel
 BuildRequires: libSDL2-devel
 BuildRequires: gcc-c++
 BuildRequires: cmake
+BuildRequires: gcc
 
 %description
 "hello world" for SDL2 for various programming languages.
@@ -43,6 +44,8 @@ Currently packaged examples:
  - C++14 CMake
  - C++11 CMake
  - C++11
+ - С18
+ - С11
 
 %prep
 %setup
@@ -58,6 +61,9 @@ sed -i 's|IMGDIR="../img/"|IMGDIR="%_datadir/%name/img/"|' c++14-cmake/CMakeList
 sed -i 's|IMGDIR="../img/"|IMGDIR="%_datadir/%name/img/"|' c++11-cmake/CMakeLists.txt
 
 sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c++11/main.cpp
+
+sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c11/main.c
+sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c18/main.c
 
 %build
 
@@ -89,6 +95,14 @@ pushd c++11-cmake
 popd
 
 pushd c++11
+%make_build
+popd
+
+pushd c18
+%make_build
+popd
+
+pushd c11
 %make_build
 popd
 
@@ -131,6 +145,12 @@ install -p -m 755 c++17-cmake/x86_64-alt-linux/main %buildroot%_bindir/sdl2-cpp1
 
 # C++11
 install -p -m 755 c++11/main %buildroot%_bindir/sdl2-cpp11-example
+
+# C18
+install -p -m 755 c11/main %buildroot%_bindir/sdl2-c18-example
+
+# C11
+install -p -m 755 c11/main %buildroot%_bindir/sdl2-c11-example
 
 cat << EOF > %buildroot%_desktopdir/sdl2-python-example.desktop
 [Desktop Entry]
@@ -202,6 +222,26 @@ Icon=grumpy-cat
 Categories=Other;
 EOF
 
+cat << EOF > %buildroot%_desktopdir/sdl2-c18-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 C18 Example
+Exec=sdl2-c18-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
+
+cat << EOF > %buildroot%_desktopdir/sdl2-c11-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 C11 Example
+Exec=sdl2-c11-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
+
 install -pm 644 img/grumpy-cat.png %buildroot%_iconsdir/hicolor/64x64/apps/grumpy-cat.png
 
 %files
@@ -215,16 +255,14 @@ install -pm 644 img/grumpy-cat.png %buildroot%_iconsdir/hicolor/64x64/apps/grump
 %_datadir/%name/python/
 
 %_bindir/sdl2-cpp23-cmake-example
-
 %_bindir/sdl2-cpp20-cmake-example
-
 %_bindir/sdl2-cpp17-cmake-example
-
 %_bindir/sdl2-cpp14-cmake-example
-
 %_bindir/sdl2-cpp11-cmake-example
-
 %_bindir/sdl2-cpp11-example
+
+%_bindir/sdl2-c11-example
+%_bindir/sdl2-c18-example
 
 %changelog
 * Mon Jul 21 2025 Fedor Moseichuck <fedor@altlinux.org> 1.0-alt1
