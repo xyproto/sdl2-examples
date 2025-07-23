@@ -37,8 +37,11 @@ there is no event loop.
 
 Currently packaged examples:
  - Python
+ - C++23 CMake
  - C++20 CMake
  - C++17 CMake
+ - C++14 CMake
+ - C++11 CMake
  - C++11
 
 %prep
@@ -48,8 +51,11 @@ Currently packaged examples:
 # This module is removed, so i decided to change version of python
 sed -i '1s|/usr/bin/env python|/usr/bin/python3|' python/main.py
 
+sed -i 's|IMGDIR="../img/"|IMGDIR="%_datadir/%name/img/"|' c++23-cmake/CMakeLists.txt
 sed -i 's|IMGDIR="../img/"|IMGDIR="%_datadir/%name/img/"|' c++20-cmake/CMakeLists.txt
 sed -i 's|IMGDIR="../img/"|IMGDIR="%_datadir/%name/img/"|' c++17-cmake/CMakeLists.txt
+sed -i 's|IMGDIR="../img/"|IMGDIR="%_datadir/%name/img/"|' c++14-cmake/CMakeLists.txt
+sed -i 's|IMGDIR="../img/"|IMGDIR="%_datadir/%name/img/"|' c++11-cmake/CMakeLists.txt
 
 sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c++11/main.cpp
 
@@ -57,12 +63,27 @@ sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c++11/m
 
 python3 -m compileall python/
 
+pushd c++23-cmake
+%cmake
+%cmake_build
+popd
+
 pushd c++20-cmake
 %cmake
 %cmake_build
 popd
 
 pushd c++17-cmake
+%cmake
+%cmake_build
+popd
+
+pushd c++14-cmake
+%cmake
+%cmake_build
+popd
+
+pushd c++11-cmake
 %cmake
 %cmake_build
 popd
@@ -93,11 +114,20 @@ EOF
 
 chmod +x %buildroot%_bindir/sdl2-python-example
 
+# C++23 cmake
+install -p -m 755 c++17-cmake/x86_64-alt-linux/main %buildroot%_bindir/sdl2-cpp23-cmake-example
+
 # C++20 cmake
 install -p -m 755 c++20-cmake/x86_64-alt-linux/main %buildroot%_bindir/sdl2-cpp20-cmake-example
 
 # C++17 cmake
 install -p -m 755 c++17-cmake/x86_64-alt-linux/main %buildroot%_bindir/sdl2-cpp17-cmake-example
+
+# C++14 cmake
+install -p -m 755 c++17-cmake/x86_64-alt-linux/main %buildroot%_bindir/sdl2-cpp14-cmake-example
+
+# C++11 cmake
+install -p -m 755 c++17-cmake/x86_64-alt-linux/main %buildroot%_bindir/sdl2-cpp11-cmake-example
 
 # C++11
 install -p -m 755 c++11/main %buildroot%_bindir/sdl2-cpp11-example
@@ -108,6 +138,16 @@ Version=1.0
 Type=Application
 Name=SDL2 Python Example
 Exec=sdl2-python-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
+
+cat << EOF > %buildroot%_desktopdir/sdl2-cpp23-cmake-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 C++23 CMake Example
+Exec=sdl2-cpp23-cmake-example
 Icon=grumpy-cat
 Categories=Other;
 EOF
@@ -128,6 +168,26 @@ Version=1.0
 Type=Application
 Name=SDL2 C++17 CMake Example
 Exec=sdl2-cpp17-cmake-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
+
+cat << EOF > %buildroot%_desktopdir/sdl2-cpp14-cmake-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 C++14 CMake Example
+Exec=sdl2-cpp14-cmake-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
+
+cat << EOF > %buildroot%_desktopdir/sdl2-cpp11-cmake-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 C++11 CMake Example
+Exec=sdl2-cpp11-cmake-example
 Icon=grumpy-cat
 Categories=Other;
 EOF
@@ -154,12 +214,17 @@ install -pm 644 img/grumpy-cat.png %buildroot%_iconsdir/hicolor/64x64/apps/grump
 %_bindir/sdl2-python-example
 %_datadir/%name/python/
 
+%_bindir/sdl2-cpp23-cmake-example
+
 %_bindir/sdl2-cpp20-cmake-example
 
 %_bindir/sdl2-cpp17-cmake-example
 
+%_bindir/sdl2-cpp14-cmake-example
+
+%_bindir/sdl2-cpp11-cmake-example
+
 %_bindir/sdl2-cpp11-example
-%_datadir/%name/cpp11/
 
 %changelog
 * Mon Jul 21 2025 Fedor Moseichuck <fedor@altlinux.org> 1.0-alt1
