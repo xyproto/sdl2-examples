@@ -1,2 +1,3 @@
 tar: @version@:.
+tar: rust/vendor name=vendor
 spec: .gear/sdl2-examples.spec

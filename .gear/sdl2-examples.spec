@@ -11,7 +11,11 @@ Url: https://github.com/xyproto/sdl2-examples.git
 Vcs: https://github.com/xyproto/sdl2-examples.git
 
 Source0: %name-%version.tar 
+Source1: vendor.tar
 
+BuildRequires: rust-cargo
+BuildRequires: /proc
+BuildRequires: git
 BuildRequires: python3-dev
 BuildRequires: python3-module-sdl2
 BuildRequires: libSDL2_image-devel
@@ -44,11 +48,34 @@ Currently packaged examples:
  - C++14 CMake
  - C++11 CMake
  - C++11
- - С18
- - С11
+ - C18
+ - C11
 
 %prep
 %setup
+mkdir -p .cargo
+cat >> .cargo/config.toml <<EOF
+[source.crates-io]
+replace-with = "vendored-sources"
+
+[source.vendored-sources]
+directory = "vendor"
+
+[term]
+verbose = true
+quiet = false
+
+[install]
+root = "%buildroot%_prefix"
+
+[build]
+rustflags = ["-Copt-level=3", "-Cdebuginfo=1"]
+
+[profile.release]
+strip = false
+EOF
+
+sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' rust/src/main.rs
 
 # https://packages.altlinux.org/en/sisyphus/srpms/python-module-sdl2/
 # This module is removed, so i decided to change version of python
@@ -66,6 +93,10 @@ sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c11/mai
 sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c18/main.c
 
 %build
+
+pushd rust
+cargo build --release
+popd
 
 python3 -m compileall python/
 
@@ -117,6 +148,9 @@ mkdir -p \
 
 install -pm 644 img/grumpy-cat.bmp %buildroot%_datadir/%name/img/
 
+# Rust
+install -p -m 755 rust/target/release/rust %buildroot%_bindir/sdl2-rust-example
+
 # Python
 cp -a python/* %buildroot%_datadir/%name/python
 
@@ -151,6 +185,16 @@ install -p -m 755 c11/main %buildroot%_bindir/sdl2-c18-example
 
 # C11
 install -p -m 755 c11/main %buildroot%_bindir/sdl2-c11-example
+
+cat << EOF > %buildroot%_desktopdir/sdl2-rust-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 Rust Example
+Exec=sdl2-rust-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
 
 cat << EOF > %buildroot%_desktopdir/sdl2-python-example.desktop
 [Desktop Entry]
@@ -250,6 +294,8 @@ install -pm 644 img/grumpy-cat.png %buildroot%_iconsdir/hicolor/64x64/apps/grump
 %_datadir/%name/img/
 %_desktopdir/*.desktop
 %_iconsdir/hicolor/64x64/apps/grumpy-cat.png
+
+%_bindir/sdl2-rust-example
 
 %_bindir/sdl2-python-example
 %_datadir/%name/python/
