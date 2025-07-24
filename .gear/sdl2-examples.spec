@@ -11,10 +11,11 @@ Url: https://github.com/xyproto/sdl2-examples.git
 Vcs: https://github.com/xyproto/sdl2-examples.git
 
 Source0: %name-%version.tar 
-Source1: vendor.tar
+Source1: rust-vendor.tar
 
 BuildRequires: rust-cargo
 BuildRequires: /proc
+BuildRequires: golang
 BuildRequires: git
 BuildRequires: python3-dev
 BuildRequires: python3-module-sdl2
@@ -41,6 +42,7 @@ of adding that to each example. The window just isn't shown if
 there is no event loop.
 
 Currently packaged examples:
+ - Golang
  - Rust
  - Python
  - C++23 CMake
@@ -54,7 +56,7 @@ Currently packaged examples:
 
 %prep
 %setup -a1
-mv vendor rust/vendor
+mv rust-vendor rust/vendor
 pushd rust
 mkdir -p .cargo
 cat >> .cargo/config.toml <<EOF
@@ -81,6 +83,8 @@ popd
 
 sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' rust/src/main.rs
 
+sed -i 's|("..", "img", "grumpy-cat.png")|("/", "usr", "share", "sdl2-examples", "img", "grumpy-cat.bmp")|' go/main.go
+
 # https://packages.altlinux.org/en/sisyphus/srpms/python-module-sdl2/
 # This module is removed, so i decided to change version of python
 sed -i '1s|/usr/bin/env python|/usr/bin/python3|' python/main.py
@@ -100,6 +104,11 @@ sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c18/mai
 
 pushd rust
 cargo build --release -j12 --offline
+popd
+
+pushd go
+export GOROOT=/usr/lib/golang
+%make_build
 popd
 
 python3 -m compileall python/
@@ -144,7 +153,6 @@ popd
 %install
 mkdir -p \
   %buildroot%_datadir/%name/python \
-  %buildroot%_datadir/%name/cpp11 \
   %buildroot%_bindir \
   %buildroot%_desktopdir \
   %buildroot%_iconsdir/hicolor/64x64/apps \
@@ -190,12 +198,25 @@ install -p -m 755 c11/main %buildroot%_bindir/sdl2-c18-example
 # C11
 install -p -m 755 c11/main %buildroot%_bindir/sdl2-c11-example
 
+# Go
+install -p -m 755 go/go %buildroot%_bindir/sdl2-go-example
+
 cat << EOF > %buildroot%_desktopdir/sdl2-rust-example.desktop
 [Desktop Entry]
 Version=1.0
 Type=Application
 Name=SDL2 Rust Example
 Exec=sdl2-rust-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
+
+cat << EOF > %buildroot%_desktopdir/sdl2-go-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 Go Example
+Exec=sdl2-go-example
 Icon=grumpy-cat
 Categories=Other;
 EOF
@@ -300,6 +321,8 @@ install -pm 644 img/grumpy-cat.png %buildroot%_iconsdir/hicolor/64x64/apps/grump
 %_iconsdir/hicolor/64x64/apps/grumpy-cat.png
 
 %_bindir/sdl2-rust-example
+
+%_bindir/sdl2-go-example
 
 %_bindir/sdl2-python-example
 %_datadir/%name/python/
