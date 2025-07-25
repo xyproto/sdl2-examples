@@ -1,0 +1,27 @@
+{
+	"authors": [
+		"Mike Parker"
+	],
+	"configurations": [
+		{
+			"name": "library",
+			"targetType": "library"
+		}
+	],
+	"description": "Cross-platform shared library loader and a number of utility modules used by the Derelict libraries.",
+	"homepage": "https://github.com/DerelictOrg/DerelictUtil",
+	"importPaths": [
+		"source/"
+	],
+	"libs-linux": [
+		"dl"
+	],
+	"license": "Boost",
+	"name": "derelict-util",
+	"sourcePaths": [
+		"source/"
+	],
+	"targetName": "DerelictUtil",
+	"targetPath": "lib",
+	"version": "2.0.6"
+}

@@ -1,0 +1,13 @@
+language: d
+
+sudo: false
+
+d:
+  - dmd
+  - dmd-2.070.2
+  - dmd-2.069.1
+  - dmd-2.068.2
+  - dmd-2.067.1
+  - ldc-0.15.1
+  - ldc-0.16.0
+  - gdc-4.9.2

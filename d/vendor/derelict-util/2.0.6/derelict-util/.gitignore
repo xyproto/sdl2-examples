@@ -1,0 +1,5 @@
+lib
+bin
+update.txt
+.dub
+dub.selections.*

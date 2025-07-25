@@ -14,14 +14,17 @@ Vcs: https://github.com/xyproto/sdl2-examples.git
 
 Source0: %name-%version.tar 
 Source1: rust-vendor.tar
+Source0: d-vendor.tar
 
 Patch0: %name-%version-java-makefile.patch
 
 BuildRequires: rust-cargo
 BuildRequires: /proc
 BuildRequires: golang
-BuildRequires: git
 BuildRequires: java-21-openjdk-devel
+BuildRequires: dmd
+BuildRequires: dub
+BuildRequires: git
 BuildRequires: python3-dev
 BuildRequires: python3-module-sdl2
 BuildRequires: libSDL2_image-devel
