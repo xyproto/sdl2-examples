@@ -1,5 +1,6 @@
 tar: @version@:.
 tar: rust/vendor name=rust-vendor
 tar: d/vendor name=d-vendor
+tar: lua/vendor name=lua-vendor
 copy: .gear/patches/*
 spec: .gear/sdl2-examples.spec

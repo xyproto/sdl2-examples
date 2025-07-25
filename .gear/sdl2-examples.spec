@@ -15,6 +15,7 @@ Vcs: https://github.com/xyproto/sdl2-examples.git
 Source0: %name-%version.tar 
 Source1: rust-vendor.tar
 Source2: d-vendor.tar
+Source3: lua-vendor.tar
 
 Patch0: %name-%version-java-makefile.patch
 
@@ -23,7 +24,8 @@ BuildRequires: /proc
 BuildRequires: golang
 BuildRequires: java-21-openjdk-devel
 BuildRequires: dmd
-BuildRequires: dub
+BuildRequires: lua5.3-devel
+BuildRequires: luarocks-5.3
 BuildRequires: git
 BuildRequires: python3-dev
 BuildRequires: python3-module-sdl2
@@ -62,10 +64,10 @@ Currently packaged examples:
  - C++11 CMake
  - C++11
  - C18
- - C11openjdk_lib
+ - C11
 
 %prep
-%setup -a1 -a2
+%setup -a1 -a2 -a3
 %autopatch -p1
 
 mv rust-vendor rust/vendor
@@ -95,11 +97,15 @@ popd
 
 mv d-vendor d/vendor
 
+mv lua-vendor lua/vendor
+
 sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' rust/src/main.rs
 
 sed -i 's|("..", "img", "grumpy-cat.png")|("/", "usr", "share", "sdl2-examples", "img", "grumpy-cat.bmp")|' go/main.go
 
 sed -i 's|"../img/grumpy-cat.png"|"%_datadir/%name/img/grumpy-cat.bmp"|' d/source/app.d
+
+sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' lua/main.lua
 
 # https://packages.altlinux.org/en/sisyphus/srpms/python-module-sdl2/
 # This module is removed, so i decided to change version of python
@@ -118,7 +124,11 @@ sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c18/mai
 
 %build
 
-pushd rust
+pushd lua/vendor
+luarocks-5.3 make
+popd
+
+pushd rustb
 cargo build --release -j12 --offline
 popd
 
@@ -183,12 +193,23 @@ popd
 mkdir -p \
   %buildroot%_datadir/%name/python \
   %buildroot%_datadir/%name/java \
+  %buildroot%_datadir/%name/lua \
   %buildroot%_bindir \
   %buildroot%_desktopdir \
   %buildroot%_iconsdir/hicolor/64x64/apps \
   %buildroot%_datadir/%name/img \
 
 install -pm 644 img/grumpy-cat.bmp %buildroot%_datadir/%name/img/
+
+# Lua
+cp -a lua/* %buildroot%_datadir/%name/lua
+rm -rf %buildroot%_datadir/%name/lua/vendor
+
+cat << EOF > %buildroot%_bindir/sdl2-lua-example
+#!/bin/sh
+make run %_datadir/%name/lua/main.lua
+EOF
+chmod +x %buildroot%_bindir/sdl2-lua-example
 
 # Rust
 install -p -m 755 rust/target/release/rust %buildroot%_bindir/sdl2-rust-example
@@ -217,7 +238,7 @@ cp -a python/* %buildroot%_datadir/%name/python
 cat <<'EOF' > %buildroot%_bindir/sdl2-python-example
 #!/bin/sh
 pushd %_datadir/%name/python
-exec ./main.py
+make run
 popd
 EOF
 
