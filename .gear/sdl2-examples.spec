@@ -14,7 +14,7 @@ Vcs: https://github.com/xyproto/sdl2-examples.git
 
 Source0: %name-%version.tar 
 Source1: rust-vendor.tar
-Source0: d-vendor.tar
+Source2: d-vendor.tar
 
 Patch0: %name-%version-java-makefile.patch
 
@@ -53,6 +53,7 @@ Currently packaged examples:
  - Golang
  - Rust
  - Java
+ - D
  - Python
  - C++23 CMake
  - C++20 CMake
@@ -64,7 +65,7 @@ Currently packaged examples:
  - C11openjdk_lib
 
 %prep
-%setup -a1
+%setup -a1 -a2
 %autopatch -p1
 
 mv rust-vendor rust/vendor
@@ -92,9 +93,13 @@ strip = false
 EOF
 popd
 
+mv d-vendor d/vendor
+
 sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' rust/src/main.rs
 
 sed -i 's|("..", "img", "grumpy-cat.png")|("/", "usr", "share", "sdl2-examples", "img", "grumpy-cat.bmp")|' go/main.go
+
+sed -i 's|"../img/grumpy-cat.png"|"%_datadir/%name/img/grumpy-cat.bmp"|' d/source/app.d
 
 # https://packages.altlinux.org/en/sisyphus/srpms/python-module-sdl2/
 # This module is removed, so i decided to change version of python
@@ -125,6 +130,14 @@ popd
 pushd java22
 export LD_LIBRARY_PATH=%_jvmdir/%openjdk_lib/
 %make_build
+popd
+
+pushd d
+dmd -O -release -of=d/main \
+  source/app.d \
+  vendor/derelict-sdl2/2.1.4/derelict-sdl2/source/derelict/sdl2/*.d \
+  vendor/derelict-util/2.0.6/derelict-util/source/derelict/util/*.d \
+  -L-lSDL2 -L-lSDL2_image
 popd
 
 python3 -m compileall python/
@@ -195,6 +208,9 @@ EOF
 
 chmod +x %buildroot%_bindir/sdl2-java-example
 
+# D
+install -p -m 755 d/d/main %buildroot%_bindir/sdl2-d-example
+
 # Python
 cp -a python/* %buildroot%_datadir/%name/python
 
@@ -231,9 +247,6 @@ install -p -m 755 c11/main %buildroot%_bindir/sdl2-c18-example
 # C11
 install -p -m 755 c11/main %buildroot%_bindir/sdl2-c11-example
 
-# Go
-install -p -m 755 go/go %buildroot%_bindir/sdl2-go-example
-
 cat << EOF > %buildroot%_desktopdir/sdl2-rust-example.desktop
 [Desktop Entry]
 Version=1.0
@@ -260,6 +273,16 @@ Version=1.0
 Type=Application
 Name=SDL2 Java Example
 Exec=sdl2-java-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
+
+cat << EOF > %buildroot%_desktopdir/sdl2-d-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 D Example
+Exec=sdl2-d-example
 Icon=grumpy-cat
 Categories=Other;
 EOF
@@ -369,6 +392,8 @@ install -pm 644 img/grumpy-cat.png %buildroot%_iconsdir/hicolor/64x64/apps/grump
 
 %_bindir/sdl2-java-example
 %_datadir/%name/java/
+
+%_bindir/sdl2-d-example
 
 %_bindir/sdl2-python-example
 %_datadir/%name/python/
