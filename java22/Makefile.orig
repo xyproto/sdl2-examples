@@ -16,20 +16,17 @@ else
   JAVA_VERSION_CHECK=not found
 endif
 
-#ifeq ($(JAVA_VERSION_CHECK), not found)
-#$(error JAVA_HOME needs to point to Java 22 or later)
-#endif
-
-JAVA_OPTS=--enable-native-access=ALL-UNNAMED --enable-preview
-JAVAC_OPTS=--enable-preview --source 21 --release 21
+ifeq ($(JAVA_VERSION_CHECK), not found)
+$(error JAVA_HOME needs to point to Java 22 or later)
+endif
 
 # Java options - conditional on Java version
 ifeq ($(JAVA_VERSION), 22)
   JAVA_OPTS=--enable-preview --enable-native-access=ALL-UNNAMED
   JAVAC_OPTS=--enable-preview --source 22
 else
-  JAVA_OPTS=--enable-preview --enable-native-access=ALL-UNNAMED
-  JAVAC_OPTS=--enable-preview --source $(JAVA_VERSION)
+  JAVA_OPTS=--enable-native-access=ALL-UNNAMED
+  JAVAC_OPTS=--source $(JAVA_VERSION)
 endif
 
 # Project setup

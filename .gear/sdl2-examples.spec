@@ -17,6 +17,7 @@ BuildRequires: rust-cargo
 BuildRequires: /proc
 BuildRequires: golang
 BuildRequires: git
+BuildRequires: java-21-openjdk-devel
 BuildRequires: python3-dev
 BuildRequires: python3-module-sdl2
 BuildRequires: libSDL2_image-devel
@@ -111,6 +112,10 @@ export GOROOT=/usr/lib/golang
 %make_build
 popd
 
+pushd java22
+%make_build
+popd
+
 python3 -m compileall python/
 
 pushd c++23-cmake
@@ -153,6 +158,7 @@ popd
 %install
 mkdir -p \
   %buildroot%_datadir/%name/python \
+  %buildroot%_datadir/%name/java \
   %buildroot%_bindir \
   %buildroot%_desktopdir \
   %buildroot%_iconsdir/hicolor/64x64/apps \
@@ -162,6 +168,19 @@ install -pm 644 img/grumpy-cat.bmp %buildroot%_datadir/%name/img/
 
 # Rust
 install -p -m 755 rust/target/release/rust %buildroot%_bindir/sdl2-rust-example
+
+# Go
+install -p -m 755 go/go %buildroot%_bindir/sdl2-go-example
+
+# Java
+install -pm 644 java22/main.jar %buildroot%_datadir/%name/java/main.jar
+
+cat <<'EOF' > %buildroot%_bindir/sdl2-java-example
+#!/bin/sh
+exec java --enable-preview --enable-native-access=ALL-UNNAMED \
+  -Dsdl2.library.path=%_libdir/libSDL2.so \
+  -jar %_datadir/%name/java/sdl2-java-example.jar "$@"
+EOF
 
 # Python
 cp -a python/* %buildroot%_datadir/%name/python
@@ -323,6 +342,9 @@ install -pm 644 img/grumpy-cat.png %buildroot%_iconsdir/hicolor/64x64/apps/grump
 %_bindir/sdl2-rust-example
 
 %_bindir/sdl2-go-example
+
+%_bindir/sdl2-java-example
+%_datadir/%name/java/
 
 %_bindir/sdl2-python-example
 %_datadir/%name/python/

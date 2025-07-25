@@ -1,0 +1,28 @@
+--- a/java22/Makefile   2025-07-21 16:38:07.391194295 +0300
++++ b/java22/Makefile	2025-07-25 12:13:45.202784169 +0300
+@@ -16,17 +16,20 @@
+   JAVA_VERSION_CHECK=not found
+ endif
+ 
+-ifeq ($(JAVA_VERSION_CHECK), not found)
+-$(error JAVA_HOME needs to point to Java 22 or later)
+-endif
++#ifeq ($(JAVA_VERSION_CHECK), not found)
++#$(error JAVA_HOME needs to point to Java 22 or later)
++#endif
++
++JAVA_OPTS=--enable-native-access=ALL-UNNAMED --enable-preview
++JAVAC_OPTS=--enable-preview --source 21 --release 21
+ 
+ # Java options - conditional on Java version
+ ifeq ($(JAVA_VERSION), 22)
+   JAVA_OPTS=--enable-preview --enable-native-access=ALL-UNNAMED
+   JAVAC_OPTS=--enable-preview --source 22
+ else
+-  JAVA_OPTS=--enable-native-access=ALL-UNNAMED
+-  JAVAC_OPTS=--source $(JAVA_VERSION)
++  JAVA_OPTS=--enable-preview --enable-native-access=ALL-UNNAMED
++  JAVAC_OPTS=--enable-preview --source $(JAVA_VERSION)
+ endif
+ 
+ # Project setup

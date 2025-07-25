@@ -1,3 +1,4 @@
 tar: @version@:.
 tar: rust/vendor name=rust-vendor
+copy: .gear/patches/*
 spec: .gear/sdl2-examples.spec
