@@ -1,4 +1,6 @@
 %define _unpackaged_files_terminate_build 1
+%define _jvmdir /usr/lib/jvm
+%define openjdk_lib java-21-openjdk-21.0.8.0.9-alt1.x86_64/lib/
 
 Name: sdl2-examples
 Version: 1.0
@@ -12,6 +14,8 @@ Vcs: https://github.com/xyproto/sdl2-examples.git
 
 Source0: %name-%version.tar 
 Source1: rust-vendor.tar
+
+Patch0: %name-%version-java-makefile.patch
 
 BuildRequires: rust-cargo
 BuildRequires: /proc
@@ -45,6 +49,7 @@ there is no event loop.
 Currently packaged examples:
  - Golang
  - Rust
+ - Java
  - Python
  - C++23 CMake
  - C++20 CMake
@@ -53,10 +58,12 @@ Currently packaged examples:
  - C++11 CMake
  - C++11
  - C18
- - C11
+ - C11openjdk_lib
 
 %prep
 %setup -a1
+%autopatch -p1
+
 mv rust-vendor rust/vendor
 pushd rust
 mkdir -p .cargo
@@ -113,6 +120,7 @@ export GOROOT=/usr/lib/golang
 popd
 
 pushd java22
+export LD_LIBRARY_PATH=%_jvmdir/%openjdk_lib/
 %make_build
 popd
 
@@ -173,22 +181,25 @@ install -p -m 755 rust/target/release/rust %buildroot%_bindir/sdl2-rust-example
 install -p -m 755 go/go %buildroot%_bindir/sdl2-go-example
 
 # Java
-install -pm 644 java22/main.jar %buildroot%_datadir/%name/java/main.jar
+cp -a java22/* %buildroot%_datadir/%name/java
 
 cat <<'EOF' > %buildroot%_bindir/sdl2-java-example
 #!/bin/sh
-exec java --enable-preview --enable-native-access=ALL-UNNAMED \
-  -Dsdl2.library.path=%_libdir/libSDL2.so \
-  -jar %_datadir/%name/java/sdl2-java-example.jar "$@"
+pushd %_datadir/%name/java
+make run
+popd
 EOF
+
+chmod +x %buildroot%_bindir/sdl2-java-example
 
 # Python
 cp -a python/* %buildroot%_datadir/%name/python
 
 cat <<'EOF' > %buildroot%_bindir/sdl2-python-example
 #!/bin/sh
-cd %_datadir/%name/python
+pushd %_datadir/%name/python
 exec ./main.py
+popd
 EOF
 
 chmod +x %buildroot%_bindir/sdl2-python-example
@@ -236,6 +247,16 @@ Version=1.0
 Type=Application
 Name=SDL2 Go Example
 Exec=sdl2-go-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
+
+cat << EOF > %buildroot%_desktopdir/sdl2-java-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 Java Example
+Exec=sdl2-java-example
 Icon=grumpy-cat
 Categories=Other;
 EOF
