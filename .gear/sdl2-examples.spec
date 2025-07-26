@@ -17,6 +17,9 @@ Source1: rust-vendor.tar
 Source2: d-vendor.tar
 Source3: lua-vendor.tar
 
+Provides: luamain.lua(SDL)
+Provides: luamain.lua(SDL.image)
+
 Patch0: %name-%version-java-makefile.patch
 
 BuildRequires: rust-cargo
@@ -25,7 +28,8 @@ BuildRequires: golang
 BuildRequires: java-21-openjdk-devel
 BuildRequires: dmd
 BuildRequires: lua5.3-devel
-BuildRequires: luarocks-5.3
+BuildRequires: lua5.3-luarocks
+BuildRequires: unzip
 BuildRequires: git
 BuildRequires: python3-dev
 BuildRequires: python3-module-sdl2
@@ -41,17 +45,18 @@ Each sample creates a window, displays a grumpy cat image,
 then waits two seconds and quits.
 
 All executables should ideally build and run on Linux, macOS,
-Windows, BSD* and more, but they should at least work on Linux. 
+Windows, BSD* and more, but they should at least work on Linux.
 
 Most subdirectories contains README.md files with more details,
 and a Makefile to have one way of building each sample.
 
-For newer versions of macOS, the programs also appear to need 
-an event loop for the window to show up, so I'm in the process 
+For newer versions of macOS, the programs also appear to need
+an event loop for the window to show up, so I'm in the process
 of adding that to each example. The window just isn't shown if
 there is no event loop.
 
 Currently packaged examples:
+ - Lua
  - Golang
  - Rust
  - Java
@@ -96,7 +101,6 @@ EOF
 popd
 
 mv d-vendor d/vendor
-
 mv lua-vendor lua/vendor
 
 sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' rust/src/main.rs
@@ -125,10 +129,13 @@ sed -i 's|"../img/grumpy-cat.bmp"|"%_datadir/%name/img/grumpy-cat.bmp"|' c18/mai
 %build
 
 pushd lua/vendor
-luarocks-5.3 make
+unzip *.rock
+tar -xzf v*.tar.gz
+cd luasdl2*
+luarocks-5.3 make --verbose --local --deps-mode all --pack-binary-rock *.rockspec
 popd
 
-pushd rustb
+pushd rust
 cargo build --release -j12 --offline
 popd
 
@@ -202,13 +209,19 @@ mkdir -p \
 install -pm 644 img/grumpy-cat.bmp %buildroot%_datadir/%name/img/
 
 # Lua
+luarocks-5.3 install --verbose --local --deps-mode none \
+--no-manifest --tree %buildroot%prefix lua/vendor/*.rock
+
 cp -a lua/* %buildroot%_datadir/%name/lua
 rm -rf %buildroot%_datadir/%name/lua/vendor
 
 cat << EOF > %buildroot%_bindir/sdl2-lua-example
 #!/bin/sh
-make run %_datadir/%name/lua/main.lua
+pushd %_datadir/%name/lua
+make run
+popd
 EOF
+
 chmod +x %buildroot%_bindir/sdl2-lua-example
 
 # Rust
@@ -238,7 +251,7 @@ cp -a python/* %buildroot%_datadir/%name/python
 cat <<'EOF' > %buildroot%_bindir/sdl2-python-example
 #!/bin/sh
 pushd %_datadir/%name/python
-make run
+exec ./main.py
 popd
 EOF
 
@@ -267,6 +280,16 @@ install -p -m 755 c11/main %buildroot%_bindir/sdl2-c18-example
 
 # C11
 install -p -m 755 c11/main %buildroot%_bindir/sdl2-c11-example
+
+cat << EOF > %buildroot%_desktopdir/sdl2-lua-example.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SDL2 Lua Example
+Exec=sdl2-lua-example
+Icon=grumpy-cat
+Categories=Other;
+EOF
 
 cat << EOF > %buildroot%_desktopdir/sdl2-rust-example.desktop
 [Desktop Entry]
@@ -406,6 +429,12 @@ install -pm 644 img/grumpy-cat.png %buildroot%_iconsdir/hicolor/64x64/apps/grump
 %_datadir/%name/img/
 %_desktopdir/*.desktop
 %_iconsdir/hicolor/64x64/apps/grumpy-cat.png
+
+%_bindir/sdl2-lua-example
+%_datadir/%name/lua/
+%lua_modulesdir/SDL.so
+%lua_modulesdir/SDL/
+%luarocks_dbdir/lua-sdl2/
 
 %_bindir/sdl2-rust-example
 
