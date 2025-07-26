@@ -1,1 +1,0 @@
-void LogSetOutputFunction(void *data);
