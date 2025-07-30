@@ -34,6 +34,9 @@ BuildRequires: git
 BuildRequires: python3-dev
 BuildRequires: python3-module-sdl2
 BuildRequires: libSDL2_image-devel
+BuildRequires: libSDL2_mixer-devel
+BuildRequires: libSDL2_net-devel
+BuildRequires: libSDL2_ttf-devel
 BuildRequires: libSDL2-devel
 BuildRequires: gcc-c++
 BuildRequires: cmake
