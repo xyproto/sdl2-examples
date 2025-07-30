@@ -42,6 +42,9 @@ BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: gcc
 
+Requires: libSDL2-devel
+Requires: lua5.3
+
 %description
 "hello world" for SDL2 for various programming languages.
 Each sample creates a window, displays a grumpy cat image,
