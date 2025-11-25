@@ -35,7 +35,7 @@ pub fn main() !u8 {
     defer sdl2.SDL_FreeSurface(bmp);
 
     // Create a SDL_Texture from the SDL_Surface
-    var tex: ?*sdl2.SDL_Texture = sdl2.SDL_CreateTextureFromSurface(ren, bmp);
+    const tex: ?*sdl2.SDL_Texture = sdl2.SDL_CreateTextureFromSurface(ren, bmp);
     if (tex == null) {
         print("SDL_CreateTextureFromSurface Error: {s}\n", .{sdl2.SDL_GetError()});
         return 1;
