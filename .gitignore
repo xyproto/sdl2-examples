@@ -108,3 +108,5 @@ dart/pubspec.lock
 csharp/bin/
 csharp/obj/
 csharp/*.exe
+
+zig/.*cache*

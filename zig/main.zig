@@ -11,7 +11,7 @@ pub fn main() !u8 {
     defer sdl2.SDL_Quit();
 
     // Create a SDL_Window
-    var win: ?*sdl2.SDL_Window = sdl2.SDL_CreateWindow("Hello World!", 100, 100, 620, 387, sdl2.SDL_WINDOW_SHOWN);
+    const win: ?*sdl2.SDL_Window = sdl2.SDL_CreateWindow("Hello World!", 100, 100, 620, 387, sdl2.SDL_WINDOW_SHOWN);
     if (win == null) {
         print("SDL_CreateWindow Error: {s}\n", .{sdl2.SDL_GetError()});
         return 1;
@@ -19,7 +19,7 @@ pub fn main() !u8 {
     defer sdl2.SDL_DestroyWindow(win);
 
     // Create a SDL_Renderer
-    var ren: ?*sdl2.SDL_Renderer = sdl2.SDL_CreateRenderer(win, -1, sdl2.SDL_RENDERER_ACCELERATED | sdl2.SDL_RENDERER_PRESENTVSYNC);
+    const ren: ?*sdl2.SDL_Renderer = sdl2.SDL_CreateRenderer(win, -1, sdl2.SDL_RENDERER_ACCELERATED | sdl2.SDL_RENDERER_PRESENTVSYNC);
     if (ren == null) {
         print("SDL_CreateRenderer Error: {s}\n", .{sdl2.SDL_GetError()});
         return 1;
@@ -27,7 +27,7 @@ pub fn main() !u8 {
     defer sdl2.SDL_DestroyRenderer(ren);
 
     // Load the image as an SDL_Surface
-    var bmp: ?*sdl2.SDL_Surface = sdl2.SDL_LoadBMP("../img/grumpy-cat.bmp");
+    const bmp: ?*sdl2.SDL_Surface = sdl2.SDL_LoadBMP("../img/grumpy-cat.bmp");
     if (bmp == null) {
         print("SDL_LoadBMP Error: {s}\n", .{sdl2.SDL_GetError()});
         return 1;
